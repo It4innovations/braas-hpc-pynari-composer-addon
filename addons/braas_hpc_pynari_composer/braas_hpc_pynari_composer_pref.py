@@ -134,9 +134,9 @@ class PYNARI_COMPOSER_OT_update_dependencies(bpy.types.Operator):
 class PYNARIComposerPreferences(bpy.types.AddonPreferences):
     bl_idname = ADDON_NAME
 
-    dependencies_installed: bpy.props.BoolProperty(
-        default=False
-    ) # type: ignore
+    # dependencies_installed: bpy.props.BoolProperty(
+    #     default=False
+    # ) # type: ignore
 
     braas_hpc_pynari_composer_remote: bpy.props.BoolProperty(
         name="Enable Remote Access",
@@ -144,43 +144,44 @@ class PYNARIComposerPreferences(bpy.types.AddonPreferences):
         default=False
     )  # type: ignore
 
-    ssh_server_name: bpy.props.StringProperty(
-        name="SSH Server",
-        description="SSH server name or address (e.g., user@hostname)",
-        default=""
-    )  # type: ignore
+    # ssh_server_name: bpy.props.StringProperty(
+    #     name="SSH Server",
+    #     description="SSH server name or address (e.g., user@hostname)",
+    #     default=""
+    # )  # type: ignore
 
     def draw(self, context):
-        layout = self.layout        
+        layout = self.layout
 
-        boxD = layout.box()
-        boxD.label(text='Dependencies:')
+        # boxD = layout.box()
+        # boxD.label(text='Dependencies:')
 
-        dependencies_installed = preferences().dependencies_installed
+        # dependencies_installed = preferences().dependencies_installed
 
-        if not dependencies_installed:
-            try:
-                # for dependency in python_dependencies:
-                #     importlib.import_module(dependency.module)
-                import pynari
+        # if not dependencies_installed:
+        #     try:
+        #         # for dependency in python_dependencies:
+        #         #     importlib.import_module(dependency.module)
+        #         import pynari
 
-                preferences().dependencies_installed = True
-            except ImportError:
-                dependencies_installed = False
+        #         preferences().dependencies_installed = True
+        #     except ImportError:
+        #         print("Dependency package pynari is not installed!")
+        #         dependencies_installed = False
 
-        if not dependencies_installed:
-            boxD.label(text='Dependencies are not installed', icon='ERROR')
+        # if not dependencies_installed:
+        #     boxD.label(text='Dependencies are not installed', icon='ERROR')
 
-        if not dependencies_installed:
-            boxD.operator(PYNARI_COMPOSER_OT_install_dependencies.bl_idname,
-                          icon="CONSOLE")
-        else:
-            boxD.operator(PYNARI_COMPOSER_OT_update_dependencies.bl_idname,
-                          icon="CONSOLE")
+        # if not dependencies_installed:
+        #     boxD.operator(PYNARI_COMPOSER_OT_install_dependencies.bl_idname,
+        #                   icon="CONSOLE")
+        # else:
+        #     boxD.operator(PYNARI_COMPOSER_OT_update_dependencies.bl_idname,
+        #                   icon="CONSOLE")
 
-        # Remote access settings
+        #Remote access settings
         boxR = layout.box()
-        boxR.label(text='Remote Access:')
+        boxR.label(text='Remote Access (Required BRaaS-HPC addon):')
         boxR.prop(self, "braas_hpc_pynari_composer_remote")
         if self.braas_hpc_pynari_composer_remote:
             boxR.prop(self, "ssh_server_name")

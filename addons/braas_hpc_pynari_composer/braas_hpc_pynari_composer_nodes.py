@@ -145,7 +145,19 @@ class PYNARIComposerNodeTree(NodeTree):
         else:
             raise ValueError("No Frame node found in the node tree (connected to Device node).")
         
-        return "\n".join(code_lines)
+        final_code = "\n".join(code_lines)
+        
+        ############################ Create or get text block
+        text_name = f"{self.name}_code_tree.py"
+        if text_name in bpy.data.texts:
+            text = bpy.data.texts[text_name]
+            text.clear()
+        else:
+            text = bpy.data.texts.new(text_name)
+        
+        text.write(final_code)
+
+        return text_name
     
     def _generate_node_code(self, node, visited):
         """Recursively generate code for a node and its dependencies"""
@@ -2012,7 +2024,7 @@ class PYNARIDimensionToSpacingNode(PYNARIComposerNode):
     
     def init(self, context):
         resolution_socket = self.inputs.new('NodeSocketVector', "Dimension") #.link_limit = 1
-        resolution_socket.default_value = (64.0, 64.0, 64.0)
+        resolution_socket.default_value = (0.0, 0.0, 0.0)
         
         self.outputs.new('NodeSocketVector', "Spacing")
     
@@ -3271,6 +3283,105 @@ class PYNARIReadRAWVolumeDataNode(PYNARIComposerNode):
         return code
 
 
+class PYNARIReadOpenVDBVolumeDataNode(PYNARIComposerNode):
+    """Read OpenVDB volume data from file using pyopenvdb"""
+    bl_idname = 'PYNARIReadOpenVDBVolumeDataNode'
+    bl_label = 'Read Volume (OpenVDB)'
+    bl_icon = 'FILE_FOLDER'
+    
+    file_path: bpy.props.StringProperty(
+        name="File",
+        default="",
+        description="Path to the OpenVDB file (.vdb)",
+        subtype="FILE_PATH",
+        #update=lambda self, context: self.auto_generate_node_code(context)
+    ) # type: ignore
+
+    file_path_remote: bpy.props.StringProperty(
+        name="File",
+        default="",
+        description="Path to the OpenVDB file (.vdb)",
+        #update=lambda self, context: self.auto_generate_node_code(context)
+    ) # type: ignore
+    
+    grid_name: StringProperty(  # type: ignore
+        name="Grid Name",
+        default="",
+        description="Name of the grid to extract (leave empty for first grid)",
+        #update=lambda self, context: self.auto_generate_node_code(context)
+    )
+    
+    def init(self, context):
+        self.outputs.new('PYNARINumpyArraySocket', "NP Volume Data")
+        self.outputs.new('NodeSocketVector', "Dimension")
+        self.outputs.new('NodeSocketVector', "Origin")
+        self.outputs.new('NodeSocketVector', "Spacing")
+    
+    def draw_buttons(self, context, layout):
+        self.draw_file_path(layout)
+        layout.prop(self, "grid_name")
+    
+    def generate_code(self, auto_gen_enabled=False):
+        code = []
+        code.append(f"# Label: {self.label}")
+        var_name = self.get_var_name()
+
+        volume_data_socket_varname = self.get_var_name("NP Volume Data")
+        dimension_socket_varname = self.get_var_name("Dimension")
+        origin_socket_varname = self.get_var_name("Origin")
+        spacing_socket_varname = self.get_var_name("Spacing")
+        
+        code.append(f"# Read OpenVDB Volume Data: {self.get_file_path()}")
+        code.append(f"import openvdb as vdb")
+        code.append(f"")
+        code.append(f"{var_name}_vdb = vdb.readAllGridMetadata(r'{self.get_file_path()}')")
+        code.append(f"")
+        
+        # Select grid
+        if self.grid_name:
+            code.append(f"# Extract specified grid")
+            code.append(f"for grid in {var_name}_vdb:")
+            code.append(f"    if '{self.grid_name}' == grid.name:")
+            code.append(f"        {var_name}_grid = grid")
+            code.append(f"    else:")
+            code.append(f"        raise ValueError(f\"Grid '{self.grid_name}' not found in OpenVDB file.\")")
+        else:
+            code.append(f"# Extract first grid")
+            code.append(f"if len({var_name}_vdb) > 0:")
+            code.append(f"    {var_name}_grid = {var_name}_vdb[0]")
+            code.append(f"    print(f\"Using grid: {var_name}_grid.name\")")
+            code.append(f"else:")
+            code.append(f"    raise ValueError(\"No grids found in OpenVDB file\")")
+        code.append(f"")
+        
+        # Get grid properties
+        code.append(f"# Get grid properties")
+        code.append(f"{var_name}_bbox = {var_name}_grid.evalActiveVoxelBoundingBox()")
+        code.append(f"{var_name}_dim = {var_name}_bbox[1] - {var_name}_bbox[0] + vdb.Vec3i(1, 1, 1)")
+        code.append(f"{dimension_socket_varname} = np.array([{var_name}_dim.x, {var_name}_dim.y, {var_name}_dim.z], dtype=np.int32)")
+        code.append(f"")
+        
+        # Get transform information
+        code.append(f"# Get transform information")
+        code.append(f"{var_name}_transform = {var_name}_grid.transform")
+        code.append(f"{var_name}_voxel_size = {var_name}_transform.voxelSize()")
+        code.append(f"{spacing_socket_varname} = np.array([{var_name}_voxel_size[0], {var_name}_voxel_size[1], {var_name}_voxel_size[2]], dtype=np.float32)")
+        code.append(f"")
+        code.append(f"# Calculate origin from bounding box and transform")
+        code.append(f"{var_name}_world_min = {var_name}_transform.indexToWorld({var_name}_bbox[0])")
+        code.append(f"{origin_socket_varname} = np.array([{var_name}_world_min.x, {var_name}_world_min.y, {var_name}_world_min.z], dtype=np.float32)")
+        code.append(f"")
+        
+        # Convert to numpy array
+        code.append(f"# Convert grid to numpy array")
+        code.append(f"{volume_data_socket_varname} = np.zeros(({var_name}_dim.z, {var_name}_dim.y, {var_name}_dim.x), dtype=np.float32)")
+        code.append(f"{var_name}_grid.copyToArray({volume_data_socket_varname})")
+        code.append(f"")
+        code.append(f"print(f'Loaded OpenVDB volume: shape={{{volume_data_socket_varname}.shape}}, origin={{{origin_socket_varname}}}, spacing={{{spacing_socket_varname}}}')")
+        
+        return code
+
+
 class PYNARIObjectScriptNode(PYNARIComposerNode):
     """Script node for custom Python code"""
     bl_idname = 'PYNARIObjectScriptNode'
@@ -3929,6 +4040,7 @@ node_categories = [
         NodeItem('PYNARIReadPILVolumeDataNode'),
         NodeItem('PYNARIReadSimpleITKVolumeDataNode'),
         NodeItem('PYNARIReadRAWVolumeDataNode'),
+        NodeItem('PYNARIReadOpenVDBVolumeDataNode'),
     ]),
     PYNARIComposerNodeCategory('PYNARI_UTILITY', "Utility", items=[
         NodeItem('PYNARIObjectScriptNode'),
@@ -3974,19 +4086,9 @@ class PYNARICOMPOSER_OT_GenerateCodeTree(bpy.types.Operator):
             self.report({'ERROR'}, "No active node tree")
             return {'CANCELLED'}
         
-        code = tree.generate_python_code()
-        
-        # Create or get text block
-        text_name = f"{tree.name}_code_tree.py"
-        if text_name in bpy.data.texts:
-            text = bpy.data.texts[text_name]
-            text.clear()
-        else:
-            text = bpy.data.texts.new(text_name)
-        
-        text.write(code)
-        
+        text_name =tree.generate_python_code()
         self.report({'INFO'}, f"Generated code in text block '{text_name}'")
+        
         return {'FINISHED'}
 
 
@@ -4090,11 +4192,23 @@ class PYNARICOMPOSER_OT_update_remote_files(bpy.types.Operator):
 
             item = context.scene.braas_hpc_pynari_composer_remote_list.add()
             item.Name = ".."
-            item.is_directory = True                
+            item.is_directory = True
+
+            # Check BRaaS HPC addon
+            try:
+                import braas_hpc
+
+                pref = braas_hpc.raas_pref.preferences()
+                preset = pref.cluster_presets[bpy.context.scene.raas_cluster_presets_index]
+                ssh_server_name = braas_hpc.raas_config.GetServerFromType(preset.cluster_name.upper())    
+
+            except ImportError:
+                self.report({'ERROR'}, "BRAAS HPC addon not found. Please install and enable it.")
+                return {'CANCELLED'}         
 
             # Folders
             try:
-                remote_file_list = braas_hpc_pynari_composer_remote.ssh_command_sync(pref.ssh_server_name, " ls -p " + context.scene.braas_hpc_pynari_composer_remote_path + " | grep -e /")
+                remote_file_list = braas_hpc.raas_connection.ssh_command_sync(ssh_server_name, " ls -p " + context.scene.braas_hpc_pynari_composer_remote_path + " | grep -e /", preset)
                 lines = remote_file_list.split('\n')
 
                 for line in lines:
@@ -4107,7 +4221,7 @@ class PYNARICOMPOSER_OT_update_remote_files(bpy.types.Operator):
 
             # Files
             try:
-                remote_file_list = braas_hpc_pynari_composer_remote.ssh_command_sync(pref.ssh_server_name, " ls -p " + context.scene.braas_hpc_pynari_composer_remote_path + " | grep -v /")
+                remote_file_list = braas_hpc.raas_connection.ssh_command_sync(ssh_server_name, " ls -p " + context.scene.braas_hpc_pynari_composer_remote_path + " | grep -v /", preset)
                 lines = remote_file_list.split('\n')
 
                 for line in lines:
@@ -4282,6 +4396,7 @@ classes = (
     PYNARIReadPyVistaUnstructuredDataNode,
     PYNARIUnstructuredFieldNode,
     PYNARIReadRAWVolumeDataNode,
+    PYNARIReadOpenVDBVolumeDataNode,
 
     PYNARIStringValueNode,
     PYNARIFloatValueNode,
