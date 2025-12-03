@@ -4086,7 +4086,7 @@ class PYNARICOMPOSER_OT_GenerateCodeTree(bpy.types.Operator):
             self.report({'ERROR'}, "No active node tree")
             return {'CANCELLED'}
         
-        text_name =tree.generate_python_code()
+        text_name = tree.generate_python_code()
         self.report({'INFO'}, f"Generated code in text block '{text_name}'")
         
         return {'FINISHED'}
