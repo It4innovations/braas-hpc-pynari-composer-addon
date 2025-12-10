@@ -183,8 +183,8 @@ class PYNARIComposerPreferences(bpy.types.AddonPreferences):
         boxR = layout.box()
         boxR.label(text='Remote Access (Required BRaaS-HPC addon):')
         boxR.prop(self, "braas_hpc_pynari_composer_remote")
-        if self.braas_hpc_pynari_composer_remote:
-            boxR.prop(self, "ssh_server_name")
+        # if self.braas_hpc_pynari_composer_remote:
+        #     boxR.prop(self, "ssh_server_name")
 
 
 def ctx_preferences():

@@ -3500,6 +3500,12 @@ class PYNARIOutputBRAASHPCNode(PYNARIComposerNode):
         description="Server port number",
         # update=lambda self, context: self.auto_generate_node_code(context)
     )
+
+    use_gpujpeg: BoolProperty(  # type: ignore
+        name="Enable GPUJPEG",
+        default=False,
+        description="Enable GPUJPEG compression for image transmission",
+    )
     
     def init(self, context):
         self.inputs.new('PYNARIFrameSocket', "Frame").link_limit = 1
@@ -3507,7 +3513,7 @@ class PYNARIOutputBRAASHPCNode(PYNARIComposerNode):
     def draw_buttons(self, context, layout):
         layout.prop(self, "lib_name")
         layout.prop(self, "dev_name")
-        #layout.prop(self, "hostname")
+        layout.prop(self, "use_gpujpeg")
         #layout.prop(self, "port")
     
     def generate_code(self, auto_gen_enabled=False):
@@ -3533,6 +3539,9 @@ class PYNARIOutputBRAASHPCNode(PYNARIComposerNode):
 
         # Port
         port = self.port
+
+        # GPUJPEG
+        enable_gpujpeg = 1 if self.use_gpujpeg else 0
 
         if hasattr(bpy.context.scene, "braas_hpc_renderengine"):
             server_settings = bpy.context.scene.braas_hpc_renderengine.server_settings
@@ -3595,6 +3604,10 @@ class PYNARIOutputBRAASHPCNode(PYNARIComposerNode):
         code.append("    render_time = 0.0")
         code.append("    acc_render_time = 0.0")
         code.append("    acc_samples = 0")
+        code.append("    ")
+        code.append("    # Initialize renderengine_dll")
+        code.append(f"    _renderengine_dll.enable_gpujpeg({enable_gpujpeg})")
+        code.append("    _renderengine_dll.set_pixsize(8) #pynari.UFIXED8_RGBA_SRGB")
         code.append("    ")
         code.append("    # Initialize server connection")
         code.append("    server_address = server_host.encode('utf-8')")
