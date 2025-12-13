@@ -5,18 +5,18 @@ from .core import *
 TYPENAMES = []
 
 #--------------------------------------------------------------
-class VTKArrayDataWriter(Node, BVTK_Node):
+class VTKArrayDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKArrayDataWriterType'
     bl_label  = 'vtkArrayDataWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Binary: bpy.props.BoolProperty(name='Binary', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Binary: bpy.props.BoolProperty(name='Binary', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_Binary','m_WriteToOutputString','m_FileName','m_ObjectName',]
@@ -27,18 +27,18 @@ add_class( VTKArrayDataWriter )
 TYPENAMES.append('VTKArrayDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKArrayWriter(Node, BVTK_Node):
+class VTKArrayWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKArrayWriterType'
     bl_label  = 'vtkArrayWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Binary: bpy.props.BoolProperty(name='Binary', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Binary: bpy.props.BoolProperty(name='Binary', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_Binary','m_WriteToOutputString','m_FileName','m_ObjectName',]
@@ -49,20 +49,20 @@ add_class( VTKArrayWriter )
 TYPENAMES.append('VTKArrayWriterType' )
 
 #--------------------------------------------------------------
-class VTKBMPWriter(Node, BVTK_Node):
+class VTKBMPWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKBMPWriterType'
     bl_label  = 'vtkBMPWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToMemory: bpy.props.BoolProperty(name='WriteToMemory', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToMemory: bpy.props.BoolProperty(name='WriteToMemory', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteToMemory','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_FileDimensionality',]
@@ -73,22 +73,22 @@ add_class( VTKBMPWriter )
 TYPENAMES.append('VTKBMPWriterType' )
 
 #--------------------------------------------------------------
-class VTKBYUWriter(Node, BVTK_Node):
+class VTKBYUWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKBYUWriterType'
     bl_label  = 'vtkBYUWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteDisplacement: bpy.props.BoolProperty(name='WriteDisplacement', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteScalar: bpy.props.BoolProperty(name='WriteScalar', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTexture: bpy.props.BoolProperty(name='WriteTexture', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DisplacementFileName: bpy.props.StringProperty(name='DisplacementFileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GeometryFileName: bpy.props.StringProperty(name='GeometryFileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarFileName: bpy.props.StringProperty(name='ScalarFileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TextureFileName: bpy.props.StringProperty(name='TextureFileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteDisplacement: bpy.props.BoolProperty(name='WriteDisplacement', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteScalar: bpy.props.BoolProperty(name='WriteScalar', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTexture: bpy.props.BoolProperty(name='WriteTexture', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DisplacementFileName: bpy.props.StringProperty(name='DisplacementFileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GeometryFileName: bpy.props.StringProperty(name='GeometryFileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarFileName: bpy.props.StringProperty(name='ScalarFileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TextureFileName: bpy.props.StringProperty(name='TextureFileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=9, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=9, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteDisplacement','m_WriteScalar','m_WriteTexture','m_DisplacementFileName','m_GeometryFileName','m_ObjectName','m_ScalarFileName','m_TextureFileName',]
@@ -99,16 +99,16 @@ add_class( VTKBYUWriter )
 TYPENAMES.append('VTKBYUWriterType' )
 
 #--------------------------------------------------------------
-class VTKCellGridWriter(Node, BVTK_Node):
+class VTKCellGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKCellGridWriterType'
     bl_label  = 'vtkCellGridWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_ObjectName',]
@@ -119,28 +119,28 @@ add_class( VTKCellGridWriter )
 TYPENAMES.append('VTKCellGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKCesium3DTilesWriter(Node, BVTK_Node):
+class VTKCesium3DTilesWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKCesium3DTilesWriterType'
     bl_label  = 'vtkCesium3DTilesWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ContentGLTF: bpy.props.BoolProperty(name='ContentGLTF', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ContentGLTFSaveGLB: bpy.props.BoolProperty(name='ContentGLTFSaveGLB', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MergeTilePolyData: bpy.props.BoolProperty(name='MergeTilePolyData', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_SaveTextures: bpy.props.BoolProperty(name='SaveTextures', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_SaveTiles: bpy.props.BoolProperty(name='SaveTiles', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CRS: bpy.props.StringProperty(name='CRS', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DirectoryName: bpy.props.StringProperty(name='DirectoryName', default="", subtype='DIR_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PropertyTextureFile: bpy.props.StringProperty(name='PropertyTextureFile', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TextureBaseDirectory: bpy.props.StringProperty(name='TextureBaseDirectory', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InputType: bpy.props.IntProperty(name='InputType', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MergedTextureWidth: bpy.props.IntProperty(name='MergedTextureWidth', default=1000000000, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfFeaturesPerTile: bpy.props.IntProperty(name='NumberOfFeaturesPerTile', default=100, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Offset: bpy.props.FloatVectorProperty(name='Offset', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ContentGLTF: bpy.props.BoolProperty(name='ContentGLTF', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ContentGLTFSaveGLB: bpy.props.BoolProperty(name='ContentGLTFSaveGLB', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MergeTilePolyData: bpy.props.BoolProperty(name='MergeTilePolyData', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_SaveTextures: bpy.props.BoolProperty(name='SaveTextures', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_SaveTiles: bpy.props.BoolProperty(name='SaveTiles', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CRS: bpy.props.StringProperty(name='CRS', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DirectoryName: bpy.props.StringProperty(name='DirectoryName', default="", subtype='DIR_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PropertyTextureFile: bpy.props.StringProperty(name='PropertyTextureFile', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TextureBaseDirectory: bpy.props.StringProperty(name='TextureBaseDirectory', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InputType: bpy.props.IntProperty(name='InputType', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MergedTextureWidth: bpy.props.IntProperty(name='MergedTextureWidth', default=1000000000, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfFeaturesPerTile: bpy.props.IntProperty(name='NumberOfFeaturesPerTile', default=100, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Offset: bpy.props.FloatVectorProperty(name='Offset', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_ContentGLTF','m_ContentGLTFSaveGLB','m_MergeTilePolyData','m_SaveTextures','m_SaveTiles','m_CRS','m_DirectoryName','m_ObjectName','m_PropertyTextureFile','m_TextureBaseDirectory','m_InputType','m_MergedTextureWidth','m_NumberOfFeaturesPerTile','m_Offset',]
@@ -151,16 +151,16 @@ add_class( VTKCesium3DTilesWriter )
 TYPENAMES.append('VTKCesium3DTilesWriterType' )
 
 #--------------------------------------------------------------
-class VTKCesiumPointCloudWriter(Node, BVTK_Node):
+class VTKCesiumPointCloudWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKCesiumPointCloudWriterType'
     bl_label  = 'vtkCesiumPointCloudWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_ObjectName',]
@@ -171,32 +171,32 @@ add_class( VTKCesiumPointCloudWriter )
 TYPENAMES.append('VTKCesiumPointCloudWriterType' )
 
 #--------------------------------------------------------------
-class VTKCompositeDataWriter(Node, BVTK_Node):
+class VTKCompositeDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKCompositeDataWriterType'
     bl_label  = 'vtkCompositeDataWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -207,32 +207,32 @@ add_class( VTKCompositeDataWriter )
 TYPENAMES.append('VTKCompositeDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKDIMACSGraphWriter(Node, BVTK_Node):
+class VTKDIMACSGraphWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKDIMACSGraphWriterType'
     bl_label  = 'vtkDIMACSGraphWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -243,21 +243,21 @@ add_class( VTKDIMACSGraphWriter )
 TYPENAMES.append('VTKDIMACSGraphWriterType' )
 
 #--------------------------------------------------------------
-class VTKDataObjectWriter(Node, BVTK_Node):
+class VTKDataObjectWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKDataObjectWriterType'
     bl_label  = 'vtkDataObjectWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteToOutputString','m_FieldDataName','m_FileName','m_Header','m_ObjectName','e_FileType',]
@@ -268,32 +268,32 @@ add_class( VTKDataObjectWriter )
 TYPENAMES.append('VTKDataObjectWriterType' )
 
 #--------------------------------------------------------------
-class VTKDataSetWriter(Node, BVTK_Node):
+class VTKDataSetWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKDataSetWriterType'
     bl_label  = 'vtkDataSetWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -304,32 +304,32 @@ add_class( VTKDataSetWriter )
 TYPENAMES.append('VTKDataSetWriterType' )
 
 #--------------------------------------------------------------
-class VTKDataWriter(Node, BVTK_Node):
+class VTKDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKDataWriterType'
     bl_label  = 'vtkDataWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -340,20 +340,20 @@ add_class( VTKDataWriter )
 TYPENAMES.append('VTKDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKDelimitedTextWriter(Node, BVTK_Node):
+class VTKDelimitedTextWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKDelimitedTextWriterType'
     bl_label  = 'vtkDelimitedTextWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseStringDelimiter: bpy.props.BoolProperty(name='UseStringDelimiter', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDelimiter: bpy.props.StringProperty(name='FieldDelimiter', default=",", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StringDelimiter: bpy.props.StringProperty(name='StringDelimiter', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseStringDelimiter: bpy.props.BoolProperty(name='UseStringDelimiter', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDelimiter: bpy.props.StringProperty(name='FieldDelimiter', default=",", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StringDelimiter: bpy.props.StringProperty(name='StringDelimiter', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_UseStringDelimiter','m_WriteToOutputString','m_FieldDelimiter','m_FileName','m_ObjectName','m_StringDelimiter',]
@@ -364,25 +364,25 @@ add_class( VTKDelimitedTextWriter )
 TYPENAMES.append('VTKDelimitedTextWriterType' )
 
 #--------------------------------------------------------------
-class VTKEnSightWriter(Node, BVTK_Node):
+class VTKEnSightWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKEnSightWriterType'
     bl_label  = 'vtkEnSightWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TransientGeometry: bpy.props.BoolProperty(name='TransientGeometry', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteElementIDs: bpy.props.BoolProperty(name='WriteElementIDs', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteNodeIDs: bpy.props.BoolProperty(name='WriteNodeIDs', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BaseName: bpy.props.StringProperty(name='BaseName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Path: bpy.props.StringProperty(name='Path', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfBlocks: bpy.props.IntProperty(name='NumberOfBlocks', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ProcessNumber: bpy.props.IntProperty(name='ProcessNumber', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TimeStep: bpy.props.IntProperty(name='TimeStep', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TransientGeometry: bpy.props.BoolProperty(name='TransientGeometry', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteElementIDs: bpy.props.BoolProperty(name='WriteElementIDs', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteNodeIDs: bpy.props.BoolProperty(name='WriteNodeIDs', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BaseName: bpy.props.StringProperty(name='BaseName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Path: bpy.props.StringProperty(name='Path', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfBlocks: bpy.props.IntProperty(name='NumberOfBlocks', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ProcessNumber: bpy.props.IntProperty(name='ProcessNumber', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TimeStep: bpy.props.IntProperty(name='TimeStep', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=12, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=12, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_TransientGeometry','m_WriteElementIDs','m_WriteNodeIDs','m_BaseName','m_FileName','m_ObjectName','m_Path','m_GhostLevel','m_NumberOfBlocks','m_ProcessNumber','m_TimeStep',]
@@ -393,24 +393,24 @@ add_class( VTKEnSightWriter )
 TYPENAMES.append('VTKEnSightWriterType' )
 
 #--------------------------------------------------------------
-class VTKExodusIIWriter(Node, BVTK_Node):
+class VTKExodusIIWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKExodusIIWriterType'
     bl_label  = 'vtkExodusIIWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_IgnoreMetaDataWarning: bpy.props.BoolProperty(name='IgnoreMetaDataWarning', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteAllTimeSteps: bpy.props.BoolProperty(name='WriteAllTimeSteps', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteOutBlockIdArray: bpy.props.BoolProperty(name='WriteOutBlockIdArray', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteOutGlobalElementIdArray: bpy.props.BoolProperty(name='WriteOutGlobalElementIdArray', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteOutGlobalNodeIdArray: bpy.props.BoolProperty(name='WriteOutGlobalNodeIdArray', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockIdArrayName: bpy.props.StringProperty(name='BlockIdArrayName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StoreDoubles: bpy.props.IntProperty(name='StoreDoubles', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_IgnoreMetaDataWarning: bpy.props.BoolProperty(name='IgnoreMetaDataWarning', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteAllTimeSteps: bpy.props.BoolProperty(name='WriteAllTimeSteps', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteOutBlockIdArray: bpy.props.BoolProperty(name='WriteOutBlockIdArray', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteOutGlobalElementIdArray: bpy.props.BoolProperty(name='WriteOutGlobalElementIdArray', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteOutGlobalNodeIdArray: bpy.props.BoolProperty(name='WriteOutGlobalNodeIdArray', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockIdArrayName: bpy.props.StringProperty(name='BlockIdArrayName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StoreDoubles: bpy.props.IntProperty(name='StoreDoubles', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=11, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=11, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_IgnoreMetaDataWarning','m_WriteAllTimeSteps','m_WriteOutBlockIdArray','m_WriteOutGlobalElementIdArray','m_WriteOutGlobalNodeIdArray','m_BlockIdArrayName','m_FileName','m_ObjectName','m_GhostLevel','m_StoreDoubles',]
@@ -421,16 +421,16 @@ add_class( VTKExodusIIWriter )
 TYPENAMES.append('VTKExodusIIWriterType' )
 
 #--------------------------------------------------------------
-class VTKFacetWriter(Node, BVTK_Node):
+class VTKFacetWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKFacetWriterType'
     bl_label  = 'vtkFacetWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_ObjectName',]
@@ -441,25 +441,25 @@ add_class( VTKFacetWriter )
 TYPENAMES.append('VTKFacetWriterType' )
 
 #--------------------------------------------------------------
-class VTKGLTFWriter(Node, BVTK_Node):
+class VTKGLTFWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKGLTFWriterType'
     bl_label  = 'vtkGLTFWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CopyTextures: bpy.props.BoolProperty(name='CopyTextures', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InlineData: bpy.props.BoolProperty(name='InlineData', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RelativeCoordinates: bpy.props.BoolProperty(name='RelativeCoordinates', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_SaveActivePointColor: bpy.props.BoolProperty(name='SaveActivePointColor', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_SaveBatchId: bpy.props.BoolProperty(name='SaveBatchId', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_SaveNormal: bpy.props.BoolProperty(name='SaveNormal', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_SaveTextures: bpy.props.BoolProperty(name='SaveTextures', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PropertyTextureFile: bpy.props.StringProperty(name='PropertyTextureFile', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TextureBaseDirectory: bpy.props.StringProperty(name='TextureBaseDirectory', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CopyTextures: bpy.props.BoolProperty(name='CopyTextures', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InlineData: bpy.props.BoolProperty(name='InlineData', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RelativeCoordinates: bpy.props.BoolProperty(name='RelativeCoordinates', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_SaveActivePointColor: bpy.props.BoolProperty(name='SaveActivePointColor', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_SaveBatchId: bpy.props.BoolProperty(name='SaveBatchId', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_SaveNormal: bpy.props.BoolProperty(name='SaveNormal', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_SaveTextures: bpy.props.BoolProperty(name='SaveTextures', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PropertyTextureFile: bpy.props.StringProperty(name='PropertyTextureFile', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TextureBaseDirectory: bpy.props.StringProperty(name='TextureBaseDirectory', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=12, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=12, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_CopyTextures','m_InlineData','m_RelativeCoordinates','m_SaveActivePointColor','m_SaveBatchId','m_SaveNormal','m_SaveTextures','m_FileName','m_ObjectName','m_PropertyTextureFile','m_TextureBaseDirectory',]
@@ -470,32 +470,32 @@ add_class( VTKGLTFWriter )
 TYPENAMES.append('VTKGLTFWriterType' )
 
 #--------------------------------------------------------------
-class VTKGenericDataObjectWriter(Node, BVTK_Node):
+class VTKGenericDataObjectWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKGenericDataObjectWriterType'
     bl_label  = 'vtkGenericDataObjectWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -506,18 +506,18 @@ add_class( VTKGenericDataObjectWriter )
 TYPENAMES.append('VTKGenericDataObjectWriterType' )
 
 #--------------------------------------------------------------
-class VTKGeoJSONWriter(Node, BVTK_Node):
+class VTKGeoJSONWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKGeoJSONWriterType'
     bl_label  = 'vtkGeoJSONWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarFormat: bpy.props.IntProperty(name='ScalarFormat', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarFormat: bpy.props.IntProperty(name='ScalarFormat', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteToOutputString','m_FileName','m_ObjectName','m_ScalarFormat',]
@@ -528,32 +528,32 @@ add_class( VTKGeoJSONWriter )
 TYPENAMES.append('VTKGeoJSONWriterType' )
 
 #--------------------------------------------------------------
-class VTKGraphWriter(Node, BVTK_Node):
+class VTKGraphWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKGraphWriterType'
     bl_label  = 'vtkGraphWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -564,23 +564,23 @@ add_class( VTKGraphWriter )
 TYPENAMES.append('VTKGraphWriterType' )
 
 #--------------------------------------------------------------
-class VTKHDFWriter(Node, BVTK_Node):
+class VTKHDFWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKHDFWriterType'
     bl_label  = 'vtkHDFWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Overwrite: bpy.props.BoolProperty(name='Overwrite', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseExternalComposite: bpy.props.BoolProperty(name='UseExternalComposite', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseExternalPartitions: bpy.props.BoolProperty(name='UseExternalPartitions', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseExternalTimeSteps: bpy.props.BoolProperty(name='UseExternalTimeSteps', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteAllTimeSteps: bpy.props.BoolProperty(name='WriteAllTimeSteps', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ChunkSize: bpy.props.IntProperty(name='ChunkSize', default=25000, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Overwrite: bpy.props.BoolProperty(name='Overwrite', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseExternalComposite: bpy.props.BoolProperty(name='UseExternalComposite', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseExternalPartitions: bpy.props.BoolProperty(name='UseExternalPartitions', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseExternalTimeSteps: bpy.props.BoolProperty(name='UseExternalTimeSteps', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteAllTimeSteps: bpy.props.BoolProperty(name='WriteAllTimeSteps', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ChunkSize: bpy.props.IntProperty(name='ChunkSize', default=25000, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=10, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=10, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_Overwrite','m_UseExternalComposite','m_UseExternalPartitions','m_UseExternalTimeSteps','m_WriteAllTimeSteps','m_FileName','m_ObjectName','m_ChunkSize','m_CompressionLevel',]
@@ -591,16 +591,16 @@ add_class( VTKHDFWriter )
 TYPENAMES.append('VTKHDFWriterType' )
 
 #--------------------------------------------------------------
-class VTKHoudiniPolyDataWriter(Node, BVTK_Node):
+class VTKHoudiniPolyDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKHoudiniPolyDataWriterType'
     bl_label  = 'vtkHoudiniPolyDataWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_ObjectName',]
@@ -611,33 +611,33 @@ add_class( VTKHoudiniPolyDataWriter )
 TYPENAMES.append('VTKHoudiniPolyDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKIOSSWriter(Node, BVTK_Node):
+class VTKIOSSWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKIOSSWriterType'
     bl_label  = 'vtkIOSSWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ChooseFieldsToWrite: bpy.props.BoolProperty(name='ChooseFieldsToWrite', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_OffsetGlobalIds: bpy.props.BoolProperty(name='OffsetGlobalIds', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PreserveOriginalIds: bpy.props.BoolProperty(name='PreserveOriginalIds', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RemoveGhosts: bpy.props.BoolProperty(name='RemoveGhosts', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteQAAndInformationRecords: bpy.props.BoolProperty(name='WriteQAAndInformationRecords', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_AssemblyName: bpy.props.StringProperty(name='AssemblyName', default="Hierarchy", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeBlockSelector: bpy.props.StringProperty(name='EdgeBlockSelector', default="0", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeSetSelector: bpy.props.StringProperty(name='EdgeSetSelector', default="0", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ElementBlockSelector: bpy.props.StringProperty(name='ElementBlockSelector', default="0", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ElementSetSelector: bpy.props.StringProperty(name='ElementSetSelector', default="0", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FaceBlockSelector: bpy.props.StringProperty(name='FaceBlockSelector', default="0", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FaceSetSelector: bpy.props.StringProperty(name='FaceSetSelector', default="0", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NodeSetSelector: bpy.props.StringProperty(name='NodeSetSelector', default="0", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_SideSetSelector: bpy.props.StringProperty(name='SideSetSelector', default="0", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TimeStepStride: bpy.props.IntProperty(name='TimeStepStride', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DisplacementMagnitude: bpy.props.FloatProperty(name='DisplacementMagnitude', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TimeStepRange: bpy.props.IntVectorProperty(name='TimeStepRange', default=[0, 1000000000], size=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ChooseFieldsToWrite: bpy.props.BoolProperty(name='ChooseFieldsToWrite', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_OffsetGlobalIds: bpy.props.BoolProperty(name='OffsetGlobalIds', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PreserveOriginalIds: bpy.props.BoolProperty(name='PreserveOriginalIds', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RemoveGhosts: bpy.props.BoolProperty(name='RemoveGhosts', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteQAAndInformationRecords: bpy.props.BoolProperty(name='WriteQAAndInformationRecords', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_AssemblyName: bpy.props.StringProperty(name='AssemblyName', default="Hierarchy", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeBlockSelector: bpy.props.StringProperty(name='EdgeBlockSelector', default="0", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeSetSelector: bpy.props.StringProperty(name='EdgeSetSelector', default="0", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ElementBlockSelector: bpy.props.StringProperty(name='ElementBlockSelector', default="0", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ElementSetSelector: bpy.props.StringProperty(name='ElementSetSelector', default="0", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FaceBlockSelector: bpy.props.StringProperty(name='FaceBlockSelector', default="0", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FaceSetSelector: bpy.props.StringProperty(name='FaceSetSelector', default="0", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NodeSetSelector: bpy.props.StringProperty(name='NodeSetSelector', default="0", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_SideSetSelector: bpy.props.StringProperty(name='SideSetSelector', default="0", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TimeStepStride: bpy.props.IntProperty(name='TimeStepStride', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DisplacementMagnitude: bpy.props.FloatProperty(name='DisplacementMagnitude', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TimeStepRange: bpy.props.IntVectorProperty(name='TimeStepRange', default=[0, 1000000000], size=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=20, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=20, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_ChooseFieldsToWrite','m_OffsetGlobalIds','m_PreserveOriginalIds','m_RemoveGhosts','m_WriteQAAndInformationRecords','m_AssemblyName','m_EdgeBlockSelector','m_EdgeSetSelector','m_ElementBlockSelector','m_ElementSetSelector','m_FaceBlockSelector','m_FaceSetSelector','m_FileName','m_NodeSetSelector','m_ObjectName','m_SideSetSelector','m_TimeStepStride','m_DisplacementMagnitude','m_TimeStepRange',]
@@ -648,16 +648,16 @@ add_class( VTKIOSSWriter )
 TYPENAMES.append('VTKIOSSWriterType' )
 
 #--------------------------------------------------------------
-class VTKIVWriter(Node, BVTK_Node):
+class VTKIVWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKIVWriterType'
     bl_label  = 'vtkIVWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_ObjectName',]
@@ -668,19 +668,19 @@ add_class( VTKIVWriter )
 TYPENAMES.append('VTKIVWriterType' )
 
 #--------------------------------------------------------------
-class VTKImageWriter(Node, BVTK_Node):
+class VTKImageWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKImageWriterType'
     bl_label  = 'vtkImageWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_FileDimensionality',]
@@ -691,22 +691,22 @@ add_class( VTKImageWriter )
 TYPENAMES.append('VTKImageWriterType' )
 
 #--------------------------------------------------------------
-class VTKJPEGWriter(Node, BVTK_Node):
+class VTKJPEGWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKJPEGWriterType'
     bl_label  = 'vtkJPEGWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Progressive: bpy.props.BoolProperty(name='Progressive', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToMemory: bpy.props.BoolProperty(name='WriteToMemory', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Quality: bpy.props.IntProperty(name='Quality', default=95, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Progressive: bpy.props.BoolProperty(name='Progressive', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToMemory: bpy.props.BoolProperty(name='WriteToMemory', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Quality: bpy.props.IntProperty(name='Quality', default=95, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=9, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=9, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_Progressive','m_WriteToMemory','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_FileDimensionality','m_Quality',]
@@ -717,15 +717,15 @@ add_class( VTKJPEGWriter )
 TYPENAMES.append('VTKJPEGWriterType' )
 
 #--------------------------------------------------------------
-class VTKJSONDataSetWriter(Node, BVTK_Node):
+class VTKJSONDataSetWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKJSONDataSetWriterType'
     bl_label  = 'vtkJSONDataSetWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_ObjectName',]
@@ -736,18 +736,18 @@ add_class( VTKJSONDataSetWriter )
 TYPENAMES.append('VTKJSONDataSetWriterType' )
 
 #--------------------------------------------------------------
-class VTKJSONImageWriter(Node, BVTK_Node):
+class VTKJSONImageWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKJSONImageWriterType'
     bl_label  = 'vtkJSONImageWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ArrayName: bpy.props.StringProperty(name='ArrayName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Slice: bpy.props.IntProperty(name='Slice', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ArrayName: bpy.props.StringProperty(name='ArrayName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Slice: bpy.props.IntProperty(name='Slice', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_ArrayName','m_FileName','m_ObjectName','m_Slice',]
@@ -758,18 +758,18 @@ add_class( VTKJSONImageWriter )
 TYPENAMES.append('VTKJSONImageWriterType' )
 
 #--------------------------------------------------------------
-class VTKJavaScriptDataWriter(Node, BVTK_Node):
+class VTKJavaScriptDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKJavaScriptDataWriterType'
     bl_label  = 'vtkJavaScriptDataWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_IncludeFieldNames: bpy.props.BoolProperty(name='IncludeFieldNames', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VariableName: bpy.props.StringProperty(name='VariableName', default="data", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_IncludeFieldNames: bpy.props.BoolProperty(name='IncludeFieldNames', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VariableName: bpy.props.StringProperty(name='VariableName', default="data", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_IncludeFieldNames','m_FileName','m_ObjectName','m_VariableName',]
@@ -780,32 +780,32 @@ add_class( VTKJavaScriptDataWriter )
 TYPENAMES.append('VTKJavaScriptDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKLegacyCellGridWriter(Node, BVTK_Node):
+class VTKLegacyCellGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKLegacyCellGridWriterType'
     bl_label  = 'vtkLegacyCellGridWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -816,17 +816,17 @@ add_class( VTKLegacyCellGridWriter )
 TYPENAMES.append('VTKLegacyCellGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKMCubesWriter(Node, BVTK_Node):
+class VTKMCubesWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKMCubesWriterType'
     bl_label  = 'vtkMCubesWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LimitsFileName: bpy.props.StringProperty(name='LimitsFileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LimitsFileName: bpy.props.StringProperty(name='LimitsFileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_LimitsFileName','m_ObjectName',]
@@ -837,23 +837,23 @@ add_class( VTKMCubesWriter )
 TYPENAMES.append('VTKMCubesWriterType' )
 
 #--------------------------------------------------------------
-class VTKMINCImageWriter(Node, BVTK_Node):
+class VTKMINCImageWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKMINCImageWriterType'
     bl_label  = 'vtkMINCImageWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StrictValidation: bpy.props.BoolProperty(name='StrictValidation', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_HistoryAddition: bpy.props.StringProperty(name='HistoryAddition', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RescaleIntercept: bpy.props.FloatProperty(name='RescaleIntercept', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RescaleSlope: bpy.props.FloatProperty(name='RescaleSlope', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StrictValidation: bpy.props.BoolProperty(name='StrictValidation', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_HistoryAddition: bpy.props.StringProperty(name='HistoryAddition', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RescaleIntercept: bpy.props.FloatProperty(name='RescaleIntercept', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RescaleSlope: bpy.props.FloatProperty(name='RescaleSlope', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=10, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=10, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_StrictValidation','m_FileName','m_FilePattern','m_FilePrefix','m_HistoryAddition','m_ObjectName','m_FileDimensionality','m_RescaleIntercept','m_RescaleSlope',]
@@ -864,18 +864,18 @@ add_class( VTKMINCImageWriter )
 TYPENAMES.append('VTKMINCImageWriterType' )
 
 #--------------------------------------------------------------
-class VTKMNIObjectWriter(Node, BVTK_Node):
+class VTKMNIObjectWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKMNIObjectWriterType'
     bl_label  = 'vtkMNIObjectWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_ObjectName','e_FileType',]
@@ -886,17 +886,17 @@ add_class( VTKMNIObjectWriter )
 TYPENAMES.append('VTKMNIObjectWriterType' )
 
 #--------------------------------------------------------------
-class VTKMNITagPointWriter(Node, BVTK_Node):
+class VTKMNITagPointWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKMNITagPointWriterType'
     bl_label  = 'vtkMNITagPointWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Comments: bpy.props.StringProperty(name='Comments', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Comments: bpy.props.StringProperty(name='Comments', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_Comments','m_FileName','m_ObjectName',]
@@ -907,17 +907,17 @@ add_class( VTKMNITagPointWriter )
 TYPENAMES.append('VTKMNITagPointWriterType' )
 
 #--------------------------------------------------------------
-class VTKMNITransformWriter(Node, BVTK_Node):
+class VTKMNITransformWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKMNITransformWriterType'
     bl_label  = 'vtkMNITransformWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Comments: bpy.props.StringProperty(name='Comments', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Comments: bpy.props.StringProperty(name='Comments', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_Comments','m_FileName','m_ObjectName',]
@@ -928,21 +928,21 @@ add_class( VTKMNITransformWriter )
 TYPENAMES.append('VTKMNITransformWriterType' )
 
 #--------------------------------------------------------------
-class VTKMetaImageWriter(Node, BVTK_Node):
+class VTKMetaImageWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKMetaImageWriterType'
     bl_label  = 'vtkMetaImageWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Compression: bpy.props.BoolProperty(name='Compression', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RAWFileName: bpy.props.StringProperty(name='RAWFileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Compression: bpy.props.BoolProperty(name='Compression', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RAWFileName: bpy.props.StringProperty(name='RAWFileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=8, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=8, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_Compression','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_RAWFileName','m_FileDimensionality',]
@@ -953,27 +953,27 @@ add_class( VTKMetaImageWriter )
 TYPENAMES.append('VTKMetaImageWriterType' )
 
 #--------------------------------------------------------------
-class VTKNIFTIImageWriter(Node, BVTK_Node):
+class VTKNIFTIImageWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKNIFTIImageWriterType'
     bl_label  = 'vtkNIFTIImageWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PlanarRGB: bpy.props.BoolProperty(name='PlanarRGB', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Description: bpy.props.StringProperty(name='Description', default="VTK9.5.2", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NIFTIVersion: bpy.props.IntProperty(name='NIFTIVersion', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TimeDimension: bpy.props.IntProperty(name='TimeDimension', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_QFac: bpy.props.FloatProperty(name='QFac', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RescaleIntercept: bpy.props.FloatProperty(name='RescaleIntercept', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RescaleSlope: bpy.props.FloatProperty(name='RescaleSlope', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TimeSpacing: bpy.props.FloatProperty(name='TimeSpacing', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PlanarRGB: bpy.props.BoolProperty(name='PlanarRGB', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Description: bpy.props.StringProperty(name='Description', default="VTK9.5.2", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NIFTIVersion: bpy.props.IntProperty(name='NIFTIVersion', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TimeDimension: bpy.props.IntProperty(name='TimeDimension', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_QFac: bpy.props.FloatProperty(name='QFac', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RescaleIntercept: bpy.props.FloatProperty(name='RescaleIntercept', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RescaleSlope: bpy.props.FloatProperty(name='RescaleSlope', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TimeSpacing: bpy.props.FloatProperty(name='TimeSpacing', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=14, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=14, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_PlanarRGB','m_Description','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_FileDimensionality','m_NIFTIVersion','m_TimeDimension','m_QFac','m_RescaleIntercept','m_RescaleSlope','m_TimeSpacing',]
@@ -984,20 +984,20 @@ add_class( VTKNIFTIImageWriter )
 TYPENAMES.append('VTKNIFTIImageWriterType' )
 
 #--------------------------------------------------------------
-class VTKNetCDFCFWriter(Node, BVTK_Node):
+class VTKNetCDFCFWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKNetCDFCFWriterType'
     bl_label  = 'vtkNetCDFCFWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FillBlankedAttributes: bpy.props.BoolProperty(name='FillBlankedAttributes', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CellArrayNamePostfix: bpy.props.StringProperty(name='CellArrayNamePostfix', default="_c", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_AttributeType: bpy.props.IntProperty(name='AttributeType', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FillValue: bpy.props.IntProperty(name='FillValue', default=-1000000000, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FillBlankedAttributes: bpy.props.BoolProperty(name='FillBlankedAttributes', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CellArrayNamePostfix: bpy.props.StringProperty(name='CellArrayNamePostfix', default="_c", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_AttributeType: bpy.props.IntProperty(name='AttributeType', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FillValue: bpy.props.IntProperty(name='FillValue', default=-1000000000, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FillBlankedAttributes','m_CellArrayNamePostfix','m_FileName','m_ObjectName','m_AttributeType','m_FillValue',]
@@ -1008,34 +1008,34 @@ add_class( VTKNetCDFCFWriter )
 TYPENAMES.append('VTKNetCDFCFWriterType' )
 
 #--------------------------------------------------------------
-class VTKNewickTreeWriter(Node, BVTK_Node):
+class VTKNewickTreeWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKNewickTreeWriterType'
     bl_label  = 'vtkNewickTreeWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeWeightArrayName: bpy.props.StringProperty(name='EdgeWeightArrayName', default="weight", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NodeNameArrayName: bpy.props.StringProperty(name='NodeNameArrayName', default="node name", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeWeightArrayName: bpy.props.StringProperty(name='EdgeWeightArrayName', default="weight", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NodeNameArrayName: bpy.props.StringProperty(name='NodeNameArrayName', default="node name", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=20, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=20, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_EdgeWeightArrayName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NodeNameArrayName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -1046,17 +1046,17 @@ add_class( VTKNewickTreeWriter )
 TYPENAMES.append('VTKNewickTreeWriterType' )
 
 #--------------------------------------------------------------
-class VTKOBJWriter(Node, BVTK_Node):
+class VTKOBJWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKOBJWriterType'
     bl_label  = 'vtkOBJWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TextureFileName: bpy.props.StringProperty(name='TextureFileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TextureFileName: bpy.props.StringProperty(name='TextureFileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_ObjectName','m_TextureFileName',]
@@ -1067,19 +1067,19 @@ add_class( VTKOBJWriter )
 TYPENAMES.append('VTKOBJWriterType' )
 
 #--------------------------------------------------------------
-class VTKOggTheoraWriter(Node, BVTK_Node):
+class VTKOggTheoraWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKOggTheoraWriterType'
     bl_label  = 'vtkOggTheoraWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Subsampling: bpy.props.BoolProperty(name='Subsampling', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Quality: bpy.props.IntProperty(name='Quality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Rate: bpy.props.IntProperty(name='Rate', default=25, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Subsampling: bpy.props.BoolProperty(name='Subsampling', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Quality: bpy.props.IntProperty(name='Quality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Rate: bpy.props.IntProperty(name='Rate', default=25, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_Subsampling','m_FileName','m_ObjectName','m_Quality','m_Rate',]
@@ -1090,38 +1090,38 @@ add_class( VTKOggTheoraWriter )
 TYPENAMES.append('VTKOggTheoraWriterType' )
 
 #--------------------------------------------------------------
-class VTKPDataSetWriter(Node, BVTK_Node):
+class VTKPDataSetWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPDataSetWriterType'
     bl_label  = 'vtkPDataSetWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseRelativeFileNames: bpy.props.BoolProperty(name='UseRelativeFileNames', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d.vtk", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseRelativeFileNames: bpy.props.BoolProperty(name='UseRelativeFileNames', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d.vtk", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=24, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=24, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_UseRelativeFileNames','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_FilePattern','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_EndPiece','m_FileVersion','m_GhostLevel','m_NumberOfPieces','m_StartPiece','e_FileType',]
@@ -1132,24 +1132,24 @@ add_class( VTKPDataSetWriter )
 TYPENAMES.append('VTKPDataSetWriterType' )
 
 #--------------------------------------------------------------
-class VTKPExodusIIWriter(Node, BVTK_Node):
+class VTKPExodusIIWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPExodusIIWriterType'
     bl_label  = 'vtkPExodusIIWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_IgnoreMetaDataWarning: bpy.props.BoolProperty(name='IgnoreMetaDataWarning', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteAllTimeSteps: bpy.props.BoolProperty(name='WriteAllTimeSteps', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteOutBlockIdArray: bpy.props.BoolProperty(name='WriteOutBlockIdArray', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteOutGlobalElementIdArray: bpy.props.BoolProperty(name='WriteOutGlobalElementIdArray', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteOutGlobalNodeIdArray: bpy.props.BoolProperty(name='WriteOutGlobalNodeIdArray', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockIdArrayName: bpy.props.StringProperty(name='BlockIdArrayName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StoreDoubles: bpy.props.IntProperty(name='StoreDoubles', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_IgnoreMetaDataWarning: bpy.props.BoolProperty(name='IgnoreMetaDataWarning', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteAllTimeSteps: bpy.props.BoolProperty(name='WriteAllTimeSteps', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteOutBlockIdArray: bpy.props.BoolProperty(name='WriteOutBlockIdArray', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteOutGlobalElementIdArray: bpy.props.BoolProperty(name='WriteOutGlobalElementIdArray', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteOutGlobalNodeIdArray: bpy.props.BoolProperty(name='WriteOutGlobalNodeIdArray', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockIdArrayName: bpy.props.StringProperty(name='BlockIdArrayName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StoreDoubles: bpy.props.IntProperty(name='StoreDoubles', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=11, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=11, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_IgnoreMetaDataWarning','m_WriteAllTimeSteps','m_WriteOutBlockIdArray','m_WriteOutGlobalElementIdArray','m_WriteOutGlobalNodeIdArray','m_BlockIdArrayName','m_FileName','m_ObjectName','m_GhostLevel','m_StoreDoubles',]
@@ -1160,20 +1160,20 @@ add_class( VTKPExodusIIWriter )
 TYPENAMES.append('VTKPExodusIIWriterType' )
 
 #--------------------------------------------------------------
-class VTKPImageWriter(Node, BVTK_Node):
+class VTKPImageWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPImageWriterType'
     bl_label  = 'vtkPImageWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MemoryLimit: bpy.props.IntProperty(name='MemoryLimit', default=1048576, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MemoryLimit: bpy.props.IntProperty(name='MemoryLimit', default=1048576, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_FileDimensionality','m_MemoryLimit',]
@@ -1184,7 +1184,7 @@ add_class( VTKPImageWriter )
 TYPENAMES.append('VTKPImageWriterType' )
 
 #--------------------------------------------------------------
-class VTKPLYWriter(Node, BVTK_Node):
+class VTKPLYWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPLYWriterType'
     bl_label  = 'vtkPLYWriter'
@@ -1193,22 +1193,22 @@ class VTKPLYWriter(Node, BVTK_Node):
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     e_TextureCoordinatesName_items=[ (x,x,x) for x in ['UV', 'TextureUV']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EnableAlpha: bpy.props.BoolProperty(name='EnableAlpha', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteObjectInformation: bpy.props.BoolProperty(name='WriteObjectInformation', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ArrayName: bpy.props.StringProperty(name='ArrayName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Alpha: bpy.props.IntProperty(name='Alpha', default=255, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Component: bpy.props.IntProperty(name='Component', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ColorMode: bpy.props.EnumProperty(name='ColorMode', default="Default", items=e_ColorMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataByteOrder: bpy.props.EnumProperty(name='DataByteOrder', default="LittleEndian", items=e_DataByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="Binary", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_TextureCoordinatesName: bpy.props.EnumProperty(name='TextureCoordinatesName', default="UV", items=e_TextureCoordinatesName_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Color: bpy.props.IntVectorProperty(name='Color', default=[255, 255, 255], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EnableAlpha: bpy.props.BoolProperty(name='EnableAlpha', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteObjectInformation: bpy.props.BoolProperty(name='WriteObjectInformation', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ArrayName: bpy.props.StringProperty(name='ArrayName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Alpha: bpy.props.IntProperty(name='Alpha', default=255, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Component: bpy.props.IntProperty(name='Component', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ColorMode: bpy.props.EnumProperty(name='ColorMode', default="Default", items=e_ColorMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataByteOrder: bpy.props.EnumProperty(name='DataByteOrder', default="LittleEndian", items=e_DataByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="Binary", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_TextureCoordinatesName: bpy.props.EnumProperty(name='TextureCoordinatesName', default="UV", items=e_TextureCoordinatesName_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Color: bpy.props.IntVectorProperty(name='Color', default=[255, 255, 255], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=14, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=14, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EnableAlpha','m_WriteObjectInformation','m_WriteToOutputString','m_ArrayName','m_FileName','m_ObjectName','m_Alpha','m_Component','e_ColorMode','e_DataByteOrder','e_FileType','e_TextureCoordinatesName','m_Color',]
@@ -1219,21 +1219,21 @@ add_class( VTKPLYWriter )
 TYPENAMES.append('VTKPLYWriterType' )
 
 #--------------------------------------------------------------
-class VTKPNGWriter(Node, BVTK_Node):
+class VTKPNGWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPNGWriterType'
     bl_label  = 'vtkPNGWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToMemory: bpy.props.BoolProperty(name='WriteToMemory', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToMemory: bpy.props.BoolProperty(name='WriteToMemory', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=8, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=8, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteToMemory','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_CompressionLevel','m_FileDimensionality',]
@@ -1244,19 +1244,19 @@ add_class( VTKPNGWriter )
 TYPENAMES.append('VTKPNGWriterType' )
 
 #--------------------------------------------------------------
-class VTKPNMWriter(Node, BVTK_Node):
+class VTKPNMWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPNMWriterType'
     bl_label  = 'vtkPNMWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_FileDimensionality',]
@@ -1267,7 +1267,7 @@ add_class( VTKPNMWriter )
 TYPENAMES.append('VTKPNMWriterType' )
 
 #--------------------------------------------------------------
-class VTKPhyloXMLTreeWriter(Node, BVTK_Node):
+class VTKPhyloXMLTreeWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPhyloXMLTreeWriterType'
     bl_label  = 'vtkPhyloXMLTreeWriter'
@@ -1276,23 +1276,23 @@ class VTKPhyloXMLTreeWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeWeightArrayName: bpy.props.StringProperty(name='EdgeWeightArrayName', default="weight", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NodeNameArrayName: bpy.props.StringProperty(name='NodeNameArrayName', default="node name", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeWeightArrayName: bpy.props.StringProperty(name='EdgeWeightArrayName', default="weight", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NodeNameArrayName: bpy.props.StringProperty(name='NodeNameArrayName', default="node name", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_EdgeWeightArrayName','m_FileName','m_NodeNameArrayName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_NumberOfTimeSteps','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -1303,32 +1303,32 @@ add_class( VTKPhyloXMLTreeWriter )
 TYPENAMES.append('VTKPhyloXMLTreeWriterType' )
 
 #--------------------------------------------------------------
-class VTKPolyDataWriter(Node, BVTK_Node):
+class VTKPolyDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPolyDataWriterType'
     bl_label  = 'vtkPolyDataWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -1339,19 +1339,19 @@ add_class( VTKPolyDataWriter )
 TYPENAMES.append('VTKPolyDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKPostScriptWriter(Node, BVTK_Node):
+class VTKPostScriptWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKPostScriptWriterType'
     bl_label  = 'vtkPostScriptWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_FileDimensionality',]
@@ -1362,33 +1362,33 @@ add_class( VTKPostScriptWriter )
 TYPENAMES.append('VTKPostScriptWriterType' )
 
 #--------------------------------------------------------------
-class VTKRectilinearGridWriter(Node, BVTK_Node):
+class VTKRectilinearGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKRectilinearGridWriterType'
     bl_label  = 'vtkRectilinearGridWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteExtent: bpy.props.BoolProperty(name='WriteExtent', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteExtent: bpy.props.BoolProperty(name='WriteExtent', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteExtent','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -1399,19 +1399,19 @@ add_class( VTKRectilinearGridWriter )
 TYPENAMES.append('VTKRectilinearGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKSTLWriter(Node, BVTK_Node):
+class VTKSTLWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKSTLWriterType'
     bl_label  = 'vtkSTLWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="Visualization Toolkit generated SLA File", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="Visualization Toolkit generated SLA File", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_Header','m_ObjectName','e_FileType',]
@@ -1422,33 +1422,33 @@ add_class( VTKSTLWriter )
 TYPENAMES.append('VTKSTLWriterType' )
 
 #--------------------------------------------------------------
-class VTKSimplePointsWriter(Node, BVTK_Node):
+class VTKSimplePointsWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKSimplePointsWriterType'
     bl_label  = 'vtkSimplePointsWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DecimalPrecision: bpy.props.IntProperty(name='DecimalPrecision', default=6, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DecimalPrecision: bpy.props.IntProperty(name='DecimalPrecision', default=6, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_DecimalPrecision','m_FileVersion','e_FileType',]
@@ -1459,33 +1459,33 @@ add_class( VTKSimplePointsWriter )
 TYPENAMES.append('VTKSimplePointsWriterType' )
 
 #--------------------------------------------------------------
-class VTKStructuredGridWriter(Node, BVTK_Node):
+class VTKStructuredGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKStructuredGridWriterType'
     bl_label  = 'vtkStructuredGridWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteExtent: bpy.props.BoolProperty(name='WriteExtent', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteExtent: bpy.props.BoolProperty(name='WriteExtent', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteExtent','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -1496,33 +1496,33 @@ add_class( VTKStructuredGridWriter )
 TYPENAMES.append('VTKStructuredGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKStructuredPointsWriter(Node, BVTK_Node):
+class VTKStructuredPointsWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKStructuredPointsWriterType'
     bl_label  = 'vtkStructuredPointsWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteExtent: bpy.props.BoolProperty(name='WriteExtent', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteExtent: bpy.props.BoolProperty(name='WriteExtent', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteExtent','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -1533,21 +1533,21 @@ add_class( VTKStructuredPointsWriter )
 TYPENAMES.append('VTKStructuredPointsWriterType' )
 
 #--------------------------------------------------------------
-class VTKTIFFWriter(Node, BVTK_Node):
+class VTKTIFFWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKTIFFWriterType'
     bl_label  = 'vtkTIFFWriter'
     e_Compression_items=[ (x,x,x) for x in ['NoCompression', 'PackBits', 'JPEG', 'Deflate', 'LZW']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_Compression: bpy.props.EnumProperty(name='Compression', default="PackBits", items=e_Compression_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePattern: bpy.props.StringProperty(name='FilePattern', default="%s.%d", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FilePrefix: bpy.props.StringProperty(name='FilePrefix', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileDimensionality: bpy.props.IntProperty(name='FileDimensionality', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_Compression: bpy.props.EnumProperty(name='Compression', default="PackBits", items=e_Compression_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_FileName','m_FilePattern','m_FilePrefix','m_ObjectName','m_FileDimensionality','e_Compression',]
@@ -1558,15 +1558,15 @@ add_class( VTKTIFFWriter )
 TYPENAMES.append('VTKTIFFWriterType' )
 
 #--------------------------------------------------------------
-class VTKTableToSQLiteWriter(Node, BVTK_Node):
+class VTKTableToSQLiteWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKTableToSQLiteWriterType'
     bl_label  = 'vtkTableToSQLiteWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_ObjectName',]
@@ -1577,32 +1577,32 @@ add_class( VTKTableToSQLiteWriter )
 TYPENAMES.append('VTKTableToSQLiteWriterType' )
 
 #--------------------------------------------------------------
-class VTKTableWriter(Node, BVTK_Node):
+class VTKTableWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKTableWriterType'
     bl_label  = 'vtkTableWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -1613,32 +1613,32 @@ add_class( VTKTableWriter )
 TYPENAMES.append('VTKTableWriterType' )
 
 #--------------------------------------------------------------
-class VTKTreeWriter(Node, BVTK_Node):
+class VTKTreeWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKTreeWriterType'
     bl_label  = 'vtkTreeWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -1649,32 +1649,32 @@ add_class( VTKTreeWriter )
 TYPENAMES.append('VTKTreeWriterType' )
 
 #--------------------------------------------------------------
-class VTKUnstructuredGridWriter(Node, BVTK_Node):
+class VTKUnstructuredGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKUnstructuredGridWriterType'
     bl_label  = 'vtkUnstructuredGridWriter'
     e_FileType_items=[ (x,x,x) for x in ['ASCII', 'Binary']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteArrayMetaData: bpy.props.BoolProperty(name='WriteArrayMetaData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EdgeFlagsName: bpy.props.StringProperty(name='EdgeFlagsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FieldDataName: bpy.props.StringProperty(name='FieldDataName', default="FieldData", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GlobalIdsName: bpy.props.StringProperty(name='GlobalIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Header: bpy.props.StringProperty(name='Header', default="vtk output", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LookupTableName: bpy.props.StringProperty(name='LookupTableName', default="lookup_table", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalsName: bpy.props.StringProperty(name='NormalsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PedigreeIdsName: bpy.props.StringProperty(name='PedigreeIdsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ScalarsName: bpy.props.StringProperty(name='ScalarsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TCoordsName: bpy.props.StringProperty(name='TCoordsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TensorsName: bpy.props.StringProperty(name='TensorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VectorsName: bpy.props.StringProperty(name='VectorsName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileVersion: bpy.props.IntProperty(name='FileVersion', default=51, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_FileType: bpy.props.EnumProperty(name='FileType', default="ASCII", items=e_FileType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_WriteArrayMetaData','m_WriteToOutputString','m_EdgeFlagsName','m_FieldDataName','m_FileName','m_GlobalIdsName','m_Header','m_LookupTableName','m_NormalsName','m_ObjectName','m_PedigreeIdsName','m_ScalarsName','m_TCoordsName','m_TensorsName','m_VectorsName','m_FileVersion','e_FileType',]
@@ -1685,7 +1685,7 @@ add_class( VTKUnstructuredGridWriter )
 TYPENAMES.append('VTKUnstructuredGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLDataObjectWriter(Node, BVTK_Node):
+class VTKXMLDataObjectWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLDataObjectWriterType'
     bl_label  = 'vtkXMLDataObjectWriter'
@@ -1694,21 +1694,21 @@ class VTKXMLDataObjectWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_NumberOfTimeSteps','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -1719,7 +1719,7 @@ add_class( VTKXMLDataObjectWriter )
 TYPENAMES.append('VTKXMLDataObjectWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLDataSetWriter(Node, BVTK_Node):
+class VTKXMLDataSetWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLDataSetWriterType'
     bl_label  = 'vtkXMLDataSetWriter'
@@ -1728,21 +1728,21 @@ class VTKXMLDataSetWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_NumberOfTimeSteps','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -1753,7 +1753,7 @@ add_class( VTKXMLDataSetWriter )
 TYPENAMES.append('VTKXMLDataSetWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLDataWriterHelper(Node, BVTK_Node):
+class VTKXMLDataWriterHelper(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLDataWriterHelperType'
     bl_label  = 'vtkXMLDataWriterHelper'
@@ -1762,21 +1762,21 @@ class VTKXMLDataWriterHelper(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_NumberOfTimeSteps','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -1787,7 +1787,7 @@ add_class( VTKXMLDataWriterHelper )
 TYPENAMES.append('VTKXMLDataWriterHelperType' )
 
 #--------------------------------------------------------------
-class VTKXMLHierarchicalBoxDataWriter(Node, BVTK_Node):
+class VTKXMLHierarchicalBoxDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLHierarchicalBoxDataWriterType'
     bl_label  = 'vtkXMLHierarchicalBoxDataWriter'
@@ -1796,23 +1796,23 @@ class VTKXMLHierarchicalBoxDataWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfTimeSteps','m_WriteMetaFile','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -1823,7 +1823,7 @@ add_class( VTKXMLHierarchicalBoxDataWriter )
 TYPENAMES.append('VTKXMLHierarchicalBoxDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLHyperTreeGridWriter(Node, BVTK_Node):
+class VTKXMLHyperTreeGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLHyperTreeGridWriterType'
     bl_label  = 'vtkXMLHyperTreeGridWriter'
@@ -1832,21 +1832,21 @@ class VTKXMLHyperTreeGridWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_NumberOfTimeSteps','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -1857,7 +1857,7 @@ add_class( VTKXMLHyperTreeGridWriter )
 TYPENAMES.append('VTKXMLHyperTreeGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLImageDataWriter(Node, BVTK_Node):
+class VTKXMLImageDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLImageDataWriterType'
     bl_label  = 'vtkXMLImageDataWriter'
@@ -1866,25 +1866,25 @@ class VTKXMLImageDataWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteExtent: bpy.props.IntVectorProperty(name='WriteExtent', default=[0, -1, 0, -1, 0, -1], size=6, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteExtent: bpy.props.IntVectorProperty(name='WriteExtent', default=[0, -1, 0, -1, 0, -1], size=6, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_WritePiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType','m_WriteExtent',]
@@ -1895,7 +1895,7 @@ add_class( VTKXMLImageDataWriter )
 TYPENAMES.append('VTKXMLImageDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLMultiBlockDataWriter(Node, BVTK_Node):
+class VTKXMLMultiBlockDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLMultiBlockDataWriterType'
     bl_label  = 'vtkXMLMultiBlockDataWriter'
@@ -1904,23 +1904,23 @@ class VTKXMLMultiBlockDataWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfTimeSteps','m_WriteMetaFile','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -1931,7 +1931,7 @@ add_class( VTKXMLMultiBlockDataWriter )
 TYPENAMES.append('VTKXMLMultiBlockDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPDataSetWriter(Node, BVTK_Node):
+class VTKXMLPDataSetWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPDataSetWriterType'
     bl_label  = 'vtkXMLPDataSetWriter'
@@ -1940,27 +1940,27 @@ class VTKXMLPDataSetWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_UseSubdirectory','m_WriteSummaryFile','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_EndPiece','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -1971,7 +1971,7 @@ add_class( VTKXMLPDataSetWriter )
 TYPENAMES.append('VTKXMLPDataSetWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPHierarchicalBoxDataWriter(Node, BVTK_Node):
+class VTKXMLPHierarchicalBoxDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPHierarchicalBoxDataWriterType'
     bl_label  = 'vtkXMLPHierarchicalBoxDataWriter'
@@ -1980,23 +1980,23 @@ class VTKXMLPHierarchicalBoxDataWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfTimeSteps','m_WriteMetaFile','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2007,7 +2007,7 @@ add_class( VTKXMLPHierarchicalBoxDataWriter )
 TYPENAMES.append('VTKXMLPHierarchicalBoxDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPHyperTreeGridWriter(Node, BVTK_Node):
+class VTKXMLPHyperTreeGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPHyperTreeGridWriterType'
     bl_label  = 'vtkXMLPHyperTreeGridWriter'
@@ -2016,27 +2016,27 @@ class VTKXMLPHyperTreeGridWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_UseSubdirectory','m_WriteSummaryFile','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_EndPiece','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2047,7 +2047,7 @@ add_class( VTKXMLPHyperTreeGridWriter )
 TYPENAMES.append('VTKXMLPHyperTreeGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPImageDataWriter(Node, BVTK_Node):
+class VTKXMLPImageDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPImageDataWriterType'
     bl_label  = 'vtkXMLPImageDataWriter'
@@ -2056,27 +2056,27 @@ class VTKXMLPImageDataWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_UseSubdirectory','m_WriteSummaryFile','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_EndPiece','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2087,7 +2087,7 @@ add_class( VTKXMLPImageDataWriter )
 TYPENAMES.append('VTKXMLPImageDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPMultiBlockDataWriter(Node, BVTK_Node):
+class VTKXMLPMultiBlockDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPMultiBlockDataWriterType'
     bl_label  = 'vtkXMLPMultiBlockDataWriter'
@@ -2096,25 +2096,25 @@ class VTKXMLPMultiBlockDataWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','m_WriteMetaFile','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2125,7 +2125,7 @@ add_class( VTKXMLPMultiBlockDataWriter )
 TYPENAMES.append('VTKXMLPMultiBlockDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPPolyDataWriter(Node, BVTK_Node):
+class VTKXMLPPolyDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPPolyDataWriterType'
     bl_label  = 'vtkXMLPPolyDataWriter'
@@ -2134,27 +2134,27 @@ class VTKXMLPPolyDataWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_UseSubdirectory','m_WriteSummaryFile','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_EndPiece','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2165,7 +2165,7 @@ add_class( VTKXMLPPolyDataWriter )
 TYPENAMES.append('VTKXMLPPolyDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPRectilinearGridWriter(Node, BVTK_Node):
+class VTKXMLPRectilinearGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPRectilinearGridWriterType'
     bl_label  = 'vtkXMLPRectilinearGridWriter'
@@ -2174,27 +2174,27 @@ class VTKXMLPRectilinearGridWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_UseSubdirectory','m_WriteSummaryFile','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_EndPiece','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2205,7 +2205,7 @@ add_class( VTKXMLPRectilinearGridWriter )
 TYPENAMES.append('VTKXMLPRectilinearGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPStructuredGridWriter(Node, BVTK_Node):
+class VTKXMLPStructuredGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPStructuredGridWriterType'
     bl_label  = 'vtkXMLPStructuredGridWriter'
@@ -2214,27 +2214,27 @@ class VTKXMLPStructuredGridWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_UseSubdirectory','m_WriteSummaryFile','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_EndPiece','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2245,7 +2245,7 @@ add_class( VTKXMLPStructuredGridWriter )
 TYPENAMES.append('VTKXMLPStructuredGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPTableWriter(Node, BVTK_Node):
+class VTKXMLPTableWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPTableWriterType'
     bl_label  = 'vtkXMLPTableWriter'
@@ -2254,27 +2254,27 @@ class VTKXMLPTableWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_UseSubdirectory','m_WriteSummaryFile','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_EndPiece','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2285,7 +2285,7 @@ add_class( VTKXMLPTableWriter )
 TYPENAMES.append('VTKXMLPTableWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPUniformGridAMRWriter(Node, BVTK_Node):
+class VTKXMLPUniformGridAMRWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPUniformGridAMRWriterType'
     bl_label  = 'vtkXMLPUniformGridAMRWriter'
@@ -2294,23 +2294,23 @@ class VTKXMLPUniformGridAMRWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfTimeSteps','m_WriteMetaFile','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2321,7 +2321,7 @@ add_class( VTKXMLPUniformGridAMRWriter )
 TYPENAMES.append('VTKXMLPUniformGridAMRWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPUnstructuredGridWriter(Node, BVTK_Node):
+class VTKXMLPUnstructuredGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPUnstructuredGridWriterType'
     bl_label  = 'vtkXMLPUnstructuredGridWriter'
@@ -2330,27 +2330,27 @@ class VTKXMLPUnstructuredGridWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_UseSubdirectory: bpy.props.BoolProperty(name='UseSubdirectory', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteSummaryFile: bpy.props.BoolProperty(name='WriteSummaryFile', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EndPiece: bpy.props.IntProperty(name='EndPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartPiece: bpy.props.IntProperty(name='StartPiece', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_UseSubdirectory','m_WriteSummaryFile','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_EndPiece','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_StartPiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2361,7 +2361,7 @@ add_class( VTKXMLPUnstructuredGridWriter )
 TYPENAMES.append('VTKXMLPUnstructuredGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPartitionedDataSetCollectionWriter(Node, BVTK_Node):
+class VTKXMLPartitionedDataSetCollectionWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPartitionedDataSetCollectionWriterType'
     bl_label  = 'vtkXMLPartitionedDataSetCollectionWriter'
@@ -2370,21 +2370,21 @@ class VTKXMLPartitionedDataSetCollectionWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfGhostLevels: bpy.props.IntProperty(name='NumberOfGhostLevels', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfGhostLevels: bpy.props.IntProperty(name='NumberOfGhostLevels', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_NumberOfGhostLevels','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2395,7 +2395,7 @@ add_class( VTKXMLPartitionedDataSetCollectionWriter )
 TYPENAMES.append('VTKXMLPartitionedDataSetCollectionWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPartitionedDataSetWriter(Node, BVTK_Node):
+class VTKXMLPartitionedDataSetWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPartitionedDataSetWriterType'
     bl_label  = 'vtkXMLPartitionedDataSetWriter'
@@ -2404,21 +2404,21 @@ class VTKXMLPartitionedDataSetWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfGhostLevels: bpy.props.IntProperty(name='NumberOfGhostLevels', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfGhostLevels: bpy.props.IntProperty(name='NumberOfGhostLevels', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=13, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_NumberOfGhostLevels','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2429,7 +2429,7 @@ add_class( VTKXMLPartitionedDataSetWriter )
 TYPENAMES.append('VTKXMLPartitionedDataSetWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLPolyDataWriter(Node, BVTK_Node):
+class VTKXMLPolyDataWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLPolyDataWriterType'
     bl_label  = 'vtkXMLPolyDataWriter'
@@ -2438,24 +2438,24 @@ class VTKXMLPolyDataWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_WritePiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2466,7 +2466,7 @@ add_class( VTKXMLPolyDataWriter )
 TYPENAMES.append('VTKXMLPolyDataWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLRectilinearGridWriter(Node, BVTK_Node):
+class VTKXMLRectilinearGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLRectilinearGridWriterType'
     bl_label  = 'vtkXMLRectilinearGridWriter'
@@ -2475,25 +2475,25 @@ class VTKXMLRectilinearGridWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteExtent: bpy.props.IntVectorProperty(name='WriteExtent', default=[0, -1, 0, -1, 0, -1], size=6, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteExtent: bpy.props.IntVectorProperty(name='WriteExtent', default=[0, -1, 0, -1, 0, -1], size=6, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_WritePiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType','m_WriteExtent',]
@@ -2504,7 +2504,7 @@ add_class( VTKXMLRectilinearGridWriter )
 TYPENAMES.append('VTKXMLRectilinearGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLStructuredGridWriter(Node, BVTK_Node):
+class VTKXMLStructuredGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLStructuredGridWriterType'
     bl_label  = 'vtkXMLStructuredGridWriter'
@@ -2513,25 +2513,25 @@ class VTKXMLStructuredGridWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteExtent: bpy.props.IntVectorProperty(name='WriteExtent', default=[0, -1, 0, -1, 0, -1], size=6, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteExtent: bpy.props.IntVectorProperty(name='WriteExtent', default=[0, -1, 0, -1, 0, -1], size=6, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_WritePiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType','m_WriteExtent',]
@@ -2542,7 +2542,7 @@ add_class( VTKXMLStructuredGridWriter )
 TYPENAMES.append('VTKXMLStructuredGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLTableWriter(Node, BVTK_Node):
+class VTKXMLTableWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLTableWriterType'
     bl_label  = 'vtkXMLTableWriter'
@@ -2551,23 +2551,23 @@ class VTKXMLTableWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_WritePiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2578,7 +2578,7 @@ add_class( VTKXMLTableWriter )
 TYPENAMES.append('VTKXMLTableWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLUniformGridAMRWriter(Node, BVTK_Node):
+class VTKXMLUniformGridAMRWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLUniformGridAMRWriterType'
     bl_label  = 'vtkXMLUniformGridAMRWriter'
@@ -2587,23 +2587,23 @@ class VTKXMLUniformGridAMRWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteMetaFile: bpy.props.IntProperty(name='WriteMetaFile', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfTimeSteps','m_WriteMetaFile','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2614,7 +2614,7 @@ add_class( VTKXMLUniformGridAMRWriter )
 TYPENAMES.append('VTKXMLUniformGridAMRWriterType' )
 
 #--------------------------------------------------------------
-class VTKXMLUnstructuredGridWriter(Node, BVTK_Node):
+class VTKXMLUnstructuredGridWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXMLUnstructuredGridWriterType'
     bl_label  = 'vtkXMLUnstructuredGridWriter'
@@ -2623,24 +2623,24 @@ class VTKXMLUnstructuredGridWriter(Node, BVTK_Node):
     e_HeaderType_items=[ (x,x,x) for x in ['UInt32', 'UInt64']]
     e_IdType_items=[ (x,x,x) for x in ['Int32', 'Int64']]
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_EncodeAppendedData: bpy.props.BoolProperty(name='EncodeAppendedData', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteTimeValue: bpy.props.BoolProperty(name='WriteTimeValue', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteToOutputString: bpy.props.BoolProperty(name='WriteToOutputString', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_BlockSize: bpy.props.IntProperty(name='BlockSize', default=32768, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CompressionLevel: bpy.props.IntProperty(name='CompressionLevel', default=5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_GhostLevel: bpy.props.IntProperty(name='GhostLevel', default=0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfPieces: bpy.props.IntProperty(name='NumberOfPieces', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfTimeSteps: bpy.props.IntProperty(name='NumberOfTimeSteps', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WritePiece: bpy.props.IntProperty(name='WritePiece', default=-1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_ByteOrder: bpy.props.EnumProperty(name='ByteOrder', default="LittleEndian", items=e_ByteOrder_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_DataMode: bpy.props.EnumProperty(name='DataMode', default="Appended", items=e_DataMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_HeaderType: bpy.props.EnumProperty(name='HeaderType', default="UInt32", items=e_HeaderType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_IdType: bpy.props.EnumProperty(name='IdType', default="Int64", items=e_IdType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_EncodeAppendedData','m_WriteTimeValue','m_WriteToOutputString','m_FileName','m_ObjectName','m_BlockSize','m_CompressionLevel','m_GhostLevel','m_NumberOfPieces','m_NumberOfTimeSteps','m_WritePiece','e_ByteOrder','e_DataMode','e_HeaderType','e_IdType',]
@@ -2651,21 +2651,21 @@ add_class( VTKXMLUnstructuredGridWriter )
 TYPENAMES.append('VTKXMLUnstructuredGridWriterType' )
 
 #--------------------------------------------------------------
-class VTKXdmfWriter(Node, BVTK_Node):
+class VTKXdmfWriter(Node, PBVTK_Node):
 
     bl_idname = 'VTKXdmfWriterType'
     bl_label  = 'vtkXdmfWriter'
     
-    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MeshStaticOverTime: bpy.props.BoolProperty(name='MeshStaticOverTime', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WriteAllTimeSteps: bpy.props.BoolProperty(name='WriteAllTimeSteps', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_HeavyDataFileName: bpy.props.StringProperty(name='HeavyDataFileName', default="", subtype='FILE_PATH', update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_HeavyDataGroupName: bpy.props.StringProperty(name='HeavyDataGroupName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LightDataLimit: bpy.props.IntProperty(name='LightDataLimit', default=100, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AbortOutput: bpy.props.BoolProperty(name='AbortOutput', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MeshStaticOverTime: bpy.props.BoolProperty(name='MeshStaticOverTime', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WriteAllTimeSteps: bpy.props.BoolProperty(name='WriteAllTimeSteps', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FileName: bpy.props.StringProperty(name='FileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_HeavyDataFileName: bpy.props.StringProperty(name='HeavyDataFileName', default="", subtype='FILE_PATH', update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_HeavyDataGroupName: bpy.props.StringProperty(name='HeavyDataGroupName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LightDataLimit: bpy.props.IntProperty(name='LightDataLimit', default=100, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=8, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=8, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AbortOutput','m_MeshStaticOverTime','m_WriteAllTimeSteps','m_FileName','m_HeavyDataFileName','m_HeavyDataGroupName','m_ObjectName','m_LightDataLimit',]
@@ -2677,4 +2677,4 @@ TYPENAMES.append('VTKXdmfWriterType' )
 
 #--------------------------------------------------------------
 menu_items = [ NodeItem(x) for x in TYPENAMES ]
-CATEGORIES.append( BVTK_NodeCategory( 'Writer', 'Writer', items=menu_items) )
+CATEGORIES.append( PBVTK_NodeCategory( 'Writer', 'Writer', items=menu_items) )

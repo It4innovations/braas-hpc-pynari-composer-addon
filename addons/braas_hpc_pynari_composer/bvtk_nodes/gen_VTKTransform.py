@@ -5,19 +5,19 @@ from .core import *
 TYPENAMES = []
 
 #--------------------------------------------------------------
-class VTKBSplineTransform(Node, BVTK_Node):
+class VTKBSplineTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKBSplineTransformType'
     bl_label  = 'vtkBSplineTransform'
     e_BorderMode_items=[ (x,x,x) for x in ['Edge', 'Zero', 'ZeroAtBorder']]
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DisplacementScale: bpy.props.FloatProperty(name='DisplacementScale', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=1e-06, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_BorderMode: bpy.props.EnumProperty(name='BorderMode', default="Edge", items=e_BorderMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DisplacementScale: bpy.props.FloatProperty(name='DisplacementScale', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=1e-06, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_BorderMode: bpy.props.EnumProperty(name='BorderMode', default="Edge", items=e_BorderMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_InverseIterations','m_DisplacementScale','m_InverseTolerance','e_BorderMode',]
@@ -28,16 +28,16 @@ add_class( VTKBSplineTransform )
 TYPENAMES.append('VTKBSplineTransformType' )
 
 #--------------------------------------------------------------
-class VTKCylindricalTransform(Node, BVTK_Node):
+class VTKCylindricalTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKCylindricalTransformType'
     bl_label  = 'vtkCylindricalTransform'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=0.001, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=0.001, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_InverseIterations','m_InverseTolerance',]
@@ -48,14 +48,14 @@ add_class( VTKCylindricalTransform )
 TYPENAMES.append('VTKCylindricalTransformType' )
 
 #--------------------------------------------------------------
-class VTKGeneralTransform(Node, BVTK_Node):
+class VTKGeneralTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKGeneralTransformType'
     bl_label  = 'vtkGeneralTransform'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -66,20 +66,20 @@ add_class( VTKGeneralTransform )
 TYPENAMES.append('VTKGeneralTransformType' )
 
 #--------------------------------------------------------------
-class VTKGridTransform(Node, BVTK_Node):
+class VTKGridTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKGridTransformType'
     bl_label  = 'vtkGridTransform'
     e_InterpolationMode_items=[ (x,x,x) for x in ['NearestNeighbor', 'Linear', 'Cubic']]
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DisplacementScale: bpy.props.FloatProperty(name='DisplacementScale', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DisplacementShift: bpy.props.FloatProperty(name='DisplacementShift', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=0.01, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_InterpolationMode: bpy.props.EnumProperty(name='InterpolationMode', default="Linear", items=e_InterpolationMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DisplacementScale: bpy.props.FloatProperty(name='DisplacementScale', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DisplacementShift: bpy.props.FloatProperty(name='DisplacementShift', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=0.01, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_InterpolationMode: bpy.props.EnumProperty(name='InterpolationMode', default="Linear", items=e_InterpolationMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_InverseIterations','m_DisplacementScale','m_DisplacementShift','m_InverseTolerance','e_InterpolationMode',]
@@ -90,14 +90,14 @@ add_class( VTKGridTransform )
 TYPENAMES.append('VTKGridTransformType' )
 
 #--------------------------------------------------------------
-class VTKIdentityTransform(Node, BVTK_Node):
+class VTKIdentityTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKIdentityTransformType'
     bl_label  = 'vtkIdentityTransform'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -108,21 +108,21 @@ add_class( VTKIdentityTransform )
 TYPENAMES.append('VTKIdentityTransformType' )
 
 #--------------------------------------------------------------
-class VTKIterativeClosestPointTransform(Node, BVTK_Node):
+class VTKIterativeClosestPointTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKIterativeClosestPointTransformType'
     bl_label  = 'vtkIterativeClosestPointTransform'
     e_MeanDistanceMode_items=[ (x,x,x) for x in ['RMS', 'AbsoluteValue']]
     
-    m_CheckMeanDistance: bpy.props.BoolProperty(name='CheckMeanDistance', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_StartByMatchingCentroids: bpy.props.BoolProperty(name='StartByMatchingCentroids', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumNumberOfIterations: bpy.props.IntProperty(name='MaximumNumberOfIterations', default=50, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumNumberOfLandmarks: bpy.props.IntProperty(name='MaximumNumberOfLandmarks', default=200, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumMeanDistance: bpy.props.FloatProperty(name='MaximumMeanDistance', default=0.01, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_MeanDistanceMode: bpy.props.EnumProperty(name='MeanDistanceMode', default="RMS", items=e_MeanDistanceMode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_CheckMeanDistance: bpy.props.BoolProperty(name='CheckMeanDistance', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_StartByMatchingCentroids: bpy.props.BoolProperty(name='StartByMatchingCentroids', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumNumberOfIterations: bpy.props.IntProperty(name='MaximumNumberOfIterations', default=50, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumNumberOfLandmarks: bpy.props.IntProperty(name='MaximumNumberOfLandmarks', default=200, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumMeanDistance: bpy.props.FloatProperty(name='MaximumMeanDistance', default=0.01, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_MeanDistanceMode: bpy.props.EnumProperty(name='MeanDistanceMode', default="RMS", items=e_MeanDistanceMode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=7, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_CheckMeanDistance','m_StartByMatchingCentroids','m_ObjectName','m_MaximumNumberOfIterations','m_MaximumNumberOfLandmarks','m_MaximumMeanDistance','e_MeanDistanceMode',]
@@ -133,16 +133,16 @@ add_class( VTKIterativeClosestPointTransform )
 TYPENAMES.append('VTKIterativeClosestPointTransformType' )
 
 #--------------------------------------------------------------
-class VTKLandmarkTransform(Node, BVTK_Node):
+class VTKLandmarkTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKLandmarkTransformType'
     bl_label  = 'vtkLandmarkTransform'
     e_Mode_items=[ (x,x,x) for x in ['RigidBody', 'Similarity', 'Affine']]
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_Mode: bpy.props.EnumProperty(name='Mode', default="Similarity", items=e_Mode_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_Mode: bpy.props.EnumProperty(name='Mode', default="Similarity", items=e_Mode_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','e_Mode',]
@@ -153,14 +153,14 @@ add_class( VTKLandmarkTransform )
 TYPENAMES.append('VTKLandmarkTransformType' )
 
 #--------------------------------------------------------------
-class VTKMatrixToHomogeneousTransform(Node, BVTK_Node):
+class VTKMatrixToHomogeneousTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKMatrixToHomogeneousTransformType'
     bl_label  = 'vtkMatrixToHomogeneousTransform'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -171,14 +171,14 @@ add_class( VTKMatrixToHomogeneousTransform )
 TYPENAMES.append('VTKMatrixToHomogeneousTransformType' )
 
 #--------------------------------------------------------------
-class VTKMatrixToLinearTransform(Node, BVTK_Node):
+class VTKMatrixToLinearTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKMatrixToLinearTransformType'
     bl_label  = 'vtkMatrixToLinearTransform'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -189,14 +189,14 @@ add_class( VTKMatrixToLinearTransform )
 TYPENAMES.append('VTKMatrixToLinearTransformType' )
 
 #--------------------------------------------------------------
-class VTKPerspectiveTransform(Node, BVTK_Node):
+class VTKPerspectiveTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKPerspectiveTransformType'
     bl_label  = 'vtkPerspectiveTransform'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -207,16 +207,16 @@ add_class( VTKPerspectiveTransform )
 TYPENAMES.append('VTKPerspectiveTransformType' )
 
 #--------------------------------------------------------------
-class VTKSphericalTransform(Node, BVTK_Node):
+class VTKSphericalTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKSphericalTransformType'
     bl_label  = 'vtkSphericalTransform'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=0.001, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=0.001, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_InverseIterations','m_InverseTolerance',]
@@ -227,20 +227,20 @@ add_class( VTKSphericalTransform )
 TYPENAMES.append('VTKSphericalTransformType' )
 
 #--------------------------------------------------------------
-class VTKThinPlateSplineTransform(Node, BVTK_Node):
+class VTKThinPlateSplineTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKThinPlateSplineTransformType'
     bl_label  = 'vtkThinPlateSplineTransform'
     e_Basis_items=[ (x,x,x) for x in ['R', 'R2LogR']]
     
-    m_RegularizeBulkTransform: bpy.props.BoolProperty(name='RegularizeBulkTransform', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=0.001, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Sigma: bpy.props.FloatProperty(name='Sigma', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_Basis: bpy.props.EnumProperty(name='Basis', default="R2LogR", items=e_Basis_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_RegularizeBulkTransform: bpy.props.BoolProperty(name='RegularizeBulkTransform', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseIterations: bpy.props.IntProperty(name='InverseIterations', default=500, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InverseTolerance: bpy.props.FloatProperty(name='InverseTolerance', default=0.001, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Sigma: bpy.props.FloatProperty(name='Sigma', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_Basis: bpy.props.EnumProperty(name='Basis', default="R2LogR", items=e_Basis_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=6, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_RegularizeBulkTransform','m_ObjectName','m_InverseIterations','m_InverseTolerance','m_Sigma','e_Basis',]
@@ -251,14 +251,14 @@ add_class( VTKThinPlateSplineTransform )
 TYPENAMES.append('VTKThinPlateSplineTransformType' )
 
 #--------------------------------------------------------------
-class VTKTransform(Node, BVTK_Node):
+class VTKTransform(Node, PBVTK_Node):
 
     bl_idname = 'VTKTransformType'
     bl_label  = 'vtkTransform'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -270,4 +270,4 @@ TYPENAMES.append('VTKTransformType' )
 
 #--------------------------------------------------------------
 menu_items = [ NodeItem(x) for x in TYPENAMES ]
-CATEGORIES.append( BVTK_NodeCategory( 'Transform', 'Transform', items=menu_items) )
+CATEGORIES.append( PBVTK_NodeCategory( 'Transform', 'Transform', items=menu_items) )

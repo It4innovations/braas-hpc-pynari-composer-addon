@@ -15,9 +15,12 @@ l = logging.getLogger(__name__)
 import bpy
 from bpy.types import NodeTree, Node, NodeSocket
 from nodeitems_utils import NodeCategory, NodeItem
+import nodeitems_utils
 import os
 import vtk
 import functools  # for decorators
+
+from math import nan
 
 # from . import b_properties  # Boolean properties
 
@@ -28,15 +31,15 @@ ENUM_ICON = "DOT"  # Default icon for enumeration lists
 debug_mode = False  # Set true to see more information in nodes
 
 # -----------------------------------------------------------------------------
-# BVTK_NodeTree
+# PBVTK_NodeTree
 # -----------------------------------------------------------------------------
 
 
-# class BVTK_NodeTree(NodeTree):
-#     """BVTK Node Tree"""
+# class PBVTK_NodeTree(NodeTree):
+#     """PBVTK Node Tree"""
 
 #     bl_idname = "PYNARIComposerNodeTree"
-#     bl_label = "BVTK Node Tree"
+#     bl_label = "PBVTK Node Tree"
 #     bl_icon = "COLOR_BLUE"
 
 
@@ -45,11 +48,11 @@ debug_mode = False  # Set true to see more information in nodes
 # -----------------------------------------------------------------------------
 
 
-class BVTK_NodeSocket(NodeSocket):
-    """BVTK Node Socket"""
+class PBVTK_NodeSocket(NodeSocket):
+    """PBVTK Node Socket"""
 
-    bl_idname = "BVTK_NodeSocketType"
-    bl_label = "BVTK Node Socket"
+    bl_idname = "PBVTK_NodeSocketType"
+    bl_label = "PBVTK Node Socket"
 
     def draw(self, context, layout, node, txt):
         layout.label(text=txt)
@@ -160,7 +163,7 @@ def run_custom_code(func):
 
 
 # -----------------------------------------------------------------------------
-# base class for all BVTK_Nodes
+# base class for all PBVTK_Nodes
 #
 # General implementation for VTK nodes below. Special nodes may
 # need to provide own versions of following methods:
@@ -179,12 +182,12 @@ def run_custom_code(func):
 # -----------------------------------------------------------------------------
 
 
-class BVTK_Node:
+class PBVTK_Node:
     """Base class for VTK nodes and special nodes"""
 
     node_id: bpy.props.IntProperty(
         name="Node ID Number",
-        description="Node ID Number for mapping VTK objects in BVTKCache",
+        description="Node ID Number for mapping VTK objects in PBVTKCache",
         default=0,
     ) # type: ignore
     connected_input_names: bpy.props.StringProperty(
@@ -199,7 +202,7 @@ class BVTK_Node:
     ) # type: ignore
     vtk_status: bpy.props.EnumProperty(
         name="VTK Status",
-        description="Status of BVTK node",
+        description="Status of PBVTK node",
         items={
             # No status information. This should never be a state for
             # nodes that are initialized and work correctly.
@@ -239,6 +242,70 @@ class BVTK_Node:
     @classmethod
     def poll(cls, ntree):
         return ntree.bl_idname == "PYNARIComposerNodeTree"
+    
+    def get_var_name(self, postfix=""):
+        """Get the variable name for this node's output.
+        This follows the pattern used in PYNARIComposerNode.
+        """
+        from .. import utility
+        if len(postfix) > 0:
+            return f"{utility.str_to_var_name(self.name)}_{utility.str_to_var_name(postfix)}"
+        
+        return utility.str_to_var_name(self.name)
+    
+    def generate_code(self, auto_gen_enabled=False):
+        """Generate Python code for this node.
+        This method should be overridden in child classes.
+        Returns a list of code lines (strings).
+        
+        Default implementation generates basic VTK object creation and property setting.
+        """
+        code = []
+        code.append(f"# Label: {self.label if hasattr(self, 'label') and self.label else self.name}")
+        
+        var_name = self.get_var_name()
+        vtk_class_name = self.bl_label if hasattr(self, 'bl_label') else self.__class__.__name__
+        
+        # Create VTK object
+        code.append(f"# VTK Node: {vtk_class_name}")
+        if not auto_gen_enabled:
+            code.append(f"import vtk")
+            code.append(f"{var_name} = vtk.{vtk_class_name}()")
+        
+        # Set properties from m_properties
+        if hasattr(self, 'm_properties') and hasattr(self, 'b_properties'):
+            m_properties = self.m_properties()
+            for i, prop_name in enumerate(m_properties):
+                # Only process visible properties
+                if self.b_properties[i]:
+                    inputval = getattr(self, prop_name, None)
+                    if inputval is None or len(str(inputval)) == 0:
+                        continue
+                    
+                    # SetXFileName(Y) only if attribute is a string
+                    if "FileName" in prop_name and isinstance(inputval, str):
+                        value = os.path.realpath(bpy.path.abspath(inputval))
+                        code.append(f"{var_name}.Set{prop_name[2:]}(r'{value}')")
+                    # SetXToY()
+                    elif prop_name.startswith("e_"):
+                        code.append(f"{var_name}.Set{prop_name[2:]}To{inputval}()")
+                    # SetX(value)
+                    else:
+                        # Get the property value
+                        code.append(f"{var_name}.Set{prop_name[2:]}({repr(inputval)})")
+        
+        # Add custom code if present
+        if hasattr(self, 'custom_code') and len(self.custom_code) > 0:
+            code.append(f"# Custom Code")
+            for line in self.custom_code.splitlines():
+                if not line.startswith("#"):
+                    code.append(f"{var_name}.{line}")
+        
+        # Call Update() if available and not in auto-gen mode
+        if not auto_gen_enabled:
+            code.append(f"{var_name}.Update()")
+        
+        return code
 
     def m_properties(self):
         """Return list of node specific property names.
@@ -266,7 +333,7 @@ class BVTK_Node:
         return m_connections[1]
 
     def init(self, context):
-        """Create and initialize a new BVTK node.
+        """Create and initialize a new PBVTK node.
         """
         # Node properties
         self.width = 200
@@ -278,9 +345,9 @@ class BVTK_Node:
         inputs.extend(extra_inputs)
         outputs.extend(extra_outputs)
         for x in inputs:
-            self.inputs.new("BVTK_NodeSocketType", x)
+            self.inputs.new("PBVTK_NodeSocketType", x)
         for x in outputs:
-            self.outputs.new("BVTK_NodeSocketType", x)
+            self.outputs.new("PBVTK_NodeSocketType", x)
 
         if hasattr(self, "init_special"):
             self.init_special(context)
@@ -326,7 +393,8 @@ class BVTK_Node:
     def free(self):
         """Clean up node information upon node removal.
         """
-        BVTKCache.unmap_node(self)
+        # PBVTKCache removed - no cleanup needed
+        pass
 
     @show_custom_code
     def draw_buttons(self, context, layout):
@@ -432,14 +500,15 @@ class BVTK_Node:
     def get_vtk_obj(self):
         """Return the VTK object of this node from cache.
         """
-        vtk_obj = BVTKCache.get_vtk_obj(self.node_id)
-        return vtk_obj
+        # PBVTKCache removed - return None
+        return None
 
     def vtk_obj_in_cache(self):
         """Return True if an object (or None) is in cache.
         True means that node has been initialized correctly.
         """
-        return BVTKCache.vtk_obj_in_cache(self.node_id)
+        # PBVTKCache removed - return False
+        return False
 
     def get_output_connection(self, socketname="output"):
         """Return VTK output connection object for argument output socket name
@@ -598,10 +667,9 @@ class BVTK_Node:
     def copy(self, node):
         """Copy setup from another node to self.
         """
-        self.node_id = 0  # Force node_id update in map_node()
+        self.node_id = 0
         vtk_obj = self.init_vtk()
-        if vtk_obj:
-            BVTKCache.map_node(self, vtk_obj)  # Add VTK object to cache
+        # PBVTKCache removed - vtk_obj not cached
         if hasattr(self, "copy_special"):
             # some nodes need to set properties (such as color ramp elements)
             # after being copied
@@ -611,63 +679,38 @@ class BVTK_Node:
     def get_b(self):
         """Get list of booleans to show/hide boolean properties.
         """
-        n_properties = len(self.b_properties)
-        # If there are correct number of saved properties, return those
-        if self.bl_idname in b_properties.b:
-            saved_properties = b_properties.b[self.bl_idname]
-            if len(saved_properties) == n_properties:
-                return saved_properties
-        # Otherwise return correct number of Trues (=show all properties by default)
-        return [True] * n_properties
+        # b_properties removed - return all True (show all properties by default)
+        if hasattr(self, 'b_properties'):
+            return [True] * len(self.b_properties)
+        return []
 
     def set_b(self, value):
         """Set boolean property list and update boolean properties file.
         """
-        b_properties.b[self.bl_idname] = [v for v in value]
-        bpy.ops.node.select_all(action="SELECT")
-        bpy.ops.node.select_all(action="DESELECT")
-
-        # Write sorted b_properties.b dictionary
-        # Note: lambda function used to force sort on dictionary key
-        txt = "b={"
-        for key, value in sorted(b_properties.b.items(), key=lambda s: str.lower(s[0])):
-            txt += " '" + key + "': " + str(value) + ",\n"
-        txt += "}\n"
-        open(b_path, "w").write(txt)
+        # b_properties removed - no-op
+        pass
 
     def outdate_vtk_status(self, context):
         """Set node VTK status to out-of-date and notify downstream when a
         property value is changed in UI.
         """
-        update_mode = bpy.context.scene.bvtknodes_settings.update_mode
-        if update_mode == "update-current":
-            l.debug(self.name + ": Setting VTK status out-of-date")
-            self.set_vtk_status("out-of-date")
-            self.update_vtk()
-        else:
-            self.notify_downstream(vtk_status="out-of-date")
-        if update_mode == "update-all":
-            l.debug(self.name + ": Calling update for all nodes")
-            BVTKCache.update_all()
+        # PBVTKCache removed - simplified update logic
+        l.debug(self.name + ": Setting VTK status out-of-date")
+        self.set_vtk_status("out-of-date")
+        self.notify_downstream(vtk_status="out-of-date")
 
     def update(self):
         """Update routine triggered on node UI topology changes (adding or
         removing nodes and links).
         """
-        # Change status for downstream nodes only
-        update_mode = bpy.context.scene.bvtknodes_settings.update_mode
+        # PBVTKCache removed - simplified update logic
         namelist = [
             link.from_node.name for socket in self.inputs for link in socket.links
         ]
         names = str(namelist)
         if self.connected_input_names != names:
-            if update_mode == "update-current":
-                self.set_vtk_status("out-of-date")
-                self.update_vtk()
-            else:
-                self.notify_downstream(vtk_status="out-of-date")
-            if update_mode == "update-all":
-                BVTKCache.update_all()
+            self.set_vtk_status("out-of-date")
+            self.notify_downstream(vtk_status="out-of-date")
 
     def outdate_upstream(self):
         """Set all upstream nodes to out-of-date status (to force update on
@@ -710,7 +753,7 @@ class BVTK_Node:
         # Allocate VTK object if it doesn't exist already
         if not self.vtk_obj_in_cache():
             vtk_obj = self.init_vtk()
-            BVTKCache.map_node(self, vtk_obj)  # Add VTK object to cache
+            # PBVTKCache removed - vtk_obj not cached
             l.debug("Init done for node: %s, id #%d" % (self.name, self.node_id))
 
         # Update this node's properties to VTK object only if needed
@@ -755,51 +798,51 @@ class BVTK_Node:
 # -----------------------------------------------------------------------------
 
 
-class BVTK_OT_NodeUpdate(bpy.types.Operator):
+class PBVTK_OT_NodeUpdate(bpy.types.Operator):
     """Node Update Operator"""
 
     bl_idname = "node.bvtk_node_update"
     bl_label = "Update Node"
 
-    node_path: bpy.props.StringProperty()
+    node_path: bpy.props.StringProperty() # type: ignore
 
     def execute(self, context):
-        node = eval(self.node_path)
-        node.update_vtk()
+        # node = eval(self.node_path)
+        # node.update_vtk()
         return {"FINISHED"}
 
 
-class BVTK_OT_NodeForceUpdateUpstream(bpy.types.Operator):
+class PBVTK_OT_NodeForceUpdateUpstream(bpy.types.Operator):
     """Force All Upstream Nodes and This Node to be Updated"""
 
     bl_idname = "node.bvtk_node_force_update_upstream"
     bl_label = "Force Update Upstream"
 
-    node_path: bpy.props.StringProperty()
+    node_path: bpy.props.StringProperty() # type: ignore
 
     def execute(self, context):
-        node = eval(self.node_path)
-        node.outdate_upstream()
-        node.update_vtk()
+        # node = eval(self.node_path)
+        # node.outdate_upstream()
+        # node.update_vtk()
         return {"FINISHED"}
 
 
 # -----------------------------------------------------------------------------
 # VTK Writer Nodes' Write Operator
 # -----------------------------------------------------------------------------
-class BVTK_OT_NodeWrite(bpy.types.Operator):
+class PBVTK_OT_NodeWrite(bpy.types.Operator):
     """Operator to call VTK Write() for a writer node"""
 
     bl_idname = "node.bvtk_node_write"
     bl_label = "Write Data"
 
-    node_path: bpy.props.StringProperty()
+    node_path: bpy.props.StringProperty() # type: ignore
 
     def execute(self, context):
-        node = eval(self.node_path)
-        if node:
-            node.update_vtk()
-            node.get_vtk_obj().Write()
+        # node = eval(self.node_path)
+        # if node:
+        #     node.update_vtk()
+        #     node.get_vtk_obj().Write()
 
         return {"FINISHED"}
 
@@ -820,32 +863,23 @@ def add_ui_class(obj):
     UI_CLASSES.append(obj)
 
 
-# def check_b_properties():
-#     """Sets all boolean properties to True, unless correct number of properties
-#     is specified in b_properties
-#     """
-#     for obj in CLASSES.values():
-#         if hasattr(obj, "m_properties") and hasattr(obj, "b_properties"):
-#             np = len(obj.m_properties(obj))
-#             name = obj.bl_idname
-#             b = b_properties.b
-#             if (not name in b) or (name in b and len(b[name]) != np):
-#                 b[name] = [True for i in range(np)]
+# b_properties and check_b_properties removed
 
 
 # Register classes
-# add_class(BVTK_NodeTree)
-add_class(BVTK_NodeSocket)
-add_ui_class(BVTK_OT_NodeUpdate)
-add_ui_class(BVTK_OT_NodeForceUpdateUpstream)
-add_ui_class(BVTK_OT_NodeWrite)
+# add_class(PBVTK_NodeTree)
+# add_class(PBVTK_NodeSocket)
+# Operator classes commented out - not defined in this file
+add_ui_class(PBVTK_OT_NodeUpdate)
+add_ui_class(PBVTK_OT_NodeForceUpdateUpstream)
+add_ui_class(PBVTK_OT_NodeWrite)
 
 # -----------------------------------------------------------------------------
 # VTK Node Category
 # -----------------------------------------------------------------------------
 
 
-class BVTK_NodeCategory(NodeCategory):
+class PBVTK_NodeCategory(NodeCategory):
     @classmethod
     def poll(cls, context):
         return context.space_data.tree_type == "PYNARIComposerNodeTree"
@@ -952,7 +986,7 @@ def node_path(node):
 
 
 # def get_all_bvtk_nodes():
-#     """Return list of BVTK Nodes from all node trees/groups"""
+#     """Return list of PBVTK Nodes from all node trees/groups"""
 #     bvtk_nodes = []
 #     for node_group in bpy.data.node_groups:
 #         if node_group.bl_idname != "PYNARIComposerNodeTree":
@@ -960,3 +994,356 @@ def node_path(node):
 #         for node in node_group.nodes:
 #             bvtk_nodes.append(node)
 #     return bvtk_nodes
+
+
+# -----------------------------------------------------------------------------
+# VTK to Numpy Converter Nodes
+# -----------------------------------------------------------------------------
+
+
+class VTKPolyDataToNumpyNode(Node, PBVTK_Node):
+    """Convert VTK PolyData to Numpy arrays"""
+    bl_idname = "VTKPolyDataToNumpyType"
+    bl_label = "VTK PolyData to Numpy"
+    bl_icon = "MESH_DATA"
+
+    def m_properties(self):
+        return []
+
+    def m_connections(self):
+        return (["input"], [], [], [])
+
+    def init(self, context):
+        # Call parent init
+        PBVTK_Node.init(self, context)
+        # Add numpy output sockets
+        self.outputs.new("PYNARINumpyArraySocket", "NP Vertices")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Indices")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Normals")
+
+    def generate_code(self, auto_gen_enabled=False):
+        """Generate code to convert VTK PolyData to numpy arrays"""
+        code = []
+        code.append(f"# Label: {self.label if hasattr(self, 'label') and self.label else self.name}")
+        
+        var_name = self.get_var_name()
+        
+        # Get input VTK object variable name
+        input_node, from_socket_name = self.get_input_node_and_socketname("input")
+        if not input_node:
+            code.append(f"# No input connected")
+            return code
+        
+        vtk_var = input_node.get_var_name()
+        
+        code.append(f"# Convert VTK PolyData to Numpy")
+        code.append(f"import numpy as np")
+        code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
+        code.append(f"")
+        
+        # Get the output from VTK pipeline
+        code.append(f"{vtk_var}.Update()")
+        code.append(f"{var_name}_polydata = {vtk_var}.GetOutput()")
+        code.append(f"")
+        
+        # Get socket variable names
+        vertices_socket_varname = self.get_var_name("NP Vertices")
+        indices_socket_varname = self.get_var_name("NP Indices")
+        normals_socket_varname = self.get_var_name("NP Normals")
+        
+        # Extract vertices
+        code.append(f"# Extract vertices")
+        code.append(f"{vertices_socket_varname} = vtk_to_numpy({var_name}_polydata.GetPoints().GetData()).astype(np.float32)")
+        code.append(f"")
+        
+        # Extract indices (faces)
+        code.append(f"# Extract indices")
+        code.append(f"{var_name}_polys = {var_name}_polydata.GetPolys()")
+        code.append(f"{var_name}_polys_data = vtk_to_numpy({var_name}_polys.GetData())")
+        code.append(f"# Reshape assuming triangles (n, 4) where first value is count")
+        code.append(f"{indices_socket_varname} = {var_name}_polys_data.reshape(-1, 4)[:, 1:].astype(np.uint32)")
+        code.append(f"")
+        
+        # Extract normals if available
+        code.append(f"# Extract normals if available")
+        code.append(f"if {var_name}_polydata.GetPointData().GetNormals():")
+        code.append(f"    {normals_socket_varname} = vtk_to_numpy({var_name}_polydata.GetPointData().GetNormals()).astype(np.float32)")
+        code.append(f"else:")
+        code.append(f"    {normals_socket_varname} = None")
+        
+        return code
+
+
+class VTKStructuredGridToNumpyNode(Node, PBVTK_Node):
+    """Convert VTK Structured Grid to Numpy arrays"""
+    bl_idname = "VTKStructuredGridToNumpyType"
+    bl_label = "VTK Structured Grid to Numpy"
+    bl_icon = "MESH_GRID"
+
+    def m_properties(self):
+        return []
+
+    def m_connections(self):
+        return (["input"], [], [], [])
+
+    def init(self, context):
+        PBVTK_Node.init(self, context)
+        self.outputs.new("PYNARINumpyArraySocket", "NP Points")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Dimensions")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Scalars")
+
+    def generate_code(self, auto_gen_enabled=False):
+        code = []
+        code.append(f"# Label: {self.label if hasattr(self, 'label') and self.label else self.name}")
+        
+        var_name = self.get_var_name()
+        input_node, from_socket_name = self.get_input_node_and_socketname("input")
+        if not input_node:
+            code.append(f"# No input connected")
+            return code
+        
+        vtk_var = input_node.get_var_name()
+        
+        code.append(f"# Convert VTK Structured Grid to Numpy")
+        code.append(f"import numpy as np")
+        code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
+        code.append(f"")
+        
+        code.append(f"{vtk_var}.Update()")
+        code.append(f"{var_name}_grid = {vtk_var}.GetOutput()")
+        code.append(f"")
+        
+        # Get socket variable names
+        points_socket_varname = self.get_var_name("NP Points")
+        dimensions_socket_varname = self.get_var_name("NP Dimensions")
+        scalars_socket_varname = self.get_var_name("NP Scalars")
+        
+        # Extract points
+        code.append(f"# Extract points")
+        code.append(f"{points_socket_varname} = vtk_to_numpy({var_name}_grid.GetPoints().GetData()).astype(np.float32)")
+        code.append(f"")
+        
+        # Extract dimensions
+        code.append(f"# Extract dimensions")
+        code.append(f"{dimensions_socket_varname} = np.array({var_name}_grid.GetDimensions(), dtype=np.int32)")
+        code.append(f"")
+        
+        # Extract scalars if available
+        code.append(f"# Extract scalars if available")
+        code.append(f"if {var_name}_grid.GetPointData().GetScalars():")
+        code.append(f"    {scalars_socket_varname} = vtk_to_numpy({var_name}_grid.GetPointData().GetScalars()).astype(np.float32)")
+        code.append(f"else:")
+        code.append(f"    {scalars_socket_varname} = None")
+        
+        return code
+
+
+class VTKUnstructuredGridToNumpyNode(Node, PBVTK_Node):
+    """Convert VTK Unstructured Grid to Numpy arrays"""
+    bl_idname = "VTKUnstructuredGridToNumpyType"
+    bl_label = "VTK Unstructured Grid to Numpy"
+    bl_icon = "MESH_DATA"
+
+    def m_properties(self):
+        return []
+
+    def m_connections(self):
+        return (["input"], [], [], [])
+
+    def init(self, context):
+        PBVTK_Node.init(self, context)
+        self.outputs.new("PYNARINumpyArraySocket", "NP Points")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Cells")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Cell Types")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Scalars")
+
+    def generate_code(self, auto_gen_enabled=False):
+        code = []
+        code.append(f"# Label: {self.label if hasattr(self, 'label') and self.label else self.name}")
+        
+        var_name = self.get_var_name()
+        input_node, from_socket_name = self.get_input_node_and_socketname("input")
+        if not input_node:
+            code.append(f"# No input connected")
+            return code
+        
+        vtk_var = input_node.get_var_name()
+        
+        code.append(f"# Convert VTK Unstructured Grid to Numpy")
+        code.append(f"import numpy as np")
+        code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
+        code.append(f"")
+        
+        code.append(f"{vtk_var}.Update()")
+        code.append(f"{var_name}_ugrid = {vtk_var}.GetOutput()")
+        code.append(f"")
+        
+        # Get socket variable names
+        points_socket_varname = self.get_var_name("NP Points")
+        cells_socket_varname = self.get_var_name("NP Cells")
+        cell_types_socket_varname = self.get_var_name("NP Cell Types")
+        scalars_socket_varname = self.get_var_name("NP Scalars")
+        
+        # Extract points
+        code.append(f"# Extract points")
+        code.append(f"{points_socket_varname} = vtk_to_numpy({var_name}_ugrid.GetPoints().GetData()).astype(np.float32)")
+        code.append(f"")
+        
+        # Extract cells
+        code.append(f"# Extract cells")
+        code.append(f"{cells_socket_varname} = vtk_to_numpy({var_name}_ugrid.GetCells().GetData())")
+        code.append(f"")
+        
+        # Extract cell types
+        code.append(f"# Extract cell types")
+        code.append(f"{cell_types_socket_varname} = vtk_to_numpy({var_name}_ugrid.GetCellTypesArray())")
+        code.append(f"")
+        
+        # Extract scalars if available
+        code.append(f"# Extract scalars if available")
+        code.append(f"if {var_name}_ugrid.GetPointData().GetScalars():")
+        code.append(f"    {scalars_socket_varname} = vtk_to_numpy({var_name}_ugrid.GetPointData().GetScalars()).astype(np.float32)")
+        code.append(f"else:")
+        code.append(f"    {scalars_socket_varname} = None")
+        
+        return code
+
+
+class VTKImageDataToNumpyNode(Node, PBVTK_Node):
+    """Convert VTK Image Data (Volume) to Numpy array"""
+    bl_idname = "VTKImageDataToNumpyType"
+    bl_label = "VTK Image Data to Numpy"
+    bl_icon = "VOLUME_DATA"
+
+    def m_properties(self):
+        return []
+
+    def m_connections(self):
+        return (["input"], [], [], [])
+
+    def init(self, context):
+        PBVTK_Node.init(self, context)
+        self.outputs.new("PYNARINumpyArraySocket", "NP Volume")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Dimensions")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Spacing")
+        self.outputs.new("PYNARINumpyArraySocket", "NP Origin")
+
+    def generate_code(self, auto_gen_enabled=False):
+        code = []
+        code.append(f"# Label: {self.label if hasattr(self, 'label') and self.label else self.name}")
+        
+        var_name = self.get_var_name()
+        input_node, from_socket_name = self.get_input_node_and_socketname("input")
+        if not input_node:
+            code.append(f"# No input connected")
+            return code
+        
+        vtk_var = input_node.get_var_name()
+        
+        code.append(f"# Convert VTK Image Data to Numpy")
+        code.append(f"import numpy as np")
+        code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
+        code.append(f"")
+        
+        code.append(f"{vtk_var}.Update()")
+        code.append(f"{var_name}_imagedata = {vtk_var}.GetOutput()")
+        code.append(f"")
+        
+        # Get socket variable names
+        volume_socket_varname = self.get_var_name("NP Volume")
+        dimensions_socket_varname = self.get_var_name("NP Dimensions")
+        spacing_socket_varname = self.get_var_name("NP Spacing")
+        origin_socket_varname = self.get_var_name("NP Origin")
+        
+        # Extract volume data
+        code.append(f"# Extract volume data")
+        code.append(f"{var_name}_dims = {var_name}_imagedata.GetDimensions()")
+        code.append(f"{var_name}_scalars = {var_name}_imagedata.GetPointData().GetScalars()")
+        code.append(f"{volume_socket_varname} = vtk_to_numpy({var_name}_scalars).reshape({var_name}_dims, order='F').astype(np.float32)")
+        code.append(f"")
+        
+        # Extract metadata
+        code.append(f"# Extract metadata")
+        code.append(f"{dimensions_socket_varname} = np.array({var_name}_dims, dtype=np.int32)")
+        code.append(f"{spacing_socket_varname} = np.array({var_name}_imagedata.GetSpacing(), dtype=np.float32)")
+        code.append(f"{origin_socket_varname} = np.array({var_name}_imagedata.GetOrigin(), dtype=np.float32)")
+        
+        return code
+
+
+# Add converter nodes to CLASSES
+add_class(VTKPolyDataToNumpyNode)
+add_class(VTKStructuredGridToNumpyNode)
+add_class(VTKUnstructuredGridToNumpyNode)
+add_class(VTKImageDataToNumpyNode)
+
+# -----------------------------------------------------------------------------
+# Registration Functions
+# -----------------------------------------------------------------------------
+
+
+def register():
+    """Register all VTK nodes and create VTK category"""
+
+    from . import gen_VTKFilters
+    from . import gen_VTKFilters1
+    from . import gen_VTKFilters2
+    from . import gen_VTKImplicitFunc
+    from . import gen_VTKIntegrator
+    from . import gen_VTKParametricFunc
+    from . import gen_VTKReaders
+    from . import gen_VTKSources
+    from . import gen_VTKTransform
+    from . import gen_VTKWriters
+
+    bpy.utils.register_class(PBVTK_NodeSocket)
+
+    # Register socket and converter nodes
+    for cls in CLASSES.values():
+        bpy.utils.register_class(cls)
+    
+    # Register UI classes if any
+    for cls in UI_CLASSES:
+        bpy.utils.register_class(cls)
+
+    node_categories_items = []
+    for cls in CLASSES.values():
+        node_categories_items.append(nodeitems_utils.NodeItem(cls.bl_idname))
+
+    node_categories = [
+        PBVTK_NodeCategory('VTK', "VTK", items=node_categories_items),
+    ]
+
+    try:
+        nodeitems_utils.register_node_categories('PBVTK_NODES', node_categories)
+    except:
+        pass        
+
+def unregister():
+    """Unregister all VTK nodes and category"""
+
+    from . import gen_VTKFilters
+    from . import gen_VTKFilters1
+    from . import gen_VTKFilters2
+    from . import gen_VTKImplicitFunc
+    from . import gen_VTKIntegrator
+    from . import gen_VTKParametricFunc
+    from . import gen_VTKReaders
+    from . import gen_VTKSources
+    from . import gen_VTKTransform
+    from . import gen_VTKWriters
+
+    try:
+        nodeitems_utils.unregister_node_categories('PBVTK_NODES')
+    except:
+        pass
+
+    bpy.utils.unregister_class(PBVTK_NodeSocket)  
+
+    # Register socket and converter nodes
+    for cls in CLASSES.values():
+        bpy.utils.unregister_class(cls)
+    
+    # Register UI classes if any
+    for cls in UI_CLASSES:
+        bpy.utils.unregister_class(cls)

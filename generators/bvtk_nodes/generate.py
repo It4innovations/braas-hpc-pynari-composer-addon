@@ -162,7 +162,7 @@ TYPENAMES.append('VTK{{C.NAME}}Type' )
 {% endfor %}
 #--------------------------------------------------------------
 menu_items = [ NodeItem(x) for x in TYPENAMES ]
-CATEGORIES.append( BVTK_NodeCategory( '{{MENU}}', '{{MENU}}', items=menu_items) )
+CATEGORIES.append( PBVTK_NodeCategory( '{{MENU}}', '{{MENU}}', items=menu_items) )
 """
 template = Template(node_template)
 
@@ -219,7 +219,7 @@ def generate(group):
                 items_arg = ", subtype='DIR_PATH'"
 
             # Declaration row
-            decl_string = "{}{}: bpy.props.{}(name='{}', default={}{}{}, update=BVTK_Node.outdate_vtk_status) #type: ignore"
+            decl_string = "{}{}: bpy.props.{}(name='{}', default={}{}{}, update=PBVTK_Node.outdate_vtk_status) #type: ignore"
             P["decl"] = decl_string.format(
                 prefix, name, ptype, name, value, size, items_arg
             )
@@ -274,16 +274,16 @@ def generate(group):
 
 # Base class names for groups
 bases = {
-    "Source": "BVTK_Node",
-    "Reader": "BVTK_Node",
-    "Writer": "BVTK_Node",
-    "Filter": "BVTK_Node",
-    "Filter1": "BVTK_Node",
-    "Filter2": "BVTK_Node",
-    "Transform": "BVTK_Node",
-    "ImplicitFunc": "BVTK_Node",
-    "ParametricFunc": "BVTK_Node",
-    "Integrator": "BVTK_Node",
+    "Source": "PBVTK_Node",
+    "Reader": "PBVTK_Node",
+    "Writer": "PBVTK_Node",
+    "Filter": "PBVTK_Node",
+    "Filter1": "PBVTK_Node",
+    "Filter2": "PBVTK_Node",
+    "Transform": "PBVTK_Node",
+    "ImplicitFunc": "PBVTK_Node",
+    "ParametricFunc": "PBVTK_Node",
+    "Integrator": "PBVTK_Node",
 }
 
 # File names for generated python files

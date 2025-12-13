@@ -25,7 +25,7 @@ import nodeitems_utils
 from nodeitems_utils import NodeCategory, NodeItem
 
 from . import utility
-from . import pref
+from . import pynari_pref
 
 ##################################
 # Timer for Auto Code Generation
@@ -289,27 +289,27 @@ class PYNARIComposerNode(Node):
         return []
 
     def get_file_path(self):
-        if pref.preferences().braas_hpc_pynari_composer_remote:
+        if pynari_pref.preferences().braas_hpc_pynari_composer_remote:
             return str(self.file_path_remote)
         else:
             return str(bpy.path.abspath(self.file_path))
         
     def draw_file_path(self, layout):
         row = layout.column(align=True)
-        if pref.preferences().braas_hpc_pynari_composer_remote:
+        if pynari_pref.preferences().braas_hpc_pynari_composer_remote:
             row.prop(self, "file_path_remote")
         else:
             row.prop(self, "file_path")
 
     def get_dir_path(self):
-        if pref.preferences().braas_hpc_pynari_composer_remote:
+        if pynari_pref.preferences().braas_hpc_pynari_composer_remote:
             return str(self.dir_path_remote)
         else:
             return str(bpy.path.abspath(self.dir_path))
         
     def draw_dir_path(self, layout):
         row = layout.column(align=True)
-        if pref.preferences().braas_hpc_pynari_composer_remote:
+        if pynari_pref.preferences().braas_hpc_pynari_composer_remote:
             row.prop(self, "dir_path_remote")
         else:
             row.prop(self, "dir_path")
@@ -4238,7 +4238,7 @@ class PYNARICOMPOSER_OT_update_remote_files(bpy.types.Operator):
     active_node: None     
 
     def execute(self, context):
-        pref = pref.preferences()
+        pref = pynari_pref.preferences()
 
         if self.is_directory:
             context.scene.braas_hpc_pynari_composer_remote_list.clear()
@@ -4341,7 +4341,7 @@ class PYNARICOMPOSER_PT_remote_file_path_node(Panel):
 
     @classmethod
     def poll(cls, context):
-        pref = pref.preferences()        
+        pref = pynari_pref.preferences()        
         return context.active_node is not None and isinstance(context.active_node, PYNARIComposerNode) and pref.braas_hpc_pynari_composer_remote
 
     def draw(self, context):

@@ -5,14 +5,14 @@ from .core import *
 TYPENAMES = []
 
 #--------------------------------------------------------------
-class VTKRungeKutta2(Node, BVTK_Node):
+class VTKRungeKutta2(Node, PBVTK_Node):
 
     bl_idname = 'VTKRungeKutta2Type'
     bl_label  = 'vtkRungeKutta2'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -23,14 +23,14 @@ add_class( VTKRungeKutta2 )
 TYPENAMES.append('VTKRungeKutta2Type' )
 
 #--------------------------------------------------------------
-class VTKRungeKutta4(Node, BVTK_Node):
+class VTKRungeKutta4(Node, PBVTK_Node):
 
     bl_idname = 'VTKRungeKutta4Type'
     bl_label  = 'vtkRungeKutta4'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -41,14 +41,14 @@ add_class( VTKRungeKutta4 )
 TYPENAMES.append('VTKRungeKutta4Type' )
 
 #--------------------------------------------------------------
-class VTKRungeKutta45(Node, BVTK_Node):
+class VTKRungeKutta45(Node, PBVTK_Node):
 
     bl_idname = 'VTKRungeKutta45Type'
     bl_label  = 'vtkRungeKutta45'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -60,4 +60,4 @@ TYPENAMES.append('VTKRungeKutta45Type' )
 
 #--------------------------------------------------------------
 menu_items = [ NodeItem(x) for x in TYPENAMES ]
-CATEGORIES.append( BVTK_NodeCategory( 'Integrator', 'Integrator', items=menu_items) )
+CATEGORIES.append( PBVTK_NodeCategory( 'Integrator', 'Integrator', items=menu_items) )

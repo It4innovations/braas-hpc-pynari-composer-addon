@@ -28,20 +28,24 @@ bl_info = {
 #####################################################################################################################
 
 def register():
-    from . import pref
+    from . import pynari_pref
     from . import base_nodes
+    from .bvtk_nodes import core as BVTK_Node
 
-    pref.register()
+    pynari_pref.register()
     base_nodes.register()
+    BVTK_Node.register()
     
 
 def unregister():
-    from . import pref
+    from . import pynari_pref
     from . import base_nodes
+    from .bvtk_nodes import core as BVTK_Node
     
     try:        
-        pref.unregister()
+        pynari_pref.unregister()
         base_nodes.unregister()
+        BVTK_Node.unregister()
 
     except RuntimeError:
         pass 

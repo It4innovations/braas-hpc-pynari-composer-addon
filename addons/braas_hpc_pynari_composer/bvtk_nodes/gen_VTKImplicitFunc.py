@@ -5,16 +5,16 @@ from .core import *
 TYPENAMES = []
 
 #--------------------------------------------------------------
-class VTKAnnulus(Node, BVTK_Node):
+class VTKAnnulus(Node, PBVTK_Node):
 
     bl_idname = 'VTKAnnulusType'
     bl_label  = 'vtkAnnulus'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_InnerRadius: bpy.props.FloatProperty(name='InnerRadius', default=0.25, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_OuterRadius: bpy.props.FloatProperty(name='OuterRadius', default=0.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_InnerRadius: bpy.props.FloatProperty(name='InnerRadius', default=0.25, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_OuterRadius: bpy.props.FloatProperty(name='OuterRadius', default=0.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_InnerRadius','m_OuterRadius',]
@@ -25,14 +25,14 @@ add_class( VTKAnnulus )
 TYPENAMES.append('VTKAnnulusType' )
 
 #--------------------------------------------------------------
-class VTKBox(Node, BVTK_Node):
+class VTKBox(Node, PBVTK_Node):
 
     bl_idname = 'VTKBoxType'
     bl_label  = 'vtkBox'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -43,18 +43,18 @@ add_class( VTKBox )
 TYPENAMES.append('VTKBoxType' )
 
 #--------------------------------------------------------------
-class VTKCone(Node, BVTK_Node):
+class VTKCone(Node, PBVTK_Node):
 
     bl_idname = 'VTKConeType'
     bl_label  = 'vtkCone'
     
-    m_IsDoubleCone: bpy.props.BoolProperty(name='IsDoubleCone', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Angle: bpy.props.FloatProperty(name='Angle', default=45.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Axis: bpy.props.FloatVectorProperty(name='Axis', default=[1.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Origin: bpy.props.FloatVectorProperty(name='Origin', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_IsDoubleCone: bpy.props.BoolProperty(name='IsDoubleCone', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Angle: bpy.props.FloatProperty(name='Angle', default=45.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Axis: bpy.props.FloatVectorProperty(name='Axis', default=[1.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Origin: bpy.props.FloatVectorProperty(name='Origin', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_IsDoubleCone','m_ObjectName','m_Angle','m_Axis','m_Origin',]
@@ -65,18 +65,18 @@ add_class( VTKCone )
 TYPENAMES.append('VTKConeType' )
 
 #--------------------------------------------------------------
-class VTKCoordinateFrame(Node, BVTK_Node):
+class VTKCoordinateFrame(Node, PBVTK_Node):
 
     bl_idname = 'VTKCoordinateFrameType'
     bl_label  = 'vtkCoordinateFrame'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Origin: bpy.props.FloatVectorProperty(name='Origin', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_XAxis: bpy.props.FloatVectorProperty(name='XAxis', default=[1.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_YAxis: bpy.props.FloatVectorProperty(name='YAxis', default=[0.0, 1.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ZAxis: bpy.props.FloatVectorProperty(name='ZAxis', default=[0.0, 0.0, 1.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Origin: bpy.props.FloatVectorProperty(name='Origin', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_XAxis: bpy.props.FloatVectorProperty(name='XAxis', default=[1.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_YAxis: bpy.props.FloatVectorProperty(name='YAxis', default=[0.0, 1.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ZAxis: bpy.props.FloatVectorProperty(name='ZAxis', default=[0.0, 0.0, 1.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_Origin','m_XAxis','m_YAxis','m_ZAxis',]
@@ -87,17 +87,17 @@ add_class( VTKCoordinateFrame )
 TYPENAMES.append('VTKCoordinateFrameType' )
 
 #--------------------------------------------------------------
-class VTKCylinder(Node, BVTK_Node):
+class VTKCylinder(Node, PBVTK_Node):
 
     bl_idname = 'VTKCylinderType'
     bl_label  = 'vtkCylinder'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Radius: bpy.props.FloatProperty(name='Radius', default=0.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Axis: bpy.props.FloatVectorProperty(name='Axis', default=[0.0, 1.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Radius: bpy.props.FloatProperty(name='Radius', default=0.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Axis: bpy.props.FloatVectorProperty(name='Axis', default=[0.0, 1.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_Radius','m_Axis','m_Center',]
@@ -108,17 +108,17 @@ add_class( VTKCylinder )
 TYPENAMES.append('VTKCylinderType' )
 
 #--------------------------------------------------------------
-class VTKFrustum(Node, BVTK_Node):
+class VTKFrustum(Node, PBVTK_Node):
 
     bl_idname = 'VTKFrustumType'
     bl_label  = 'vtkFrustum'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_HorizontalAngle: bpy.props.FloatProperty(name='HorizontalAngle', default=30.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NearPlaneDistance: bpy.props.FloatProperty(name='NearPlaneDistance', default=0.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_VerticalAngle: bpy.props.FloatProperty(name='VerticalAngle', default=30.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_HorizontalAngle: bpy.props.FloatProperty(name='HorizontalAngle', default=30.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NearPlaneDistance: bpy.props.FloatProperty(name='NearPlaneDistance', default=0.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_VerticalAngle: bpy.props.FloatProperty(name='VerticalAngle', default=30.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_HorizontalAngle','m_NearPlaneDistance','m_VerticalAngle',]
@@ -129,16 +129,16 @@ add_class( VTKFrustum )
 TYPENAMES.append('VTKFrustumType' )
 
 #--------------------------------------------------------------
-class VTKImplicitBoolean(Node, BVTK_Node):
+class VTKImplicitBoolean(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitBooleanType'
     bl_label  = 'vtkImplicitBoolean'
     e_OperationType_items=[ (x,x,x) for x in ['Union', 'Intersection', 'Difference', 'UnionOfMagnitudes']]
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    e_OperationType: bpy.props.EnumProperty(name='OperationType', default="Union", items=e_OperationType_items, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    e_OperationType: bpy.props.EnumProperty(name='OperationType', default="Union", items=e_OperationType_items, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','e_OperationType',]
@@ -149,16 +149,16 @@ add_class( VTKImplicitBoolean )
 TYPENAMES.append('VTKImplicitBooleanType' )
 
 #--------------------------------------------------------------
-class VTKImplicitDataSet(Node, BVTK_Node):
+class VTKImplicitDataSet(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitDataSetType'
     bl_label  = 'vtkImplicitDataSet'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_OutValue: bpy.props.FloatProperty(name='OutValue', default=-1e+30, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_OutGradient: bpy.props.FloatVectorProperty(name='OutGradient', default=[0.0, 0.0, 1.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_OutValue: bpy.props.FloatProperty(name='OutValue', default=-1e+30, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_OutGradient: bpy.props.FloatVectorProperty(name='OutGradient', default=[0.0, 0.0, 1.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_OutValue','m_OutGradient',]
@@ -169,17 +169,17 @@ add_class( VTKImplicitDataSet )
 TYPENAMES.append('VTKImplicitDataSetType' )
 
 #--------------------------------------------------------------
-class VTKImplicitHalo(Node, BVTK_Node):
+class VTKImplicitHalo(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitHaloType'
     bl_label  = 'vtkImplicitHalo'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_FadeOut: bpy.props.FloatProperty(name='FadeOut', default=0.01, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_FadeOut: bpy.props.FloatProperty(name='FadeOut', default=0.01, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_FadeOut','m_Radius','m_Center',]
@@ -190,18 +190,18 @@ add_class( VTKImplicitHalo )
 TYPENAMES.append('VTKImplicitHaloType' )
 
 #--------------------------------------------------------------
-class VTKImplicitPolyDataDistance(Node, BVTK_Node):
+class VTKImplicitPolyDataDistance(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitPolyDataDistanceType'
     bl_label  = 'vtkImplicitPolyDataDistance'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NoValue: bpy.props.FloatProperty(name='NoValue', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Tolerance: bpy.props.FloatProperty(name='Tolerance', default=1e-12, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NoClosestPoint: bpy.props.FloatVectorProperty(name='NoClosestPoint', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NoGradient: bpy.props.FloatVectorProperty(name='NoGradient', default=[0.0, 0.0, 1.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NoValue: bpy.props.FloatProperty(name='NoValue', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Tolerance: bpy.props.FloatProperty(name='Tolerance', default=1e-12, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NoClosestPoint: bpy.props.FloatVectorProperty(name='NoClosestPoint', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NoGradient: bpy.props.FloatVectorProperty(name='NoGradient', default=[0.0, 0.0, 1.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_NoValue','m_Tolerance','m_NoClosestPoint','m_NoGradient',]
@@ -212,15 +212,15 @@ add_class( VTKImplicitPolyDataDistance )
 TYPENAMES.append('VTKImplicitPolyDataDistanceType' )
 
 #--------------------------------------------------------------
-class VTKImplicitProjectOnPlaneDistance(Node, BVTK_Node):
+class VTKImplicitProjectOnPlaneDistance(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitProjectOnPlaneDistanceType'
     bl_label  = 'vtkImplicitProjectOnPlaneDistance'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Tolerance: bpy.props.FloatProperty(name='Tolerance', default=0.01, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Tolerance: bpy.props.FloatProperty(name='Tolerance', default=0.01, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_Tolerance',]
@@ -231,16 +231,16 @@ add_class( VTKImplicitProjectOnPlaneDistance )
 TYPENAMES.append('VTKImplicitProjectOnPlaneDistanceType' )
 
 #--------------------------------------------------------------
-class VTKImplicitSelectionLoop(Node, BVTK_Node):
+class VTKImplicitSelectionLoop(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitSelectionLoopType'
     bl_label  = 'vtkImplicitSelectionLoop'
     
-    m_AutomaticNormalGeneration: bpy.props.BoolProperty(name='AutomaticNormalGeneration', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Normal: bpy.props.FloatVectorProperty(name='Normal', default=[0.0, 0.0, 1.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AutomaticNormalGeneration: bpy.props.BoolProperty(name='AutomaticNormalGeneration', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Normal: bpy.props.FloatVectorProperty(name='Normal', default=[0.0, 0.0, 1.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AutomaticNormalGeneration','m_ObjectName','m_Normal',]
@@ -251,15 +251,15 @@ add_class( VTKImplicitSelectionLoop )
 TYPENAMES.append('VTKImplicitSelectionLoopType' )
 
 #--------------------------------------------------------------
-class VTKImplicitSum(Node, BVTK_Node):
+class VTKImplicitSum(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitSumType'
     bl_label  = 'vtkImplicitSum'
     
-    m_NormalizeByWeight: bpy.props.BoolProperty(name='NormalizeByWeight', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_NormalizeByWeight: bpy.props.BoolProperty(name='NormalizeByWeight', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=2, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_NormalizeByWeight','m_ObjectName',]
@@ -270,16 +270,16 @@ add_class( VTKImplicitSum )
 TYPENAMES.append('VTKImplicitSumType' )
 
 #--------------------------------------------------------------
-class VTKImplicitVolume(Node, BVTK_Node):
+class VTKImplicitVolume(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitVolumeType'
     bl_label  = 'vtkImplicitVolume'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_OutValue: bpy.props.FloatProperty(name='OutValue', default=-1e+30, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_OutGradient: bpy.props.FloatVectorProperty(name='OutGradient', default=[0.0, 0.0, 1.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_OutValue: bpy.props.FloatProperty(name='OutValue', default=-1e+30, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_OutGradient: bpy.props.FloatVectorProperty(name='OutGradient', default=[0.0, 0.0, 1.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_OutValue','m_OutGradient',]
@@ -290,16 +290,16 @@ add_class( VTKImplicitVolume )
 TYPENAMES.append('VTKImplicitVolumeType' )
 
 #--------------------------------------------------------------
-class VTKImplicitWindowFunction(Node, BVTK_Node):
+class VTKImplicitWindowFunction(Node, PBVTK_Node):
 
     bl_idname = 'VTKImplicitWindowFunctionType'
     bl_label  = 'vtkImplicitWindowFunction'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WindowRange: bpy.props.FloatVectorProperty(name='WindowRange', default=[0.0, 1.0], size=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_WindowValues: bpy.props.FloatVectorProperty(name='WindowValues', default=[0.0, 1.0], size=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WindowRange: bpy.props.FloatVectorProperty(name='WindowRange', default=[0.0, 1.0], size=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_WindowValues: bpy.props.FloatVectorProperty(name='WindowValues', default=[0.0, 1.0], size=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_WindowRange','m_WindowValues',]
@@ -310,17 +310,17 @@ add_class( VTKImplicitWindowFunction )
 TYPENAMES.append('VTKImplicitWindowFunctionType' )
 
 #--------------------------------------------------------------
-class VTKPerlinNoise(Node, BVTK_Node):
+class VTKPerlinNoise(Node, PBVTK_Node):
 
     bl_idname = 'VTKPerlinNoiseType'
     bl_label  = 'vtkPerlinNoise'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Amplitude: bpy.props.FloatProperty(name='Amplitude', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Frequency: bpy.props.FloatVectorProperty(name='Frequency', default=[1.0, 1.0, 1.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Phase: bpy.props.FloatVectorProperty(name='Phase', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Amplitude: bpy.props.FloatProperty(name='Amplitude', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Frequency: bpy.props.FloatVectorProperty(name='Frequency', default=[1.0, 1.0, 1.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Phase: bpy.props.FloatVectorProperty(name='Phase', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_Amplitude','m_Frequency','m_Phase',]
@@ -331,18 +331,18 @@ add_class( VTKPerlinNoise )
 TYPENAMES.append('VTKPerlinNoiseType' )
 
 #--------------------------------------------------------------
-class VTKPlane(Node, BVTK_Node):
+class VTKPlane(Node, PBVTK_Node):
 
     bl_idname = 'VTKPlaneType'
     bl_label  = 'vtkPlane'
     
-    m_AxisAligned: bpy.props.BoolProperty(name='AxisAligned', default=False, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Offset: bpy.props.FloatProperty(name='Offset', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Normal: bpy.props.FloatVectorProperty(name='Normal', default=[0.0, 0.0, 1.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Origin: bpy.props.FloatVectorProperty(name='Origin', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AxisAligned: bpy.props.BoolProperty(name='AxisAligned', default=False, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Offset: bpy.props.FloatProperty(name='Offset', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Normal: bpy.props.FloatVectorProperty(name='Normal', default=[0.0, 0.0, 1.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Origin: bpy.props.FloatVectorProperty(name='Origin', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=5, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AxisAligned','m_ObjectName','m_Offset','m_Normal','m_Origin',]
@@ -353,14 +353,14 @@ add_class( VTKPlane )
 TYPENAMES.append('VTKPlaneType' )
 
 #--------------------------------------------------------------
-class VTKPlanes(Node, BVTK_Node):
+class VTKPlanes(Node, PBVTK_Node):
 
     bl_idname = 'VTKPlanesType'
     bl_label  = 'vtkPlanes'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -371,14 +371,14 @@ add_class( VTKPlanes )
 TYPENAMES.append('VTKPlanesType' )
 
 #--------------------------------------------------------------
-class VTKPlanesIntersection(Node, BVTK_Node):
+class VTKPlanesIntersection(Node, PBVTK_Node):
 
     bl_idname = 'VTKPlanesIntersectionType'
     bl_label  = 'vtkPlanesIntersection'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -389,14 +389,14 @@ add_class( VTKPlanesIntersection )
 TYPENAMES.append('VTKPlanesIntersectionType' )
 
 #--------------------------------------------------------------
-class VTKPolyPlane(Node, BVTK_Node):
+class VTKPolyPlane(Node, PBVTK_Node):
 
     bl_idname = 'VTKPolyPlaneType'
     bl_label  = 'vtkPolyPlane'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -407,14 +407,14 @@ add_class( VTKPolyPlane )
 TYPENAMES.append('VTKPolyPlaneType' )
 
 #--------------------------------------------------------------
-class VTKQuadric(Node, BVTK_Node):
+class VTKQuadric(Node, PBVTK_Node):
 
     bl_idname = 'VTKQuadricType'
     bl_label  = 'vtkQuadric'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -425,16 +425,16 @@ add_class( VTKQuadric )
 TYPENAMES.append('VTKQuadricType' )
 
 #--------------------------------------------------------------
-class VTKSphere(Node, BVTK_Node):
+class VTKSphere(Node, PBVTK_Node):
 
     bl_idname = 'VTKSphereType'
     bl_label  = 'vtkSphere'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Radius: bpy.props.FloatProperty(name='Radius', default=0.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Radius: bpy.props.FloatProperty(name='Radius', default=0.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=3, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName','m_Radius','m_Center',]
@@ -445,14 +445,14 @@ add_class( VTKSphere )
 TYPENAMES.append('VTKSphereType' )
 
 #--------------------------------------------------------------
-class VTKSpheres(Node, BVTK_Node):
+class VTKSpheres(Node, PBVTK_Node):
 
     bl_idname = 'VTKSpheresType'
     bl_label  = 'vtkSpheres'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ObjectName',]
@@ -463,21 +463,21 @@ add_class( VTKSpheres )
 TYPENAMES.append('VTKSpheresType' )
 
 #--------------------------------------------------------------
-class VTKSuperquadric(Node, BVTK_Node):
+class VTKSuperquadric(Node, PBVTK_Node):
 
     bl_idname = 'VTKSuperquadricType'
     bl_label  = 'vtkSuperquadric'
     
-    m_Toroidal: bpy.props.BoolProperty(name='Toroidal', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_PhiRoundness: bpy.props.FloatProperty(name='PhiRoundness', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Size: bpy.props.FloatProperty(name='Size', default=0.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ThetaRoundness: bpy.props.FloatProperty(name='ThetaRoundness', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Thickness: bpy.props.FloatProperty(name='Thickness', default=0.3333, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Scale: bpy.props.FloatVectorProperty(name='Scale', default=[1.0, 1.0, 1.0], size=3, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_Toroidal: bpy.props.BoolProperty(name='Toroidal', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_PhiRoundness: bpy.props.FloatProperty(name='PhiRoundness', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Size: bpy.props.FloatProperty(name='Size', default=0.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ThetaRoundness: bpy.props.FloatProperty(name='ThetaRoundness', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Thickness: bpy.props.FloatProperty(name='Thickness', default=0.3333, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Scale: bpy.props.FloatVectorProperty(name='Scale', default=[1.0, 1.0, 1.0], size=3, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=8, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=8, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_Toroidal','m_ObjectName','m_PhiRoundness','m_Size','m_ThetaRoundness','m_Thickness','m_Center','m_Scale',]
@@ -489,4 +489,4 @@ TYPENAMES.append('VTKSuperquadricType' )
 
 #--------------------------------------------------------------
 menu_items = [ NodeItem(x) for x in TYPENAMES ]
-CATEGORIES.append( BVTK_NodeCategory( 'ImplicitFunc', 'ImplicitFunc', items=menu_items) )
+CATEGORIES.append( PBVTK_NodeCategory( 'ImplicitFunc', 'ImplicitFunc', items=menu_items) )

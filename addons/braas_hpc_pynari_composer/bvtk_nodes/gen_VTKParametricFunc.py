@@ -5,31 +5,31 @@ from .core import *
 TYPENAMES = []
 
 #--------------------------------------------------------------
-class VTKParametricBohemianDome(Node, BVTK_Node):
+class VTKParametricBohemianDome(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricBohemianDomeType'
     bl_label  = 'vtkParametricBohemianDome'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_A: bpy.props.FloatProperty(name='A', default=0.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_B: bpy.props.FloatProperty(name='B', default=1.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_C: bpy.props.FloatProperty(name='C', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_A: bpy.props.FloatProperty(name='A', default=0.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_B: bpy.props.FloatProperty(name='B', default=1.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_C: bpy.props.FloatProperty(name='C', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_A','m_B','m_C','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -40,28 +40,28 @@ add_class( VTKParametricBohemianDome )
 TYPENAMES.append('VTKParametricBohemianDomeType' )
 
 #--------------------------------------------------------------
-class VTKParametricBour(Node, BVTK_Node):
+class VTKParametricBour(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricBourType'
     bl_label  = 'vtkParametricBour'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=12.566370614359172, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=12.566370614359172, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -72,29 +72,29 @@ add_class( VTKParametricBour )
 TYPENAMES.append('VTKParametricBourType' )
 
 #--------------------------------------------------------------
-class VTKParametricBoy(Node, BVTK_Node):
+class VTKParametricBoy(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricBoyType'
     bl_label  = 'vtkParametricBoy'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ZScale: bpy.props.FloatProperty(name='ZScale', default=0.125, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ZScale: bpy.props.FloatProperty(name='ZScale', default=0.125, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_ZScale',]
@@ -105,28 +105,28 @@ add_class( VTKParametricBoy )
 TYPENAMES.append('VTKParametricBoyType' )
 
 #--------------------------------------------------------------
-class VTKParametricCatalanMinimal(Node, BVTK_Node):
+class VTKParametricCatalanMinimal(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricCatalanMinimalType'
     bl_label  = 'vtkParametricCatalanMinimal'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=12.566370614359172, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-12.566370614359172, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-1.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=12.566370614359172, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-12.566370614359172, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-1.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -137,32 +137,32 @@ add_class( VTKParametricCatalanMinimal )
 TYPENAMES.append('VTKParametricCatalanMinimalType' )
 
 #--------------------------------------------------------------
-class VTKParametricConicSpiral(Node, BVTK_Node):
+class VTKParametricConicSpiral(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricConicSpiralType'
     bl_label  = 'vtkParametricConicSpiral'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_A: bpy.props.FloatProperty(name='A', default=0.2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_B: bpy.props.FloatProperty(name='B', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_C: bpy.props.FloatProperty(name='C', default=0.1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_N: bpy.props.FloatProperty(name='N', default=2.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_A: bpy.props.FloatProperty(name='A', default=0.2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_B: bpy.props.FloatProperty(name='B', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_C: bpy.props.FloatProperty(name='C', default=0.1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_N: bpy.props.FloatProperty(name='N', default=2.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=19, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_A','m_B','m_C','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_N',]
@@ -173,28 +173,28 @@ add_class( VTKParametricConicSpiral )
 TYPENAMES.append('VTKParametricConicSpiralType' )
 
 #--------------------------------------------------------------
-class VTKParametricCrossCap(Node, BVTK_Node):
+class VTKParametricCrossCap(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricCrossCapType'
     bl_label  = 'vtkParametricCrossCap'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -205,30 +205,30 @@ add_class( VTKParametricCrossCap )
 TYPENAMES.append('VTKParametricCrossCapType' )
 
 #--------------------------------------------------------------
-class VTKParametricDini(Node, BVTK_Node):
+class VTKParametricDini(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricDiniType'
     bl_label  = 'vtkParametricDini'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_A: bpy.props.FloatProperty(name='A', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_B: bpy.props.FloatProperty(name='B', default=0.2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=12.566370614359172, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=2.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.001, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_A: bpy.props.FloatProperty(name='A', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_B: bpy.props.FloatProperty(name='B', default=0.2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=12.566370614359172, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=2.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.001, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_A','m_B','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -239,31 +239,31 @@ add_class( VTKParametricDini )
 TYPENAMES.append('VTKParametricDiniType' )
 
 #--------------------------------------------------------------
-class VTKParametricEllipsoid(Node, BVTK_Node):
+class VTKParametricEllipsoid(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricEllipsoidType'
     bl_label  = 'vtkParametricEllipsoid'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_XRadius: bpy.props.FloatProperty(name='XRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_YRadius: bpy.props.FloatProperty(name='YRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ZRadius: bpy.props.FloatProperty(name='ZRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_XRadius: bpy.props.FloatProperty(name='XRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_YRadius: bpy.props.FloatProperty(name='YRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ZRadius: bpy.props.FloatProperty(name='ZRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=18, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_XRadius','m_YRadius','m_ZRadius',]
@@ -274,28 +274,28 @@ add_class( VTKParametricEllipsoid )
 TYPENAMES.append('VTKParametricEllipsoidType' )
 
 #--------------------------------------------------------------
-class VTKParametricEnneper(Node, BVTK_Node):
+class VTKParametricEnneper(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricEnneperType'
     bl_label  = 'vtkParametricEnneper'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=2.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=2.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-2.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-2.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=2.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=2.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-2.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-2.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -306,29 +306,29 @@ add_class( VTKParametricEnneper )
 TYPENAMES.append('VTKParametricEnneperType' )
 
 #--------------------------------------------------------------
-class VTKParametricFigure8Klein(Node, BVTK_Node):
+class VTKParametricFigure8Klein(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricFigure8KleinType'
     bl_label  = 'vtkParametricFigure8Klein'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_Radius',]
@@ -339,28 +339,28 @@ add_class( VTKParametricFigure8Klein )
 TYPENAMES.append('VTKParametricFigure8KleinType' )
 
 #--------------------------------------------------------------
-class VTKParametricHenneberg(Node, BVTK_Node):
+class VTKParametricHenneberg(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricHennebergType'
     bl_label  = 'vtkParametricHenneberg'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.5707963267948966, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-1.5707963267948966, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.5707963267948966, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-1.5707963267948966, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -371,28 +371,28 @@ add_class( VTKParametricHenneberg )
 TYPENAMES.append('VTKParametricHennebergType' )
 
 #--------------------------------------------------------------
-class VTKParametricKlein(Node, BVTK_Node):
+class VTKParametricKlein(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricKleinType'
     bl_label  = 'vtkParametricKlein'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -403,29 +403,29 @@ add_class( VTKParametricKlein )
 TYPENAMES.append('VTKParametricKleinType' )
 
 #--------------------------------------------------------------
-class VTKParametricKuen(Node, BVTK_Node):
+class VTKParametricKuen(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricKuenType'
     bl_label  = 'vtkParametricKuen'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DeltaV0: bpy.props.FloatProperty(name='DeltaV0', default=0.05, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=4.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-4.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DeltaV0: bpy.props.FloatProperty(name='DeltaV0', default=0.05, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=4.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-4.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_DeltaV0','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -436,29 +436,29 @@ add_class( VTKParametricKuen )
 TYPENAMES.append('VTKParametricKuenType' )
 
 #--------------------------------------------------------------
-class VTKParametricMobius(Node, BVTK_Node):
+class VTKParametricMobius(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricMobiusType'
     bl_label  = 'vtkParametricMobius'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_Radius',]
@@ -469,29 +469,29 @@ add_class( VTKParametricMobius )
 TYPENAMES.append('VTKParametricMobiusType' )
 
 #--------------------------------------------------------------
-class VTKParametricPluckerConoid(Node, BVTK_Node):
+class VTKParametricPluckerConoid(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricPluckerConoidType'
     bl_label  = 'vtkParametricPluckerConoid'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_N: bpy.props.IntProperty(name='N', default=2, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_N: bpy.props.IntProperty(name='N', default=2, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_N','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -502,28 +502,28 @@ add_class( VTKParametricPluckerConoid )
 TYPENAMES.append('VTKParametricPluckerConoidType' )
 
 #--------------------------------------------------------------
-class VTKParametricPseudosphere(Node, BVTK_Node):
+class VTKParametricPseudosphere(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricPseudosphereType'
     bl_label  = 'vtkParametricPseudosphere'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=5.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-5.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=5.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-5.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=15, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW',]
@@ -534,37 +534,37 @@ add_class( VTKParametricPseudosphere )
 TYPENAMES.append('VTKParametricPseudosphereType' )
 
 #--------------------------------------------------------------
-class VTKParametricRandomHills(Node, BVTK_Node):
+class VTKParametricRandomHills(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricRandomHillsType'
     bl_label  = 'vtkParametricRandomHills'
     
-    m_AllowRandomGeneration: bpy.props.BoolProperty(name='AllowRandomGeneration', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_NumberOfHills: bpy.props.IntProperty(name='NumberOfHills', default=30, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RandomSeed: bpy.props.IntProperty(name='RandomSeed', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_AmplitudeScaleFactor: bpy.props.FloatProperty(name='AmplitudeScaleFactor', default=0.3333333333333333, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_HillAmplitude: bpy.props.FloatProperty(name='HillAmplitude', default=2.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_HillXVariance: bpy.props.FloatProperty(name='HillXVariance', default=2.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_HillYVariance: bpy.props.FloatProperty(name='HillYVariance', default=2.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=10.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=10.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-10.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-10.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_XVarianceScaleFactor: bpy.props.FloatProperty(name='XVarianceScaleFactor', default=0.3333333333333333, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_YVarianceScaleFactor: bpy.props.FloatProperty(name='YVarianceScaleFactor', default=0.3333333333333333, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_AllowRandomGeneration: bpy.props.BoolProperty(name='AllowRandomGeneration', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_NumberOfHills: bpy.props.IntProperty(name='NumberOfHills', default=30, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RandomSeed: bpy.props.IntProperty(name='RandomSeed', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_AmplitudeScaleFactor: bpy.props.FloatProperty(name='AmplitudeScaleFactor', default=0.3333333333333333, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_HillAmplitude: bpy.props.FloatProperty(name='HillAmplitude', default=2.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_HillXVariance: bpy.props.FloatProperty(name='HillXVariance', default=2.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_HillYVariance: bpy.props.FloatProperty(name='HillYVariance', default=2.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=10.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=10.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-10.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-10.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_XVarianceScaleFactor: bpy.props.FloatProperty(name='XVarianceScaleFactor', default=0.3333333333333333, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_YVarianceScaleFactor: bpy.props.FloatProperty(name='YVarianceScaleFactor', default=0.3333333333333333, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=24, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=24, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_AllowRandomGeneration','m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_NumberOfHills','m_RandomSeed','m_AmplitudeScaleFactor','m_HillAmplitude','m_HillXVariance','m_HillYVariance','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_XVarianceScaleFactor','m_YVarianceScaleFactor',]
@@ -575,29 +575,29 @@ add_class( VTKParametricRandomHills )
 TYPENAMES.append('VTKParametricRandomHillsType' )
 
 #--------------------------------------------------------------
-class VTKParametricRoman(Node, BVTK_Node):
+class VTKParametricRoman(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricRomanType'
     bl_label  = 'vtkParametricRoman'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=16, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_Radius',]
@@ -608,34 +608,34 @@ add_class( VTKParametricRoman )
 TYPENAMES.append('VTKParametricRomanType' )
 
 #--------------------------------------------------------------
-class VTKParametricSpline(Node, BVTK_Node):
+class VTKParametricSpline(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricSplineType'
     bl_label  = 'vtkParametricSpline'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_Closed: bpy.props.BoolProperty(name='Closed', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ParameterizeByLength: bpy.props.BoolProperty(name='ParameterizeByLength', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LeftConstraint: bpy.props.IntProperty(name='LeftConstraint', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RightConstraint: bpy.props.IntProperty(name='RightConstraint', default=1, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_LeftValue: bpy.props.FloatProperty(name='LeftValue', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RightValue: bpy.props.FloatProperty(name='RightValue', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_Closed: bpy.props.BoolProperty(name='Closed', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ParameterizeByLength: bpy.props.BoolProperty(name='ParameterizeByLength', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LeftConstraint: bpy.props.IntProperty(name='LeftConstraint', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RightConstraint: bpy.props.IntProperty(name='RightConstraint', default=1, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_LeftValue: bpy.props.FloatProperty(name='LeftValue', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RightValue: bpy.props.FloatProperty(name='RightValue', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=21, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=21, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_Closed','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_ParameterizeByLength','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_LeftConstraint','m_RightConstraint','m_LeftValue','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_RightValue',]
@@ -646,33 +646,33 @@ add_class( VTKParametricSpline )
 TYPENAMES.append('VTKParametricSplineType' )
 
 #--------------------------------------------------------------
-class VTKParametricSuperEllipsoid(Node, BVTK_Node):
+class VTKParametricSuperEllipsoid(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricSuperEllipsoidType'
     bl_label  = 'vtkParametricSuperEllipsoid'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.5707963267948966, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-3.141592653589793, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-1.5707963267948966, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_N1: bpy.props.FloatProperty(name='N1', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_N2: bpy.props.FloatProperty(name='N2', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_XRadius: bpy.props.FloatProperty(name='XRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_YRadius: bpy.props.FloatProperty(name='YRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ZRadius: bpy.props.FloatProperty(name='ZRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=1.5707963267948966, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=-3.141592653589793, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=-1.5707963267948966, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_N1: bpy.props.FloatProperty(name='N1', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_N2: bpy.props.FloatProperty(name='N2', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_XRadius: bpy.props.FloatProperty(name='XRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_YRadius: bpy.props.FloatProperty(name='YRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ZRadius: bpy.props.FloatProperty(name='ZRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=20, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=20, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_N1','m_N2','m_XRadius','m_YRadius','m_ZRadius',]
@@ -683,35 +683,35 @@ add_class( VTKParametricSuperEllipsoid )
 TYPENAMES.append('VTKParametricSuperEllipsoidType' )
 
 #--------------------------------------------------------------
-class VTKParametricSuperToroid(Node, BVTK_Node):
+class VTKParametricSuperToroid(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricSuperToroidType'
     bl_label  = 'vtkParametricSuperToroid'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CrossSectionRadius: bpy.props.FloatProperty(name='CrossSectionRadius', default=0.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_N1: bpy.props.FloatProperty(name='N1', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_N2: bpy.props.FloatProperty(name='N2', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RingRadius: bpy.props.FloatProperty(name='RingRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_XRadius: bpy.props.FloatProperty(name='XRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_YRadius: bpy.props.FloatProperty(name='YRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ZRadius: bpy.props.FloatProperty(name='ZRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CrossSectionRadius: bpy.props.FloatProperty(name='CrossSectionRadius', default=0.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_N1: bpy.props.FloatProperty(name='N1', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_N2: bpy.props.FloatProperty(name='N2', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RingRadius: bpy.props.FloatProperty(name='RingRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_XRadius: bpy.props.FloatProperty(name='XRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_YRadius: bpy.props.FloatProperty(name='YRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ZRadius: bpy.props.FloatProperty(name='ZRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=22, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=22, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_CrossSectionRadius','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_N1','m_N2','m_RingRadius','m_XRadius','m_YRadius','m_ZRadius',]
@@ -722,30 +722,30 @@ add_class( VTKParametricSuperToroid )
 TYPENAMES.append('VTKParametricSuperToroidType' )
 
 #--------------------------------------------------------------
-class VTKParametricTorus(Node, BVTK_Node):
+class VTKParametricTorus(Node, PBVTK_Node):
 
     bl_idname = 'VTKParametricTorusType'
     bl_label  = 'vtkParametricTorus'
     
-    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_CrossSectionRadius: bpy.props.FloatProperty(name='CrossSectionRadius', default=0.5, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
-    m_RingRadius: bpy.props.FloatProperty(name='RingRadius', default=1.0, update=BVTK_Node.outdate_vtk_status) #type: ignore
+    m_ClockwiseOrdering: bpy.props.BoolProperty(name='ClockwiseOrdering', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_DerivativesAvailable: bpy.props.BoolProperty(name='DerivativesAvailable', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinU: bpy.props.BoolProperty(name='JoinU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinV: bpy.props.BoolProperty(name='JoinV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_JoinW: bpy.props.BoolProperty(name='JoinW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistU: bpy.props.BoolProperty(name='TwistU', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistV: bpy.props.BoolProperty(name='TwistV', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_TwistW: bpy.props.BoolProperty(name='TwistW', default=True, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_CrossSectionRadius: bpy.props.FloatProperty(name='CrossSectionRadius', default=0.5, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumU: bpy.props.FloatProperty(name='MaximumU', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumV: bpy.props.FloatProperty(name='MaximumV', default=6.283185307179586, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MaximumW: bpy.props.FloatProperty(name='MaximumW', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumU: bpy.props.FloatProperty(name='MinimumU', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumV: bpy.props.FloatProperty(name='MinimumV', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_MinimumW: bpy.props.FloatProperty(name='MinimumW', default=0.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
+    m_RingRadius: bpy.props.FloatProperty(name='RingRadius', default=1.0, update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
-    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=BVTK_Node.get_b, set=BVTK_Node.set_b) #type: ignore
+    b_properties: bpy.props.BoolVectorProperty(name="", size=17, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
         return ['m_ClockwiseOrdering','m_DerivativesAvailable','m_JoinU','m_JoinV','m_JoinW','m_TwistU','m_TwistV','m_TwistW','m_ObjectName','m_CrossSectionRadius','m_MaximumU','m_MaximumV','m_MaximumW','m_MinimumU','m_MinimumV','m_MinimumW','m_RingRadius',]
@@ -757,4 +757,4 @@ TYPENAMES.append('VTKParametricTorusType' )
 
 #--------------------------------------------------------------
 menu_items = [ NodeItem(x) for x in TYPENAMES ]
-CATEGORIES.append( BVTK_NodeCategory( 'ParametricFunc', 'ParametricFunc', items=menu_items) )
+CATEGORIES.append( PBVTK_NodeCategory( 'ParametricFunc', 'ParametricFunc', items=menu_items) )
