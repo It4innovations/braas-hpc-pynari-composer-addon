@@ -1,5 +1,5 @@
 #####################################################################################################################
-# Copyright(C) 2011-2025 IT4Innovations National Supercomputing Center, VSB - Technical University of Ostrava
+# Copyright(C) 2025-2026 IT4Innovations National Supercomputing Center, VSB - Technical University of Ostrava
 #
 # This program is free software : you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,20 +28,20 @@ bl_info = {
 #####################################################################################################################
 
 def register():
-    from . import braas_hpc_pynari_composer_pref
-    from . import braas_hpc_pynari_composer_nodes
+    from . import pref
+    from . import base_nodes
 
-    braas_hpc_pynari_composer_pref.register()
-    braas_hpc_pynari_composer_nodes.register()
+    pref.register()
+    base_nodes.register()
     
 
 def unregister():
-    from . import braas_hpc_pynari_composer_pref
-    from . import braas_hpc_pynari_composer_nodes
+    from . import pref
+    from . import base_nodes
     
     try:        
-        braas_hpc_pynari_composer_pref.unregister()
-        braas_hpc_pynari_composer_nodes.unregister()
+        pref.unregister()
+        base_nodes.unregister()
 
     except RuntimeError:
         pass 

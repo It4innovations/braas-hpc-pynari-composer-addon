@@ -1,5 +1,5 @@
 #####################################################################################################################
-# Copyright(C) 2011-2025 IT4Innovations National Supercomputing Center, VSB - Technical University of Ostrava
+# Copyright(C) 2025-2026 IT4Innovations National Supercomputing Center, VSB - Technical University of Ostrava
 #
 # This program is free software : you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@ from bpy.props import (StringProperty, FloatProperty, FloatVectorProperty, IntPr
 import nodeitems_utils
 from nodeitems_utils import NodeCategory, NodeItem
 
-from . import braas_hpc_pynari_composer_utility
-from . import braas_hpc_pynari_composer_pref
+from . import utility
+from . import pref
 
 ##################################
 # Timer for Auto Code Generation
@@ -209,7 +209,7 @@ class PYNARIComposerNode(Node):
                 raise ValueError(f"Input socket '{input_name}' has multiple links.")
             
             from_node = input_socket.links[0].from_node
-            socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name(input_name)
+            socket_varname = utility.str_to_var_name(input_name)
             return from_node.get_var_name(socket_varname)
         
         elif hasattr(input_socket, 'default_value'):
@@ -223,16 +223,16 @@ class PYNARIComposerNode(Node):
                 return tuple(value)
             return value
         else:
-            #socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name(input_name)
+            #socket_varname = utility.str_to_var_name(input_name)
             linked_values = [link.from_node.get_var_name(link.from_socket.name) for link in self.inputs[input_name].links]
             return linked_values[0]
     
     def get_var_name(self, postfix=""):
         """Get the variable name for this node's output"""
         if len(postfix) > 0:
-            return f"{braas_hpc_pynari_composer_utility.str_to_var_name(self.name)}_{braas_hpc_pynari_composer_utility.str_to_var_name(postfix)}"
+            return f"{utility.str_to_var_name(self.name)}_{utility.str_to_var_name(postfix)}"
         
-        return braas_hpc_pynari_composer_utility.str_to_var_name(self.name)
+        return utility.str_to_var_name(self.name)
     
     def auto_generate_node_code(self, context):
         """Callback to auto-generate code when properties change"""
@@ -289,27 +289,27 @@ class PYNARIComposerNode(Node):
         return []
 
     def get_file_path(self):
-        if braas_hpc_pynari_composer_pref.preferences().braas_hpc_pynari_composer_remote:
+        if pref.preferences().braas_hpc_pynari_composer_remote:
             return str(self.file_path_remote)
         else:
             return str(bpy.path.abspath(self.file_path))
         
     def draw_file_path(self, layout):
         row = layout.column(align=True)
-        if braas_hpc_pynari_composer_pref.preferences().braas_hpc_pynari_composer_remote:
+        if pref.preferences().braas_hpc_pynari_composer_remote:
             row.prop(self, "file_path_remote")
         else:
             row.prop(self, "file_path")
 
     def get_dir_path(self):
-        if braas_hpc_pynari_composer_pref.preferences().braas_hpc_pynari_composer_remote:
+        if pref.preferences().braas_hpc_pynari_composer_remote:
             return str(self.dir_path_remote)
         else:
             return str(bpy.path.abspath(self.dir_path))
         
     def draw_dir_path(self, layout):
         row = layout.column(align=True)
-        if braas_hpc_pynari_composer_pref.preferences().braas_hpc_pynari_composer_remote:
+        if pref.preferences().braas_hpc_pynari_composer_remote:
             row.prop(self, "dir_path_remote")
         else:
             row.prop(self, "dir_path")
@@ -941,10 +941,10 @@ class PYNARITriangleGeometryNode(PYNARIComposerNode):
         if not auto_gen_enabled:
             code.append(f"{var_name} = device.newGeometry('triangle')")
 
-        vertices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")
-        indices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Indices")
-        normals_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Normals")
-        colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")
+        vertices_socket_varname =  utility.str_to_var_name("NP Vertices")
+        indices_socket_varname =  utility.str_to_var_name("NP Indices")
+        normals_socket_varname =  utility.str_to_var_name("NP Normals")
+        colors_socket_varname =  utility.str_to_var_name("NP Colors")
 
         vertices = [link.from_node.get_var_name(vertices_socket_varname) for link in self.inputs["NP Vertices"].links]
         indices = [link.from_node.get_var_name(indices_socket_varname) for link in self.inputs["NP Indices"].links]
@@ -1001,10 +1001,10 @@ class PYNARISphereGeometryNode(PYNARIComposerNode):
         if not auto_gen_enabled:
             code.append(f"{var_name} = device.newGeometry('sphere')")
 
-        vertices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")
-        indices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Indices")
-        radiuses_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Radiuses")
-        colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")            
+        vertices_socket_varname =  utility.str_to_var_name("NP Vertices")
+        indices_socket_varname =  utility.str_to_var_name("NP Indices")
+        radiuses_socket_varname =  utility.str_to_var_name("NP Radiuses")
+        colors_socket_varname =  utility.str_to_var_name("NP Colors")            
 
         vertices = [link.from_node.get_var_name(vertices_socket_varname) for link in self.inputs["NP Vertices"].links]
         indices = [link.from_node.get_var_name(indices_socket_varname) for link in self.inputs["NP Indices"].links]
@@ -1065,10 +1065,10 @@ class PYNARICylinderGeometryNode(PYNARIComposerNode):
         if not auto_gen_enabled:
             code.append(f"{var_name} = device.newGeometry('cylinder')")
 
-        vertices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")
-        indices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Indices")
-        radiuses_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Radiuses")
-        colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")           
+        vertices_socket_varname =  utility.str_to_var_name("NP Vertices")
+        indices_socket_varname =  utility.str_to_var_name("NP Indices")
+        radiuses_socket_varname =  utility.str_to_var_name("NP Radiuses")
+        colors_socket_varname =  utility.str_to_var_name("NP Colors")           
 
         vertices = [link.from_node.get_var_name(vertices_socket_varname) for link in self.inputs["NP Vertices"].links]
         indices = [link.from_node.get_var_name(indices_socket_varname) for link in self.inputs["NP Indices"].links]
@@ -1159,10 +1159,10 @@ class PYNARIConeGeometryNode(PYNARIComposerNode):
         if not auto_gen_enabled:
             code.append(f"{var_name} = device.newGeometry('cone')")
 
-        vertices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")
-        indices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Indices")
-        radiuses_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Radiuses")
-        colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")         
+        vertices_socket_varname =  utility.str_to_var_name("NP Vertices")
+        indices_socket_varname =  utility.str_to_var_name("NP Indices")
+        radiuses_socket_varname =  utility.str_to_var_name("NP Radiuses")
+        colors_socket_varname =  utility.str_to_var_name("NP Colors")         
 
         vertices = [link.from_node.get_var_name(vertices_socket_varname) for link in self.inputs["NP Vertices"].links]
         indices = [link.from_node.get_var_name(indices_socket_varname) for link in self.inputs["NP Indices"].links]
@@ -1220,10 +1220,10 @@ class PYNARICurveGeometryNode(PYNARIComposerNode):
         if not auto_gen_enabled:
             code.append(f"{var_name} = device.newGeometry('curve')")
 
-        vertices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")
-        indices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Indices")
-        radiuses_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Radiuses")
-        colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")         
+        vertices_socket_varname =  utility.str_to_var_name("NP Vertices")
+        indices_socket_varname =  utility.str_to_var_name("NP Indices")
+        radiuses_socket_varname =  utility.str_to_var_name("NP Radiuses")
+        colors_socket_varname =  utility.str_to_var_name("NP Colors")         
 
         vertices = [link.from_node.get_var_name(vertices_socket_varname) for link in self.inputs["NP Vertices"].links]
         indices = [link.from_node.get_var_name(indices_socket_varname) for link in self.inputs["NP Indices"].links]
@@ -1281,10 +1281,10 @@ class PYNARIQuadGeometryNode(PYNARIComposerNode):
         if not auto_gen_enabled:
             code.append(f"{var_name} = device.newGeometry('quad')")
         
-        indices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Indices")
-        vertices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")
-        normals_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Normals")
-        colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")      
+        indices_socket_varname =  utility.str_to_var_name("NP Indices")
+        vertices_socket_varname =  utility.str_to_var_name("NP Vertices")
+        normals_socket_varname =  utility.str_to_var_name("NP Normals")
+        colors_socket_varname =  utility.str_to_var_name("NP Colors")      
 
         indices = [link.from_node.get_var_name(indices_socket_varname) for link in self.inputs["NP Indices"].links]
         vertices = [link.from_node.get_var_name(vertices_socket_varname) for link in self.inputs["NP Vertices"].links]
@@ -1875,14 +1875,14 @@ class PYNARIIntMathNode(PYNARIComposerNode):
         if not self.inputs["A"].is_linked:
             a = self.inputs["A"].default_value
         else:
-            a_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("A")
+            a_socket_varname = utility.str_to_var_name("A")
             a = [link.from_node.get_var_name(a_socket_varname) for link in self.inputs["A"].links]
             a = a[0]
         
         if not self.inputs["B"].is_linked:
             b = self.inputs["B"].default_value
         else:
-            b_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("B")
+            b_socket_varname = utility.str_to_var_name("B")
             b = [link.from_node.get_var_name(b_socket_varname) for link in self.inputs["B"].links]
             b = b[0]
         
@@ -1992,14 +1992,14 @@ class PYNARIVectorMathNode(PYNARIComposerNode):
         if not self.inputs["A"].is_linked:
             a = tuple(self.inputs["A"].default_value)
         else:
-            a_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("A")
+            a_socket_varname = utility.str_to_var_name("A")
             a = [link.from_node.get_var_name(a_socket_varname) for link in self.inputs["A"].links]
             a = a[0]
         
         if not self.inputs["B"].is_linked:
             b = tuple(self.inputs["B"].default_value)
         else:
-            b_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("B")
+            b_socket_varname = utility.str_to_var_name("B")
             b = [link.from_node.get_var_name(b_socket_varname) for link in self.inputs["B"].links]
             b = b[0]
         
@@ -2040,7 +2040,7 @@ class PYNARIDimensionToSpacingNode(PYNARIComposerNode):
         if not self.inputs["Dimension"].is_linked:
             resolution = tuple(self.inputs["Dimension"].default_value)
         else:
-            resolution_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("Dimension")
+            resolution_socket_varname = utility.str_to_var_name("Dimension")
             resolution = [link.from_node.get_var_name(resolution_socket_varname) for link in self.inputs["Dimension"].links]
             resolution = resolution[0]
         
@@ -2069,7 +2069,7 @@ class PYNARIFindMinMaxNode(PYNARIComposerNode):
         code.append(f"# Label: {self.label}")
         var_name = self.get_var_name("Range")
         
-        # data_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Data")
+        # data_socket_varname = utility.str_to_var_name("NP Data")
         data = [link.from_node.get_var_name(link.from_socket.name) for link in self.inputs["NP Data"].links]
         
         code.append(f"# Find Min Max")
@@ -2142,7 +2142,7 @@ class PYNARITransferFunction1DVolumeNode(PYNARIComposerNode):
         
         colors = [link.from_node.get_var_name(link.from_socket.name) for link in self.inputs["NP Colors"].links]
 
-        colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")
+        colors_socket_varname =  utility.str_to_var_name("NP Colors")
         if colors:
             code.append(f"{var_name}_{colors_socket_varname} = device.newArray1D(pynari.float4, {colors[0]})")
             code.append(f"{var_name}.setParameter('color', pynari.ARRAY1D, {var_name}_{colors_socket_varname})")                        
@@ -2304,7 +2304,7 @@ class PYNARIColorRampNode(PYNARIComposerNode):
         code.append(f"# Label: {self.label}")
         var_name = self.get_var_name("NP Colors")
 
-        # colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")
+        # colors_socket_varname =  utility.str_to_var_name("NP Colors")
         
         code.append(f"# Color Ramp")
         code.append(f"")
@@ -2352,7 +2352,7 @@ class PYNARIBlenderColorRampNode(PYNARIComposerNode):
         code = []
         code.append(f"# Label: {self.label}")
         var_name = self.get_var_name("NP Colors")
-        #colors_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")
+        #colors_socket_varname = utility.str_to_var_name("NP Colors")
         
         # Extract color ramp from Blender material at design time
         colors_list = []
@@ -2427,12 +2427,12 @@ class PYNARIUnstructuredFieldNode(PYNARIComposerNode):
         if not auto_gen_enabled:
             code.append(f"{var_name} = device.newSpatialField('unstructured')")
 
-        # vertices_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")
-        # cells_indexes_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Cells Indexes")
-        # cells_index_first_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Cells Index First")
-        # cell_types_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Cell Types")
-        # vertex_data_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertex Data")
-        # cell_data_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Cell Data")
+        # vertices_socket_varname = utility.str_to_var_name("NP Vertices")
+        # cells_indexes_socket_varname = utility.str_to_var_name("NP Cells Indexes")
+        # cells_index_first_socket_varname = utility.str_to_var_name("NP Cells Index First")
+        # cell_types_socket_varname = utility.str_to_var_name("NP Cell Types")
+        # vertex_data_socket_varname = utility.str_to_var_name("NP Vertex Data")
+        # cell_data_socket_varname = utility.str_to_var_name("NP Cell Data")
 
         vertices = [link.from_node.get_var_name(link.from_socket.name) for link in self.inputs["NP Vertices"].links]
         cells_indexes = [link.from_node.get_var_name(link.from_socket.name) for link in self.inputs["NP Cells Indexes"].links]
@@ -2509,14 +2509,14 @@ class PYNARIStructuredRegularFieldNode(PYNARIComposerNode):
         if not self.inputs["Origin"].is_linked:
             origin = tuple(self.inputs["Origin"].default_value)
         else:
-            # origin_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("Origin")
+            # origin_socket_varname = utility.str_to_var_name("Origin")
             origin = [link.from_node.get_var_name(link.from_socket.name) for link in self.inputs["Origin"].links]
             origin = origin[0]
         
         if not self.inputs["Spacing"].is_linked:
             spacing = tuple(self.inputs["Spacing"].default_value)
         else:
-            # spacing_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("Spacing")
+            # spacing_socket_varname = utility.str_to_var_name("Spacing")
             spacing = [link.from_node.get_var_name(link.from_socket.name) for link in self.inputs["Spacing"].links]
             spacing = spacing[0]
         
@@ -2530,7 +2530,7 @@ class PYNARIStructuredRegularFieldNode(PYNARIComposerNode):
         
         data = [link.from_node.get_var_name(link.from_socket.name) for link in self.inputs["NP Volume Data"].links]
 
-        volume_data_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Volume Data")
+        volume_data_socket_varname =  utility.str_to_var_name("NP Volume Data")
         if data:
             code.append(f"{var_name}_{volume_data_socket_varname} = device.newArray3D(pynari.float, {data[0]})")
             code.append(f"{var_name}.setParameter('data', pynari.ARRAY3D, {var_name}_{volume_data_socket_varname})")
@@ -2651,10 +2651,10 @@ class PYNARIReadPyVistaPolyDataNode(PYNARIComposerNode):
         code.append(f"# Label: {self.label}")
         var_name = self.get_var_name()
 
-        indices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Indices")
-        vertices_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")        
-        normals_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Normals")
-        colors_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Colors")
+        indices_socket_varname =  utility.str_to_var_name("NP Indices")
+        vertices_socket_varname =  utility.str_to_var_name("NP Vertices")        
+        normals_socket_varname =  utility.str_to_var_name("NP Normals")
+        colors_socket_varname =  utility.str_to_var_name("NP Colors")
         
         code.append(f"# Read PolyData: {self.get_file_path()}")
         code.append(f"import pyvista as pv")
@@ -2756,12 +2756,12 @@ class PYNARIReadPyVistaUnstructuredDataNode(PYNARIComposerNode):
         code.append(f"# Label: {self.label}")
         var_name = self.get_var_name()
 
-        vertices_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertices")
-        cells_indexes_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Cells Indexes")
-        cells_index_first_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Cells Index First")
-        cell_types_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Cell Types")
-        vertex_data_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Vertex Data")
-        cell_data_socket_varname = braas_hpc_pynari_composer_utility.str_to_var_name("NP Cell Data")
+        vertices_socket_varname = utility.str_to_var_name("NP Vertices")
+        cells_indexes_socket_varname = utility.str_to_var_name("NP Cells Indexes")
+        cells_index_first_socket_varname = utility.str_to_var_name("NP Cells Index First")
+        cell_types_socket_varname = utility.str_to_var_name("NP Cell Types")
+        vertex_data_socket_varname = utility.str_to_var_name("NP Vertex Data")
+        cell_data_socket_varname = utility.str_to_var_name("NP Cell Data")
         
         code.append(f"# Read Unstructured Data: {self.get_file_path()}")
         code.append(f"import pyvista as pv")
@@ -2878,8 +2878,8 @@ class PYNARIReadPyVistaVolumeDataNode(PYNARIComposerNode):
 
         volume_data_socket_varname =  self.get_var_name("NP Volume Data")
         dimension_socket_varname =  self.get_var_name("Dimension")        
-        # origin_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Origin")
-        # spacing_socket_varname =  braas_hpc_pynari_composer_utility.str_to_var_name("NP Spacing")        
+        # origin_socket_varname =  utility.str_to_var_name("NP Origin")
+        # spacing_socket_varname =  utility.str_to_var_name("NP Spacing")        
         
         code.append(f"# Read Volume Data: {self.get_file_path()}")
         code.append(f"import pyvista as pv")
@@ -3436,12 +3436,12 @@ class PYNARINumpyArrayScriptNode(PYNARIComposerNode):
 
     def get_var_name(self, postfix=""):
         """Get the function name for this node's output"""
-        #return f"{braas_hpc_pynari_composer_utility.str_to_var_name(self.name)}_{postfix}()"
+        #return f"{utility.str_to_var_name(self.name)}_{postfix}()"
 
         if len(postfix) > 0:
-            return f"{braas_hpc_pynari_composer_utility.str_to_var_name(self.name)}_{postfix}()"
+            return f"{utility.str_to_var_name(self.name)}_{postfix}()"
         
-        return f"{braas_hpc_pynari_composer_utility.str_to_var_name(self.name)}()"
+        return f"{utility.str_to_var_name(self.name)}()"
     
     def generate_code(self, auto_gen_enabled=False):
         code = []
@@ -3452,7 +3452,7 @@ class PYNARINumpyArrayScriptNode(PYNARIComposerNode):
             
             postfix = ""
             if self.outputs["NP"].is_linked:
-                postfix = braas_hpc_pynari_composer_utility.str_to_var_name(self.outputs["NP"].links[0].to_socket.name)
+                postfix = utility.str_to_var_name(self.outputs["NP"].links[0].to_socket.name)
 
             func_name = self.get_var_name(postfix)
 
@@ -4238,7 +4238,7 @@ class PYNARICOMPOSER_OT_update_remote_files(bpy.types.Operator):
     active_node: None     
 
     def execute(self, context):
-        pref = braas_hpc_pynari_composer_pref.preferences()
+        pref = pref.preferences()
 
         if self.is_directory:
             context.scene.braas_hpc_pynari_composer_remote_list.clear()
@@ -4341,7 +4341,7 @@ class PYNARICOMPOSER_PT_remote_file_path_node(Panel):
 
     @classmethod
     def poll(cls, context):
-        pref = braas_hpc_pynari_composer_pref.preferences()        
+        pref = pref.preferences()        
         return context.active_node is not None and isinstance(context.active_node, PYNARIComposerNode) and pref.braas_hpc_pynari_composer_remote
 
     def draw(self, context):
