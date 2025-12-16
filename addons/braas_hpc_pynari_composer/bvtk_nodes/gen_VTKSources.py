@@ -1065,7 +1065,7 @@ class VTKPointSource(Node, PBVTK_Node):
     e_Distribution_items=[ (x,x,x) for x in ['Shell', 'Uniform', 'Exponential']]
     
     m_NumberOfPoints: bpy.props.IntProperty(name='NumberOfPoints', default=10) #type: ignore
-    m_Lambda: bpy.props.FloatProperty(name='Lambda', default=1.3646668159164e-311) #type: ignore
+    m_Lambda: bpy.props.FloatProperty(name='Lambda', default=1.079035498837e-311) #type: ignore
     m_Radius: bpy.props.FloatProperty(name='Radius', default=0.5) #type: ignore
     e_Distribution: bpy.props.EnumProperty(name='Distribution', default="Uniform", items=e_Distribution_items) #type: ignore
     m_Center: bpy.props.FloatVectorProperty(name='Center', default=[0.0, 0.0, 0.0], size=3) #type: ignore

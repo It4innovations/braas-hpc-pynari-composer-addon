@@ -65,8 +65,7 @@ class PBVTK_NodeSocket(NodeSocket):
         layout.label(text=txt)
 
     def draw_color(self, context, node):
-        return self.is_valid_color(0.4, 1.0, 0.216, 1.0)
-
+        return self.is_valid_color(0.4, 1.0, 0.216, 1.0)    
 
 # -----------------------------------------------------------------------------
 # Custom Code decorators
@@ -324,10 +323,60 @@ class PBVTK_Node:
                     code.append(f"{var_name}.{line}")
         
         # Call Update() if available and not in auto-gen mode
-        if not auto_gen_enabled:
-            code.append(f"{var_name}.Update()")
+        #if not auto_gen_enabled:
+        code.append(f"{var_name}.Update()")
         
         return code
+    
+    def auto_generate_node_code(self, context):
+        """Callback to auto-generate code when properties change"""
+        # Get the node tree
+        if not hasattr(self, 'id_data'):
+            return
+        
+        tree = self.id_data
+        if not tree or not hasattr(tree, 'auto_generate_code'):
+            return
+        
+        # Only proceed if auto-generate is enabled and this node is active
+        if not tree.auto_generate_code:
+            return
+        
+        # Check if this node is the active node in any node editor
+        for area in context.screen.areas:
+            if area.type == 'NODE_EDITOR':
+                for space in area.spaces:
+                    if space.type == 'NODE_EDITOR' and space.tree_type == 'PYNARIComposerNodeTree':
+                        if space.edit_tree == tree and space.edit_tree.nodes.active == self:
+                            node = self
+
+                            # Generate code for the selected node
+                            code_lines = []
+                            # code_lines.append("import pynari")
+                            # code_lines.append("")
+                            code_lines.append(f"# Code for node: {node.name} ({node.bl_idname})")
+                            code_lines.append("")
+                            
+                            try:
+                                node_code = node.generate_code(auto_gen_enabled=True)
+                                code_lines.extend(node_code)
+                            except Exception as e:
+                                self.report({'ERROR'}, f"Error generating code: {str(e)}")
+                                return {'CANCELLED'}
+                            
+                            code = "\n".join(code_lines)
+                            
+                            # Create or get text block
+                            text_name = f"{tree.name}_code_node.py"
+                            if text_name in bpy.data.texts:
+                                text = bpy.data.texts[text_name]
+                                text.clear()
+                            else:
+                                text = bpy.data.texts.new(text_name)
+                            
+                            text.write(code)                            
+
+                            return    
 
     def m_properties(self):
         """Return list of node specific property names.
@@ -882,7 +931,6 @@ UI_CLASSES = []
 def add_class(obj):
     CLASSES[obj.bl_idname] = obj
 
-
 def add_ui_class(obj):
     UI_CLASSES.append(obj)
 
@@ -1020,67 +1068,96 @@ CATEGORIES = []
 #     return bvtk_nodes
 
 # -----------------------------------------------------------------------------
-# VTK Custom Filters
+# VTK Extended Filters
 # -----------------------------------------------------------------------------
+from .gen_VTKFilters1 import VTKContourFilter
 
-class VTKCustomContourFilter(Node, PBVTK_Node):
+class PBVTK_PG_ValueSettings(bpy.types.PropertyGroup):
+    """Property Group for float array of variable size"""
+
+    value: bpy.props.FloatProperty(default=0) # type: ignore
+
+add_ui_class(PBVTK_PG_ValueSettings)
+
+class VTKContourFilterExtend(VTKContourFilter):
     """Manually modified version of VTK Contour Filter"""
 
-    bl_idname = "VTKCustomContourFilterType"
-    bl_label = "vtkCustomContourFilter"
+    m_Values: bpy.props.CollectionProperty(type=PBVTK_PG_ValueSettings) # type: ignore
 
-    m_ComputeGradients: bpy.props.BoolProperty(
-        name="ComputeGradients", default=True,
-    ) # type: ignore
-    m_ComputeNormals: bpy.props.BoolProperty(
-        name="ComputeNormals", default=True,
-    ) # type: ignore
-    m_ComputeScalars: bpy.props.BoolProperty(
-        name="ComputeScalars", default=True,
-    ) # type: ignore
-    m_GenerateTriangles: bpy.props.BoolProperty(
-        name="GenerateTriangles", default=True,
-    ) # type: ignore
-    m_ArrayComponent: bpy.props.IntProperty(
-        name="ArrayComponent", default=0,
-    ) # type: ignore
+    def update_values_count(self, context):
+        """Update m_Values collection size based on m_NumberOfContours"""
+        current_count = len(self.m_Values)
+        target_count = self.m_NumberOfContours
+        
+        # Add items if we need more
+        while len(self.m_Values) < target_count:
+            self.m_Values.add()
+        
+        # Remove items if we have too many
+        while len(self.m_Values) > target_count:
+            self.m_Values.remove(len(self.m_Values) - 1)
+    
     m_NumberOfContours: bpy.props.IntProperty(
-        name="NumberOfContours", default=1,
+        name='NumberOfContours', 
+        default=1, 
+        min=0,
+        update=update_values_count
     ) # type: ignore
 
-    single_value: bpy.props.FloatProperty(
-        name="Single Value", default=0.5,
-    ) # type: ignore
-    additional_values: bpy.props.StringProperty(
-        name="Additional Values", default="",
-    ) # type: ignore
+    def init(self, context):
+        """Initialize node and ensure m_Values has correct size"""
+        # Call parent init
+        super().init(context)
+        # Initialize values collection
+        self.update_values_count(context)
 
-    b_properties: bpy.props.BoolVectorProperty(
-        name="", size=8, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b
-    ) # type: ignore
+    def draw_buttons_special(self, context, layout):
 
-    def m_properties(self):
-        return [
-            "m_ComputeGradients",
-            "m_ComputeNormals",
-            "m_ComputeScalars",
-            "m_GenerateTriangles",
-            "m_ArrayComponent",
-            "m_NumberOfContours",
-            "single_value",
-            "additional_values",
-        ]
-
-    def m_connections(self):
-        return (["VTK Input"], ["VTK Output"], [], [])
-
-
-add_class(VTKCustomContourFilter)
+        # Get properties and show visible ones
+        m_properties = self.m_properties()
+        for i in range(len(m_properties)):
+            if not hasattr(self, "b_properties") or self.b_properties[i]:
+                layout.prop(self, m_properties[i])
+        
+        # Display value inputs (only if collection is properly sized)
+        if self.m_NumberOfContours > 0 and len(self.m_Values) == self.m_NumberOfContours:
+            box = layout.box()
+            box.label(text="Contour Values:")
+            for i, item in enumerate(self.m_Values):
+                row = box.row(align=True)
+                row.prop(item, "value", text=f"Value {i}")
+        elif len(self.m_Values) != self.m_NumberOfContours:
+            # Show a message if collection size doesn't match
+            box = layout.box()
+            box.label(text="Note: Click on another node and back to refresh values", icon='INFO')
+    
+    def generate_code(self, auto_gen_enabled=False):
+        """Generate code for VTKContourFilter with dynamic values"""
+        # Get base code from parent
+        code = super().generate_code(auto_gen_enabled)
+        
+        var_name = self.get_var_name()
+        
+        # Remove the Update() call if it's at the end (we'll add it back after SetValue calls)
+        if code and code[-1] == f"{var_name}.Update()":
+            code.pop()
+        
+        # Add SetValue calls for each contour value (before Update)
+        if self.m_NumberOfContours > 0 and len(self.m_Values) > 0:
+            code.append(f"# Set contour values")
+            for i, item in enumerate(self.m_Values):
+                if i < self.m_NumberOfContours:
+                    code.append(f"{var_name}.SetValue({i}, {item.value})")
+        
+        # Add Update() back at the end
+        #if not auto_gen_enabled:
+        code.append(f"{var_name}.Update()")
+        
+        return code
 
 # -----------------------------------------------------------------------------
 # VTK to Numpy Converter Nodes
 # -----------------------------------------------------------------------------
-
 
 class VTKPolyDataToNumpyNode(Node, PBVTK_Node):
     """Convert VTK PolyData to Numpy arrays"""
@@ -1379,14 +1456,17 @@ def register():
 
     bpy.utils.register_class(PBVTK_NodeSocket)
 
-    # Register socket and converter nodes
-    for cls in CLASSES.values():
-        bpy.utils.register_class(cls)
-    
     # Register UI classes if any
     for cls in UI_CLASSES:
         bpy.utils.register_class(cls)
 
+    # Extend
+    add_class(VTKContourFilterExtend)
+
+    # Register socket and converter nodes
+    for cls in CLASSES.values():
+        bpy.utils.register_class(cls)
+    
     node_categories_items = []
     for cls in CLASSES.values():
         node_categories_items.append(nodeitems_utils.NodeItem(cls.bl_idname))
@@ -1421,10 +1501,10 @@ def unregister():
 
     bpy.utils.unregister_class(PBVTK_NodeSocket)  
 
-    # Register socket and converter nodes
+    # Unregister socket and converter nodes
     for cls in CLASSES.values():
         bpy.utils.unregister_class(cls)
     
-    # Register UI classes if any
+    # Unregister UI classes if any
     for cls in UI_CLASSES:
         bpy.utils.unregister_class(cls)

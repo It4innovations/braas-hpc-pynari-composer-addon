@@ -32,17 +32,78 @@ from . import pynari_pref
 ##################################
 
 def auto_generate_timer():
-    """Timer function to automatically generate code for selected node"""
+    """Timer function to automatically generate code for selected nodes"""
+    
+    def order_nodes_by_connections(nodes, tree):
+        """Order nodes by their connection dependencies (topological sort)"""
+        visited = set()
+        ordered = []
+        selected_set = set(nodes)
+        
+        def visit(node):
+            if node in visited or node not in selected_set:
+                return
+            visited.add(node)
+            
+            # Visit input nodes first (dependencies)
+            for input_socket in node.inputs:
+                if input_socket.is_linked:
+                    for link in input_socket.links:
+                        from_node = link.from_node
+                        if from_node in selected_set:
+                            visit(from_node)
+            
+            ordered.append(node)
+        
+        # Visit all selected nodes
+        for node in nodes:
+            visit(node)
+        
+        return ordered
+    
     for area in bpy.context.screen.areas:
         if area.type == 'NODE_EDITOR':
             for space in area.spaces:
                 if space.type == 'NODE_EDITOR' and space.tree_type == 'PYNARIComposerNodeTree':
                     tree = space.edit_tree
                     if tree and hasattr(tree, 'auto_generate_code') and tree.auto_generate_code:
-                        active_node = tree.nodes.active
-                        if active_node and hasattr(active_node, 'auto_generate_node_code'):
+                        # Get all selected nodes
+                        selected_nodes = [node for node in tree.nodes if node.select and hasattr(node, 'generate_code')]
+                        
+                        if selected_nodes:
                             try:
-                                active_node.auto_generate_node_code(bpy.context)
+                                # Order nodes by their connections
+                                ordered_nodes = order_nodes_by_connections(selected_nodes, tree)
+                                
+                                # Generate code for all selected nodes in dependency order
+                                code_lines = []
+                                
+                                for node in ordered_nodes:
+                                    code_lines.append(f"# Code for node: {node.name} ({node.bl_idname})")
+                                    code_lines.append("")
+                                    
+                                    try:
+                                        node_code = node.generate_code(auto_gen_enabled=True)
+                                        code_lines.extend(node_code)
+                                    except:
+                                        pass
+                                    
+                                    code_lines.append("")
+                                    code_lines.append("#" * 100)
+                                    code_lines.append("")
+                                
+                                code = "\n".join(code_lines)
+                                
+                                # Create or get text block
+                                text_name = f"{tree.name}_code_node.py"
+                                if text_name in bpy.data.texts:
+                                    text = bpy.data.texts[text_name]
+                                    text.clear()
+                                else:
+                                    text = bpy.data.texts.new(text_name)
+                                
+                                text.write(code)
+
                             except Exception as e:
                                 print(f"Auto-generate error: {str(e)}")
                         

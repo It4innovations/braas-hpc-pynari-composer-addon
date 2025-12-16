@@ -2401,7 +2401,7 @@ class VTKEuclideanClusterExtraction(Node, PBVTK_Node):
     
     m_ColorClusters: bpy.props.BoolProperty(name='ColorClusters', default=False) #type: ignore
     m_ScalarConnectivity: bpy.props.BoolProperty(name='ScalarConnectivity', default=False) #type: ignore
-    m_Radius: bpy.props.FloatProperty(name='Radius', default=1.364616465884e-311) #type: ignore
+    m_Radius: bpy.props.FloatProperty(name='Radius', default=1e+30) #type: ignore
     e_ExtractionMode: bpy.props.EnumProperty(name='ExtractionMode', default="LargestCluster", items=e_ExtractionMode_items) #type: ignore
     m_ClosestPoint: bpy.props.FloatVectorProperty(name='ClosestPoint', default=[0.0, 0.0, 0.0], size=3) #type: ignore
     m_ScalarRange: bpy.props.FloatVectorProperty(name='ScalarRange', default=[0.0, 1.0], size=2) #type: ignore
@@ -11803,7 +11803,7 @@ class VTKmHistogram(Node, PBVTK_Node):
     m_CenterBinsAroundMinAndMax: bpy.props.BoolProperty(name='CenterBinsAroundMinAndMax', default=False) #type: ignore
     m_UseCustomBinRanges: bpy.props.BoolProperty(name='UseCustomBinRanges', default=False) #type: ignore
     m_NumberOfBins: bpy.props.IntProperty(name='NumberOfBins', default=10) #type: ignore
-    m_CustomBinRange: bpy.props.FloatVectorProperty(name='CustomBinRange', default=[100.0, 0.0], size=2) #type: ignore
+    m_CustomBinRange: bpy.props.FloatVectorProperty(name='CustomBinRange', default=[100.0, 0.01], size=2) #type: ignore
     
     b_properties: bpy.props.BoolVectorProperty(name="", size=4, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
