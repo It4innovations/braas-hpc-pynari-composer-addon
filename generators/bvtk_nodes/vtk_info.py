@@ -233,6 +233,7 @@ BannedNames = (
 HiddenMethods = (
     "AbortExecuteOff",
     "AbortExecuteOn",
+    "AbortOutput",
     "AddObserver",
     "BreakOnError",
     "ComputeInputUpdateExtents",
@@ -303,6 +304,9 @@ HiddenMethods = (
 )
 
 HiddenProp = (
+    "ObjectName",
+    "ContainerAlgorithm",
+    "AbortOutput",
     "DataExtent",
     "DataType",
     "Executive",

@@ -54,11 +54,18 @@ class PBVTK_NodeSocket(NodeSocket):
     bl_idname = "PBVTK_NodeSocketType"
     bl_label = "PBVTK Node Socket"
 
+    def is_valid_color(self, r, g, b, a):
+        for l in self.links:
+            if l.from_socket.bl_idname != l.to_socket.bl_idname:
+                return (1.0, 0.0, 0.0, 1.0)
+            
+        return (r, g, b, a)    
+
     def draw(self, context, layout, node, txt):
         layout.label(text=txt)
 
     def draw_color(self, context, node):
-        return (1.0, 0.4, 0.216, 0.5)
+        return self.is_valid_color(0.4, 1.0, 0.216, 1.0)
 
 
 # -----------------------------------------------------------------------------
@@ -66,100 +73,100 @@ class PBVTK_NodeSocket(NodeSocket):
 # -----------------------------------------------------------------------------
 
 
-def show_custom_code(func):
-    """Decorator to show custom code in nodes. Used in draw_buttons()."""
+# def show_custom_code(func):
+#     """Decorator to show custom code in nodes. Used in draw_buttons()."""
 
-    @functools.wraps(func)
-    def show_custom_code_wrapper(self, context, layout):
-        # Call function first
-        value = func(self, context, layout)
-        # Then show Custom Code
-        row = layout.row()
-        if self.expanded:
-            row.label(text="Custom Code:")
-        elif len(self.custom_code) > 0:
-            pseudo_code = self.custom_code[: self.custom_code.find("(")]
-            row.label(text="Custom Code: " + pseudo_code + "...")
-        else:
-            row.label(text="Custom Code: None")
-        # Expand button
-        # TODO: Make proper expandable menu with triangle icon and text
-        row.prop(
-            self,
-            "expanded",
-            icon="HIDE_OFF" if self.expanded else "HIDE_ON",
-            icon_only=True,
-            emboss=False,
-            expand=True,
-        )
+#     @functools.wraps(func)
+#     def show_custom_code_wrapper(self, context, layout):
+#         # Call function first
+#         value = func(self, context, layout)
+#         # Then show Custom Code
+#         row = layout.row()
+#         if self.expanded:
+#             row.label(text="Custom Code:")
+#         elif len(self.custom_code) > 0:
+#             pseudo_code = self.custom_code[: self.custom_code.find("(")]
+#             row.label(text="Custom Code: " + pseudo_code + "...")
+#         else:
+#             row.label(text="Custom Code: None")
+#         # Expand button
+#         # TODO: Make proper expandable menu with triangle icon and text
+#         row.prop(
+#             self,
+#             "expanded",
+#             icon="HIDE_OFF" if self.expanded else "HIDE_ON",
+#             icon_only=True,
+#             emboss=False,
+#             expand=True,
+#         )
 
-        if self.expanded:
-            col = layout.column(align=True)
-            row = col.row()
-            # Only show edit and save buttons in node if cache is up-to-date,
-            # otherwise get_tree() fails for the operator.
-            if self.get_vtk_obj():
-                op = row.operator(
-                    "node.bvtk_custom_code_edit", text="Edit", icon="TEXT"
-                )
-                op.node_id = self.node_id  # Set node id in operator
-                op = row.operator(
-                    "node.bvtk_custom_code_save", text="Save", icon="FILE_TICK"
-                )
-                op.node_id = self.node_id  # Set node id in operator
-            if len(self.custom_code) > 0:
-                box = layout.box()
-                col = box.column()
-                for text in self.custom_code.splitlines():
-                    row = col.row()
-                    row.label(text=text)
-        return value
+#         if self.expanded:
+#             col = layout.column(align=True)
+#             row = col.row()
+#             # Only show edit and save buttons in node if cache is up-to-date,
+#             # otherwise get_tree() fails for the operator.
+#             if self.get_vtk_obj():
+#                 op = row.operator(
+#                     "node.bvtk_custom_code_edit", text="Edit", icon="TEXT"
+#                 )
+#                 op.node_id = self.node_id  # Set node id in operator
+#                 op = row.operator(
+#                     "node.bvtk_custom_code_save", text="Save", icon="FILE_TICK"
+#                 )
+#                 op.node_id = self.node_id  # Set node id in operator
+#             if len(self.custom_code) > 0:
+#                 box = layout.box()
+#                 col = box.column()
+#                 for text in self.custom_code.splitlines():
+#                     row = col.row()
+#                     row.label(text=text)
+#         return value
 
-    return show_custom_code_wrapper
+#     return show_custom_code_wrapper
 
 
-def run_custom_code(func):
-    """Decorator to run custom code. Used in apply_properties()."""
+# def run_custom_code(func):
+#     """Decorator to run custom code. Used in apply_properties()."""
 
-    @functools.wraps(func)
-    def run_custom_code_wrapper(self):
-        # Run optional validation routine, which can update values in
-        # node before running the actual function.
-        if hasattr(self, "validate_and_update_values_special"):
-            value = self.validate_and_update_values_special()
-            if value:
-                self.ui_message = value
-                return "error"
+#     @functools.wraps(func)
+#     def run_custom_code_wrapper(self):
+#         # Run optional validation routine, which can update values in
+#         # node before running the actual function.
+#         if hasattr(self, "validate_and_update_values_special"):
+#             value = self.validate_and_update_values_special()
+#             if value:
+#                 self.ui_message = value
+#                 return "error"
 
-        # Call the actual function
-        value = func(self)
+#         # Call the actual function
+#         value = func(self)
 
-        # Then run Custom Code
-        vtk_obj = self.get_vtk_obj()
-        if vtk_obj and len(self.custom_code) > 0:
-            for x in self.custom_code.splitlines():
-                if x.startswith("#"):
-                    continue
-                cmd = "vtk_obj." + x
-                l.debug("%s run %r" % (self.name, cmd))
-                # TODO: Error handling
-                exec(cmd, globals(), locals())
+#         # Then run Custom Code
+#         vtk_obj = self.get_vtk_obj()
+#         if vtk_obj and len(self.custom_code) > 0:
+#             for x in self.custom_code.splitlines():
+#                 if x.startswith("#"):
+#                     continue
+#                 cmd = "vtk_obj." + x
+#                 l.debug("%s run %r" % (self.name, cmd))
+#                 # TODO: Error handling
+#                 exec(cmd, globals(), locals())
 
-        # Call custom apply function if such is specified (special
-        # node). Otherwise call Update(), but only if setting of
-        # properties was succesful.
-        if hasattr(self, "apply_properties_special"):
-            value = self.apply_properties_special()
-        else:
-            if hasattr(vtk_obj, "Update") and value == "up-to-date":
-                try:
-                    vtk_obj.Update()
-                except:
-                    self.ui_message = "Failed to run Update() for VTK object"
-                    value = "error"
-        return value
+#         # Call custom apply function if such is specified (special
+#         # node). Otherwise call Update(), but only if setting of
+#         # properties was succesful.
+#         if hasattr(self, "apply_properties_special"):
+#             value = self.apply_properties_special()
+#         else:
+#             if hasattr(vtk_obj, "Update") and value == "up-to-date":
+#                 try:
+#                     vtk_obj.Update()
+#                 except:
+#                     self.ui_message = "Failed to run Update() for VTK object"
+#                     value = "error"
+#         return value
 
-    return run_custom_code_wrapper
+#     return run_custom_code_wrapper
 
 
 # -----------------------------------------------------------------------------
@@ -195,49 +202,49 @@ class PBVTK_Node:
         description="Names of connected input nodes, used for triggering status change in update()",
         default="",
     ) # type: ignore
-    ui_message: bpy.props.StringProperty(
-        name="Result Message",
-        description="Latest Result Message from Node Update, Information for User",
-        default="",
-    ) # type: ignore
-    vtk_status: bpy.props.EnumProperty(
-        name="VTK Status",
-        description="Status of PBVTK node",
-        items={
-            # No status information. This should never be a state for
-            # nodes that are initialized and work correctly.
-            ("none", "none", "none", 0),
-            # VTK object exists but no values / commands for it has been run yet.
-            # This is state reserved for a possible future where running only
-            # initialization without updating is required.
-            ("initialized", "initialized", "initialized", 1),
-            # Setting a value/running a command has failed, execution has been stopped
-            ("error", "error", "error", 2),
-            # A change has been made to an upstream node, may need to update
-            ("upstream-changed", "upstream-changed", "upstream-changed", 3),
-            # A change has been made to this node, may need to run update
-            ("out-of-date", "out-of-date", "out-of-date", 4),
-            # Input node(s) are running an update.
-            # Reserved for modal operators that visualize node tree updates.
-            ("waiting-for-upstream", "waiting-for-upstream", "waiting-for-upstream", 5),
-            # Setting values / running commands for this node
-            ("updating", "updating", "updating", 6),
-            # Successfully finished running update commands for this node
-            ("up-to-date", "up-to-date", "up-to-date", 7),
-        },
-        default="none",
-    ) # type: ignore
-    custom_code: bpy.props.StringProperty(
-        name="Custom Code",
-        description="Custom Python Code to Run for This Node's VTK Object",
-        default="",
-        maxlen=0,
-    ) # type: ignore
-    expanded: bpy.props.BoolProperty(
-        name="Show Code",
-        description="Boolean to Show/Hide Custom Code Panel",
-        default=False,
-    ) # type: ignore
+    # ui_message: bpy.props.StringProperty(
+    #     name="Result Message",
+    #     description="Latest Result Message from Node Update, Information for User",
+    #     default="",
+    # ) # type: ignore
+    # vtk_status: bpy.props.EnumProperty(
+    #     name="VTK Status",
+    #     description="Status of PBVTK node",
+    #     items={
+    #         # No status information. This should never be a state for
+    #         # nodes that are initialized and work correctly.
+    #         ("none", "none", "none", 0),
+    #         # VTK object exists but no values / commands for it has been run yet.
+    #         # This is state reserved for a possible future where running only
+    #         # initialization without updating is required.
+    #         ("initialized", "initialized", "initialized", 1),
+    #         # Setting a value/running a command has failed, execution has been stopped
+    #         ("error", "error", "error", 2),
+    #         # A change has been made to an upstream node, may need to update
+    #         ("upstream-changed", "upstream-changed", "upstream-changed", 3),
+    #         # A change has been made to this node, may need to run update
+    #         ("out-of-date", "out-of-date", "out-of-date", 4),
+    #         # Input node(s) are running an update.
+    #         # Reserved for modal operators that visualize node tree updates.
+    #         ("waiting-for-upstream", "waiting-for-upstream", "waiting-for-upstream", 5),
+    #         # Setting values / running commands for this node
+    #         ("updating", "updating", "updating", 6),
+    #         # Successfully finished running update commands for this node
+    #         ("up-to-date", "up-to-date", "up-to-date", 7),
+    #     },
+    #     default="none",
+    # ) # type: ignore
+    # custom_code: bpy.props.StringProperty(
+    #     name="Custom Code",
+    #     description="Custom Python Code to Run for This Node's VTK Object",
+    #     default="",
+    #     maxlen=0,
+    # ) # type: ignore
+    # expanded: bpy.props.BoolProperty(
+    #     name="Show Code",
+    #     description="Boolean to Show/Hide Custom Code Panel",
+    #     default=False,
+    # ) # type: ignore
 
     @classmethod
     def poll(cls, ntree):
@@ -269,8 +276,17 @@ class PBVTK_Node:
         # Create VTK object
         code.append(f"# VTK Node: {vtk_class_name}")
         if not auto_gen_enabled:
-            code.append(f"import vtk")
+            # code.append(f"import vtk")
             code.append(f"{var_name} = vtk.{vtk_class_name}()")
+        
+        # Set input connections
+        if hasattr(self, 'm_connections'):
+            inputs, outputs, extra_inputs, extra_outputs = self.m_connections()
+            for i, input_socket_name in enumerate(inputs):
+                input_node, from_socket_name = self.get_input_node_and_socketname(input_socket_name)
+                if input_node:
+                    input_var_name = input_node.get_var_name()
+                    code.append(f"{var_name}.SetInputConnection({input_var_name}.GetOutputPort())")
         
         # Set properties from m_properties
         if hasattr(self, 'm_properties') and hasattr(self, 'b_properties'):
@@ -291,6 +307,12 @@ class PBVTK_Node:
                         code.append(f"{var_name}.Set{prop_name[2:]}To{inputval}()")
                     # SetX(value)
                     else:
+                        # Convert Blender property arrays to lists
+                        if hasattr(inputval, '__len__') and not isinstance(inputval, str):
+                            try:
+                                inputval = list(inputval)
+                            except:
+                                pass
                         # Get the property value
                         code.append(f"{var_name}.Set{prop_name[2:]}({repr(inputval)})")
         
@@ -320,25 +342,25 @@ class PBVTK_Node:
         """
         return ([], [], [], [])
 
-    def get_input_socket_names(self):
-        """Return input socket names from m_connections.
-        """
-        m_connections = self.m_connections()
-        return m_connections[0]
+    # def get_input_socket_names(self):
+    #     """Return input socket names from m_connections.
+    #     """
+    #     m_connections = self.m_connections()
+    #     return m_connections[0]
 
-    def get_output_socket_names(self):
-        """Return output socket names from m_connections.
-        """
-        m_connections = self.m_connections()
-        return m_connections[1]
+    # def get_output_socket_names(self):
+    #     """Return output socket names from m_connections.
+    #     """
+    #     m_connections = self.m_connections()
+    #     return m_connections[1]
 
     def init(self, context):
         """Create and initialize a new PBVTK node.
         """
         # Node properties
         self.width = 200
-        self.use_custom_color = True
-        self.color = 0.5, 0.5, 0.5
+        # self.use_custom_color = True
+        # self.color = 0.5, 0.5, 0.5
 
         # Create sockets to node
         inputs, outputs, extra_inputs, extra_outputs = self.m_connections()
@@ -349,72 +371,72 @@ class PBVTK_Node:
         for x in outputs:
             self.outputs.new("PBVTK_NodeSocketType", x)
 
-        if hasattr(self, "init_special"):
-            self.init_special(context)
+        # if hasattr(self, "init_special"):
+        #     self.init_special(context)
 
-    def set_vtk_status(self, new_status="none"):
-        """Set node's VTK status to new status value and change node color.
-        Note: Does not trigger any updates.
-        """
+    # def set_vtk_status(self, new_status="none"):
+    #     """Set node's VTK status to new status value and change node color.
+    #     Note: Does not trigger any updates.
+    #     """
 
-        def status_to_color(vtk_status="none"):
-            """Return color for argument VTK status"""
-            colors = {
-                "none": (0.1, 0.1, 0.1),
-                "initialized": (0.5, 0.5, 0.5),
-                "error": (0.6, 0.1, 0.1),
-                "upstream-changed": (0.6, 0.5, 0),
-                "out-of-date": (0.3, 0.5, 0.1),
-                "waiting-for-upstream": (0.1, 0.6, 0.6),
-                "updating": (0.1, 0.1, 0.6),
-                "up-to-date": (0.3, 0.3, 0.3),
-            }
-            return colors[vtk_status]
+    #     def status_to_color(vtk_status="none"):
+    #         """Return color for argument VTK status"""
+    #         colors = {
+    #             "none": (0.1, 0.1, 0.1),
+    #             "initialized": (0.5, 0.5, 0.5),
+    #             "error": (0.6, 0.1, 0.1),
+    #             "upstream-changed": (0.6, 0.5, 0),
+    #             "out-of-date": (0.3, 0.5, 0.1),
+    #             "waiting-for-upstream": (0.1, 0.6, 0.6),
+    #             "updating": (0.1, 0.1, 0.6),
+    #             "up-to-date": (0.3, 0.3, 0.3),
+    #         }
+    #         return colors[vtk_status]
 
-        self.vtk_status = new_status
-        self.color = status_to_color(new_status)
+    #     self.vtk_status = new_status
+    #     self.color = status_to_color(new_status)
 
-    def init_vtk(self):
-        """Initialize and return a VTK object for the node.
-        This is a general implementation for VTK nodes.
-        Special nodes need to implement their own initialization.
-        If special node has no VTK objects, it's OK to return None.
-        """
-        vtk_class = getattr(vtk, self.bl_label, None)
-        if vtk_class is None:
-            raise Exception("Bad VTK class name " + self.bl_label)
-        vtk_obj = vtk_class()
-        if not vtk_obj:
-            raise Exception("Could not create " + self.bl_label)
-        self.set_vtk_status("initialized")
-        l.debug("Init VTK done for node: %s, id #%d" % (self.name, self.node_id))
-        return vtk_obj
+    # def init_vtk(self):
+    #     """Initialize and return a VTK object for the node.
+    #     This is a general implementation for VTK nodes.
+    #     Special nodes need to implement their own initialization.
+    #     If special node has no VTK objects, it's OK to return None.
+    #     """
+    #     vtk_class = getattr(vtk, self.bl_label, None)
+    #     if vtk_class is None:
+    #         raise Exception("Bad VTK class name " + self.bl_label)
+    #     vtk_obj = vtk_class()
+    #     if not vtk_obj:
+    #         raise Exception("Could not create " + self.bl_label)
+    #     self.set_vtk_status("initialized")
+    #     l.debug("Init VTK done for node: %s, id #%d" % (self.name, self.node_id))
+    #     return vtk_obj
 
-    def free(self):
-        """Clean up node information upon node removal.
-        """
-        # PBVTKCache removed - no cleanup needed
-        pass
+    # def free(self):
+    #     """Clean up node information upon node removal.
+    #     """
+    #     # PBVTKCache removed - no cleanup needed
+    #     pass
 
-    @show_custom_code
+    # @show_custom_code
     def draw_buttons(self, context, layout):
         """Show properties in the node. General implementation for both VTK
         and special nodes. Special nodes may provide draw_buttons_special()
         to show custom content in node.
         """
 
-        # Show node ID number and status in debug mode
-        global debug_mode
-        if debug_mode:
-            row = layout.row()
-            row.label(text="node_id #%d: %r" % (self.node_id, str(self.vtk_status)))
+        # # Show node ID number and status in debug mode
+        # global debug_mode
+        # if debug_mode:
+        #     row = layout.row()
+        #     row.label(text="node_id #%d: %r" % (self.node_id, str(self.vtk_status)))
 
-        # Show message if any
-        if len(self.ui_message) > 0:
-            box = layout.box()
-            for line in self.ui_message.split("\n"):
-                row = box.row()
-                row.label(text=line)
+        # # Show message if any
+        # if len(self.ui_message) > 0:
+        #     box = layout.box()
+        #     for line in self.ui_message.split("\n"):
+        #         row = box.row()
+        #         row.label(text=line)
 
         # Main content
         if hasattr(self, "draw_buttons_special"):
@@ -426,199 +448,201 @@ class PBVTK_Node:
                 if not hasattr(self, "b_properties") or self.b_properties[i]:
                     layout.prop(self, m_properties[i])
 
-            # Write button for writer nodes
-            if self.bl_idname.endswith("WriterType"):
-                layout.operator("node.bvtk_node_write").node_path = node_path(self)
+        #     # Write button for writer nodes
+        #     if self.bl_idname.endswith("WriterType"):
+        #         layout.operator("node.bvtk_node_write").node_path = node_path(self)
 
-        # Update button is shown when there is something to update
-        if self.vtk_status != "up-to-date":
-            row = layout.row()
-            row.operator("node.bvtk_node_update").node_path = node_path(self)
+        # # Update button is shown when there is something to update
+        # if self.vtk_status != "up-to-date":
+        #     row = layout.row()
+        #     row.operator("node.bvtk_node_update").node_path = node_path(self)
 
-    @run_custom_code
-    def apply_properties(self):
-        """Set properties from node to VTK object, and update the VTK object.
-        Return appropriate vtk_status according to success of update.
-        General implementation for both VTK and special nodes.
-        """
+        # pass
 
-        # Do nothing if inputs are not connected
-        namelist = [
-            link.to_socket.name for socket in self.inputs for link in socket.links
-        ]
-        missing_inputs = ""
-        for input in self.get_input_socket_names():
-            # Only require connections named "input" are connected
-            if not input.startswith("input"):
-                continue
-            if input not in namelist:
-                missing_inputs += input + " "
-        if len(missing_inputs) > 0:
-            self.ui_message = "Missing input connection(s): " + missing_inputs
-            return "error"
+    # @run_custom_code
+    # def apply_properties(self):
+    #     """Set properties from node to VTK object, and update the VTK object.
+    #     Return appropriate vtk_status according to success of update.
+    #     General implementation for both VTK and special nodes.
+    #     """
 
-        # Stop here if there is a custom apply routine, meaning this is a special node
-        if hasattr(self, "apply_properties_special"):
-            return "up-to-date"
+    #     # Do nothing if inputs are not connected
+    #     namelist = [
+    #         link.to_socket.name for socket in self.inputs for link in socket.links
+    #     ]
+    #     missing_inputs = ""
+    #     for input in self.get_input_socket_names():
+    #         # Only require connections named "VTK Input" are connected
+    #         if not input.startswith("VTK Input"):
+    #             continue
+    #         if input not in namelist:
+    #             missing_inputs += input + " "
+    #     if len(missing_inputs) > 0:
+    #         self.ui_message = "Missing input connection(s): " + missing_inputs
+    #         return "error"
 
-        # Require an object exists in cache
-        vtk_obj = self.get_vtk_obj()
-        if not vtk_obj:
-            self.ui_message = "Internal Error: No VTK object found in cache"
-            return "error"
+    #     # Stop here if there is a custom apply routine, meaning this is a special node
+    #     if hasattr(self, "apply_properties_special"):
+    #         return "up-to-date"
 
-        m_properties = self.m_properties()
-        for x in [
-            m_properties[i] for i in range(len(m_properties)) if self.b_properties[i]
-        ]:
-            # Skip setting any empty values
-            inputval = getattr(self, x)
-            if len(str(inputval)) == 0:
-                continue
-            # SetXFileName(Y) only if attribute is a string
-            if "FileName" in x and isinstance(inputval, str):
-                value = os.path.realpath(bpy.path.abspath(inputval))
-                cmd = "vtk_obj.Set" + x[2:] + "(value)"
-            # SetXToY()
-            elif x.startswith("e_"):
-                cmd = "vtk_obj.Set" + x[2:] + "To" + inputval + "()"
-            # SetX(self.Y)
-            else:
-                cmd = "vtk_obj.Set" + x[2:] + "(self." + x + ")"
+    #     # Require an object exists in cache
+    #     vtk_obj = self.get_vtk_obj()
+    #     if not vtk_obj:
+    #         self.ui_message = "Internal Error: No VTK object found in cache"
+    #         return "error"
 
-            # Run the command and stop if error occurs
-            try:
-                exec(cmd, globals(), locals())
-            except:
-                # TODO: How to get error message and put it to ui_message?
-                self.ui_message = "Error when running: " + cmd
-                return "error"
+    #     m_properties = self.m_properties()
+    #     for x in [
+    #         m_properties[i] for i in range(len(m_properties)) if self.b_properties[i]
+    #     ]:
+    #         # Skip setting any empty values
+    #         inputval = getattr(self, x)
+    #         if len(str(inputval)) == 0:
+    #             continue
+    #         # SetXFileName(Y) only if attribute is a string
+    #         if "FileName" in x and isinstance(inputval, str):
+    #             value = os.path.realpath(bpy.path.abspath(inputval))
+    #             cmd = "vtk_obj.Set" + x[2:] + "(value)"
+    #         # SetXToY()
+    #         elif x.startswith("e_"):
+    #             cmd = "vtk_obj.Set" + x[2:] + "To" + inputval + "()"
+    #         # SetX(self.Y)
+    #         else:
+    #             cmd = "vtk_obj.Set" + x[2:] + "(self." + x + ")"
 
-        # Everything was set successfully
-        return "up-to-date"
+    #         # Run the command and stop if error occurs
+    #         try:
+    #             exec(cmd, globals(), locals())
+    #         except:
+    #             # TODO: How to get error message and put it to ui_message?
+    #             self.ui_message = "Error when running: " + cmd
+    #             return "error"
 
-    def get_vtk_obj(self):
-        """Return the VTK object of this node from cache.
-        """
-        # PBVTKCache removed - return None
-        return None
+    #     # Everything was set successfully
+    #     return "up-to-date"
 
-    def vtk_obj_in_cache(self):
-        """Return True if an object (or None) is in cache.
-        True means that node has been initialized correctly.
-        """
-        # PBVTKCache removed - return False
-        return False
+    # def get_vtk_obj(self):
+    #     """Return the VTK object of this node from cache.
+    #     """
+    #     # PBVTKCache removed - return None
+    #     return None
 
-    def get_output_connection(self, socketname="output"):
-        """Return VTK output connection object for argument output socket name
-        of this node. Return None if no connection is provided.
-        """
+    # def vtk_obj_in_cache(self):
+    #     """Return True if an object (or None) is in cache.
+    #     True means that node has been initialized correctly.
+    #     """
+    #     # PBVTKCache removed - return False
+    #     return False
 
-        # VTK Nodes are derived from vtkAlgorithm, which implements VTK connections
-        vtk_obj = self.get_vtk_obj()
-        if not isinstance(vtk_obj, vtk.vtkAlgorithm):
-            return None
-        if socketname == "output" or socketname == "output 0":
-            return vtk_obj.GetOutputPort()
-        elif socketname == "output 1":
-            return vtk_obj.GetOutputPort(1)
-        else:
-            raise Exception(
-                "Not implemented connection for #"
-                + str(self.node_id)
-                + ": "
-                + socketname
-            )
+    # def get_output_connection(self, socketname="VTK Output"):
+    #     """Return VTK output connection object for argument output socket name
+    #     of this node. Return None if no connection is provided.
+    #     """
 
-    def get_vtk_output_object(self, socketname="output"):
-        """Return VTK output data object for argument output socket name of
-        this node.
-        """
+    #     # VTK Nodes are derived from vtkAlgorithm, which implements VTK connections
+    #     vtk_obj = self.get_vtk_obj()
+    #     if not isinstance(vtk_obj, vtk.vtkAlgorithm):
+    #         return None
+    #     if socketname == "VTK Output" or socketname == "output 0":
+    #         return vtk_obj.GetOutputPort()
+    #     elif socketname == "output 1":
+    #         return vtk_obj.GetOutputPort(1)
+    #     else:
+    #         raise Exception(
+    #             "Not implemented connection for #"
+    #             + str(self.node_id)
+    #             + ": "
+    #             + socketname
+    #         )
 
-        # Special nodes may provide custom function
-        if hasattr(self, "get_vtk_output_object_special"):
-            return self.get_vtk_output_object_special(socketname)
+    # def get_vtk_output_object(self, socketname="VTK Output"):
+    #     """Return VTK output data object for argument output socket name of
+    #     this node.
+    #     """
 
-        # Normal VTK algorithm provides output data object via producer
-        vtk_connection = self.get_output_connection(socketname)
-        if hasattr(vtk_connection, "IsA") and vtk_connection.IsA("vtkAlgorithmOutput"):
-            producer = vtk_connection.GetProducer()
-            return producer.GetOutputDataObject(vtk_connection.GetIndex())
+    #     # Special nodes may provide custom function
+    #     if hasattr(self, "get_vtk_output_object_special"):
+    #         return self.get_vtk_output_object_special(socketname)
 
-        # Final option is to return node's cached VTK object (may be None)
-        return self.get_vtk_obj()
+    #     # Normal VTK algorithm provides output data object via producer
+    #     vtk_connection = self.get_output_connection(socketname)
+    #     if hasattr(vtk_connection, "IsA") and vtk_connection.IsA("vtkAlgorithmOutput"):
+    #         producer = vtk_connection.GetProducer()
+    #         return producer.GetOutputDataObject(vtk_connection.GetIndex())
 
-    def get_vtk_output_obj_and_connection(self, socketname="output"):
-        """Return both the output VTK data object and VTK connection for the
-        argument output socket name of this node.
-        """
-        vtk_output_obj = self.get_vtk_output_object(socketname)
-        vtk_connection = self.get_output_connection(socketname)
-        return vtk_output_obj, vtk_connection
+    #     # Final option is to return node's cached VTK object (may be None)
+    #     return self.get_vtk_obj()
 
-    def apply_inputs(self):
-        """Set/update node input connections to this node's VTK object.
-        This is called from update_vtk() during update.
-        General implementation for VTK nodes.
-        """
-        inputs, dummy1, extra_inputs, dummy2 = self.m_connections()
-        vtk_obj = self.get_vtk_obj()
-        if not vtk_obj:
-            return None
+    # def get_vtk_output_obj_and_connection(self, socketname="VTK Output"):
+    #     """Return both the output VTK data object and VTK connection for the
+    #     argument output socket name of this node.
+    #     """
+    #     vtk_output_obj = self.get_vtk_output_object(socketname)
+    #     vtk_connection = self.get_output_connection(socketname)
+    #     return vtk_output_obj, vtk_connection
 
-        # Normal connections
-        for i, socketname in enumerate(inputs):
-            (
-                input_node,
-                vtk_output_obj,
-                vtk_connection,
-            ) = self.get_input_node_and_output_vtk_objects(socketname)
-            # Remove unconnected connection
-            if not input_node and hasattr(vtk_obj, "RemoveInputConnection"):
-                vtk_obj.RemoveInputConnection(i, i)
-                continue
+    # def apply_inputs(self):
+    #     """Set/update node input connections to this node's VTK object.
+    #     This is called from update_vtk() during update.
+    #     General implementation for VTK nodes.
+    #     """
+    #     inputs, dummy1, extra_inputs, dummy2 = self.m_connections()
+    #     vtk_obj = self.get_vtk_obj()
+    #     if not vtk_obj:
+    #         return None
 
-            # Normal vtkAlgorithms use SetInputConnection
-            if vtk_connection and vtk_connection.IsA("vtkAlgorithmOutput"):
-                vtk_obj.SetInputConnection(i, vtk_connection)
+    #     # Normal connections
+    #     for i, socketname in enumerate(inputs):
+    #         (
+    #             input_node,
+    #             vtk_output_obj,
+    #             vtk_connection,
+    #         ) = self.get_input_node_and_output_vtk_objects(socketname)
+    #         # Remove unconnected connection
+    #         if not input_node and hasattr(vtk_obj, "RemoveInputConnection"):
+    #             vtk_obj.RemoveInputConnection(i, i)
+    #             continue
 
-            # Special nodes can provide a VTK data object as output
-            elif hasattr(vtk_output_obj, "IsA") and vtk_output_obj.IsA("vtkDataObject"):
-                vtk_obj.SetInputData(i, vtk_output_obj)
+    #         # Normal vtkAlgorithms use SetInputConnection
+    #         if vtk_connection and vtk_connection.IsA("vtkAlgorithmOutput"):
+    #             vtk_obj.SetInputConnection(i, vtk_connection)
 
-        # Extra connections (call method SetX(vtk_output_obj) for vtk_obj)
-        # See e.g. vtkClipPolyData in the clip example tree.
-        for socketname in extra_inputs:
-            (
-                input_node,
-                vtk_output_obj,
-                dummy,
-            ) = self.get_input_node_and_output_vtk_objects(socketname)
-            if not input_node:
-                continue
-            if not vtk_output_obj:
-                raise Exception("Failed to get output from" + socketname)
-            cmd = "vtk_obj.Set" + socketname + "(vtk_output_obj)"
-            # TODO: Error handling
-            exec(cmd, globals(), locals())
+    #         # Special nodes can provide a VTK data object as output
+    #         elif hasattr(vtk_output_obj, "IsA") and vtk_output_obj.IsA("vtkDataObject"):
+    #             vtk_obj.SetInputData(i, vtk_output_obj)
 
-    def get_input_node_and_output_vtk_objects(self, input_socket_name="input"):
-        """Return input node, VTK output object it produces, and the VTK
-        output connection of the input node which is connected to this
-        node's argument input socket name.
-        """
-        input_node, from_socket_name = self.get_input_node_and_socketname(
-            input_socket_name
-        )
-        if not input_node:
-            return None, None, None
-        vtk_obj, vtk_connection = input_node.get_vtk_output_obj_and_connection(
-            from_socket_name
-        )
-        return input_node, vtk_obj, vtk_connection
+    #     # Extra connections (call method SetX(vtk_output_obj) for vtk_obj)
+    #     # See e.g. vtkClipPolyData in the clip example tree.
+    #     for socketname in extra_inputs:
+    #         (
+    #             input_node,
+    #             vtk_output_obj,
+    #             dummy,
+    #         ) = self.get_input_node_and_output_vtk_objects(socketname)
+    #         if not input_node:
+    #             continue
+    #         if not vtk_output_obj:
+    #             raise Exception("Failed to get output from" + socketname)
+    #         cmd = "vtk_obj.Set" + socketname + "(vtk_output_obj)"
+    #         # TODO: Error handling
+    #         exec(cmd, globals(), locals())
 
-    def get_input_node_and_socketname(self, input_socket_name="input"):
+    # def get_input_node_and_output_vtk_objects(self, input_socket_name="VTK Input"):
+    #     """Return input node, VTK output object it produces, and the VTK
+    #     output connection of the input node which is connected to this
+    #     node's argument input socket name.
+    #     """
+    #     input_node, from_socket_name = self.get_input_node_and_socketname(
+    #         input_socket_name
+    #     )
+    #     if not input_node:
+    #         return None, None, None
+    #     vtk_obj, vtk_connection = input_node.get_vtk_output_obj_and_connection(
+    #         from_socket_name
+    #     )
+    #     return input_node, vtk_obj, vtk_connection
+
+    def get_input_node_and_socketname(self, input_socket_name="VTK Input"):
         """Get one input node and it's output socket name using this nodes'
         input socket name.
         """
@@ -664,17 +688,17 @@ class PBVTK_Node:
                 output_nodes.append(link.to_node)
         return output_nodes
 
-    def copy(self, node):
-        """Copy setup from another node to self.
-        """
-        self.node_id = 0
-        vtk_obj = self.init_vtk()
-        # PBVTKCache removed - vtk_obj not cached
-        if hasattr(self, "copy_special"):
-            # some nodes need to set properties (such as color ramp elements)
-            # after being copied
-            self.copy_special(node)
-        l.debug("Copy done for node: %s, id #%d" % (self.name, self.node_id))
+    # def copy(self, node):
+    #     """Copy setup from another node to self.
+    #     """
+    #     self.node_id = 0
+    #     vtk_obj = self.init_vtk()
+    #     # PBVTKCache removed - vtk_obj not cached
+    #     if hasattr(self, "copy_special"):
+    #         # some nodes need to set properties (such as color ramp elements)
+    #         # after being copied
+    #         self.copy_special(node)
+    #     l.debug("Copy done for node: %s, id #%d" % (self.name, self.node_id))
 
     def get_b(self):
         """Get list of booleans to show/hide boolean properties.
@@ -690,107 +714,107 @@ class PBVTK_Node:
         # b_properties removed - no-op
         pass
 
-    def outdate_vtk_status(self, context):
-        """Set node VTK status to out-of-date and notify downstream when a
-        property value is changed in UI.
-        """
-        # PBVTKCache removed - simplified update logic
-        l.debug(self.name + ": Setting VTK status out-of-date")
-        self.set_vtk_status("out-of-date")
-        self.notify_downstream(vtk_status="out-of-date")
+    # def outdate_vtk_status(self, context):
+    #     """Set node VTK status to out-of-date and notify downstream when a
+    #     property value is changed in UI.
+    #     """
+    #     # PBVTKCache removed - simplified update logic
+    #     l.debug(self.name + ": Setting VTK status out-of-date")
+    #     self.set_vtk_status("out-of-date")
+    #     self.notify_downstream(vtk_status="out-of-date")
 
-    def update(self):
-        """Update routine triggered on node UI topology changes (adding or
-        removing nodes and links).
-        """
-        # PBVTKCache removed - simplified update logic
-        namelist = [
-            link.from_node.name for socket in self.inputs for link in socket.links
-        ]
-        names = str(namelist)
-        if self.connected_input_names != names:
-            self.set_vtk_status("out-of-date")
-            self.notify_downstream(vtk_status="out-of-date")
+    # def update(self):
+    #     """Update routine triggered on node UI topology changes (adding or
+    #     removing nodes and links).
+    #     """
+    #     # PBVTKCache removed - simplified update logic
+    #     namelist = [
+    #         link.from_node.name for socket in self.inputs for link in socket.links
+    #     ]
+    #     names = str(namelist)
+    #     if self.connected_input_names != names:
+    #         self.set_vtk_status("out-of-date")
+    #         self.notify_downstream(vtk_status="out-of-date")
 
-    def outdate_upstream(self):
-        """Set all upstream nodes to out-of-date status (to force update on
-        them when they are updated next time).
-        """
-        for node in self.get_input_nodes():
-            node.outdate_upstream()
-            node.set_vtk_status("out-of-date")
+    # def outdate_upstream(self):
+    #     """Set all upstream nodes to out-of-date status (to force update on
+    #     them when they are updated next time).
+    #     """
+    #     for node in self.get_input_nodes():
+    #         node.outdate_upstream()
+    #         node.set_vtk_status("out-of-date")
 
-    def notify_downstream(self, vtk_status="out-of-date", origin_node=True):
-        """Make status changes in downstream nodes, to advertise update made
-        in this node.
-        """
-        # Recursively call for downstream nodes
-        for node in self.get_output_nodes():
-            node.notify_downstream(vtk_status="out-of-date", origin_node=False)
-        # For downstream nodes, out-of-date supercedes upstream-changed
-        if self.vtk_status != "out-of-date":
-            self.set_vtk_status("upstream-changed")
-        if origin_node:
-            self.set_vtk_status(vtk_status)
+    # def notify_downstream(self, vtk_status="out-of-date", origin_node=True):
+    #     """Make status changes in downstream nodes, to advertise update made
+    #     in this node.
+    #     """
+    #     # Recursively call for downstream nodes
+    #     for node in self.get_output_nodes():
+    #         node.notify_downstream(vtk_status="out-of-date", origin_node=False)
+    #     # For downstream nodes, out-of-date supercedes upstream-changed
+    #     if self.vtk_status != "out-of-date":
+    #         self.set_vtk_status("upstream-changed")
+    #     if origin_node:
+    #         self.set_vtk_status(vtk_status)
 
-    def update_vtk(self):
-        """Recursively update upstream nodes and this node if not up-to-date.
-        """
-        # Recursively call for upstream nodes
-        for node in self.get_input_nodes():
-            if node.vtk_status != "up-to-date":
-                node.update_vtk()
+    # def update_vtk(self):
+    #     """Recursively update upstream nodes and this node if not up-to-date.
+    #     """
+    #     # Recursively call for upstream nodes
+    #     for node in self.get_input_nodes():
+    #         if node.vtk_status != "up-to-date":
+    #             node.update_vtk()
 
-        # Do nothing if upstream was not successfully updated
-        for node in self.get_input_nodes():
-            if node.vtk_status != "up-to-date":
-                self.ui_message = "Can't update, upstream update failed."
-                return "out-of-date"
+    #     # Do nothing if upstream was not successfully updated
+    #     for node in self.get_input_nodes():
+    #         if node.vtk_status != "up-to-date":
+    #             self.ui_message = "Can't update, upstream update failed."
+    #             return "out-of-date"
 
-        # Remove old messages
-        self.ui_message = ""
+    #     # Remove old messages
+    #     self.ui_message = ""
 
-        # Allocate VTK object if it doesn't exist already
-        if not self.vtk_obj_in_cache():
-            vtk_obj = self.init_vtk()
-            # PBVTKCache removed - vtk_obj not cached
-            l.debug("Init done for node: %s, id #%d" % (self.name, self.node_id))
+    #     # Allocate VTK object if it doesn't exist already
+    #     if not self.vtk_obj_in_cache():
+    #         vtk_obj = self.init_vtk()
+    #         # PBVTKCache removed - vtk_obj not cached
+    #         l.debug("Init done for node: %s, id #%d" % (self.name, self.node_id))
 
-        # Update this node's properties to VTK object only if needed
-        if self.vtk_status != "up-to-date":
-            self.set_vtk_status("updating")
-            l.debug("Updating " + self.name)
+    #     # Update this node's properties to VTK object only if needed
+    #     if self.vtk_status != "up-to-date":
+    #         self.set_vtk_status("updating")
+    #         l.debug("Updating " + self.name)
 
-            # Update VTK connections if node connections have changed
-            namelist = [
-                link.from_node.name for socket in self.inputs for link in socket.links
-            ]
-            names = str(namelist)
-            if self.connected_input_names != names:
-                self.connected_input_names = names
-                self.apply_inputs()
+    #         # Update VTK connections if node connections have changed
+    #         namelist = [
+    #             link.from_node.name for socket in self.inputs for link in socket.links
+    #         ]
+    #         names = str(namelist)
+    #         if self.connected_input_names != names:
+    #             self.connected_input_names = names
+    #             self.apply_inputs()
 
-            # Special nodes: Update VTK connections always, because
-            # provided VTK data object might have changed.
-            elif not str(self.__class__).startswith("vtk"):
-                self.apply_inputs()
+    #         # Special nodes: Update VTK connections always, because
+    #         # provided VTK data object might have changed.
+    #         elif not str(self.__class__).startswith("vtk"):
+    #             self.apply_inputs()
 
-            # This is the only point where apply_properties() should be called
-            new_status = self.apply_properties()
+    #         # This is the only point where apply_properties() should be called
+    #         new_status = self.apply_properties()
 
-            if new_status not in (
-                "none",
-                "initialized",
-                "error",
-                "upstream-changed",
-                "out-of-date",
-                "waiting-for-upstream",
-                "updating",
-                "up-to-date",
-            ):
-                self.ui_message = "Internal error:\napply_properties() does not return a valid status string"
-                new_status = "error"
-            self.notify_downstream(vtk_status=new_status)
+    #         if new_status not in (
+    #             "none",
+    #             "initialized",
+    #             "error",
+    #             "upstream-changed",
+    #             "out-of-date",
+    #             "waiting-for-upstream",
+    #             "updating",
+    #             "up-to-date",
+    #         ):
+    #             self.ui_message = "Internal error:\napply_properties() does not return a valid status string"
+    #             new_status = "error"
+    #         self.notify_downstream(vtk_status=new_status)
 
 
 # -----------------------------------------------------------------------------
@@ -798,53 +822,53 @@ class PBVTK_Node:
 # -----------------------------------------------------------------------------
 
 
-class PBVTK_OT_NodeUpdate(bpy.types.Operator):
-    """Node Update Operator"""
+# class PBVTK_OT_NodeUpdate(bpy.types.Operator):
+#     """Node Update Operator"""
 
-    bl_idname = "node.bvtk_node_update"
-    bl_label = "Update Node"
+#     bl_idname = "node.bvtk_node_update"
+#     bl_label = "Update Node"
 
-    node_path: bpy.props.StringProperty() # type: ignore
+#     node_path: bpy.props.StringProperty() # type: ignore
 
-    def execute(self, context):
-        # node = eval(self.node_path)
-        # node.update_vtk()
-        return {"FINISHED"}
+#     def execute(self, context):
+#         # node = eval(self.node_path)
+#         # node.update_vtk()
+#         return {"FINISHED"}
 
 
-class PBVTK_OT_NodeForceUpdateUpstream(bpy.types.Operator):
-    """Force All Upstream Nodes and This Node to be Updated"""
+# class PBVTK_OT_NodeForceUpdateUpstream(bpy.types.Operator):
+#     """Force All Upstream Nodes and This Node to be Updated"""
 
-    bl_idname = "node.bvtk_node_force_update_upstream"
-    bl_label = "Force Update Upstream"
+#     bl_idname = "node.bvtk_node_force_update_upstream"
+#     bl_label = "Force Update Upstream"
 
-    node_path: bpy.props.StringProperty() # type: ignore
+#     node_path: bpy.props.StringProperty() # type: ignore
 
-    def execute(self, context):
-        # node = eval(self.node_path)
-        # node.outdate_upstream()
-        # node.update_vtk()
-        return {"FINISHED"}
+#     def execute(self, context):
+#         # node = eval(self.node_path)
+#         # node.outdate_upstream()
+#         # node.update_vtk()
+#         return {"FINISHED"}
 
 
 # -----------------------------------------------------------------------------
 # VTK Writer Nodes' Write Operator
 # -----------------------------------------------------------------------------
-class PBVTK_OT_NodeWrite(bpy.types.Operator):
-    """Operator to call VTK Write() for a writer node"""
+# class PBVTK_OT_NodeWrite(bpy.types.Operator):
+#     """Operator to call VTK Write() for a writer node"""
 
-    bl_idname = "node.bvtk_node_write"
-    bl_label = "Write Data"
+#     bl_idname = "node.bvtk_node_write"
+#     bl_label = "Write Data"
 
-    node_path: bpy.props.StringProperty() # type: ignore
+#     node_path: bpy.props.StringProperty() # type: ignore
 
-    def execute(self, context):
-        # node = eval(self.node_path)
-        # if node:
-        #     node.update_vtk()
-        #     node.get_vtk_obj().Write()
+#     def execute(self, context):
+#         # node = eval(self.node_path)
+#         # if node:
+#         #     node.update_vtk()
+#         #     node.get_vtk_obj().Write()
 
-        return {"FINISHED"}
+#         return {"FINISHED"}
 
 
 # -----------------------------------------------------------------------------
@@ -870,9 +894,9 @@ def add_ui_class(obj):
 # add_class(PBVTK_NodeTree)
 # add_class(PBVTK_NodeSocket)
 # Operator classes commented out - not defined in this file
-add_ui_class(PBVTK_OT_NodeUpdate)
-add_ui_class(PBVTK_OT_NodeForceUpdateUpstream)
-add_ui_class(PBVTK_OT_NodeWrite)
+# add_ui_class(PBVTK_OT_NodeUpdate)
+# add_ui_class(PBVTK_OT_NodeForceUpdateUpstream)
+# add_ui_class(PBVTK_OT_NodeWrite)
 
 # -----------------------------------------------------------------------------
 # VTK Node Category
@@ -942,15 +966,15 @@ CATEGORIES = []
 #                         continue
 
 
-def node_path(node):
-    """Return node path of a node"""
-    return (
-        "bpy.data.node_groups["
-        + repr(node.id_data.name)
-        + "].nodes["
-        + repr(node.name)
-        + "]"
-    )
+# def node_path(node):
+#     """Return node path of a node"""
+#     return (
+#         "bpy.data.node_groups["
+#         + repr(node.id_data.name)
+#         + "].nodes["
+#         + repr(node.name)
+#         + "]"
+#     )
 
 
 # def node_prop_path(node, propname):
@@ -995,6 +1019,63 @@ def node_path(node):
 #             bvtk_nodes.append(node)
 #     return bvtk_nodes
 
+# -----------------------------------------------------------------------------
+# VTK Custom Filters
+# -----------------------------------------------------------------------------
+
+class VTKCustomContourFilter(Node, PBVTK_Node):
+    """Manually modified version of VTK Contour Filter"""
+
+    bl_idname = "VTKCustomContourFilterType"
+    bl_label = "vtkCustomContourFilter"
+
+    m_ComputeGradients: bpy.props.BoolProperty(
+        name="ComputeGradients", default=True,
+    ) # type: ignore
+    m_ComputeNormals: bpy.props.BoolProperty(
+        name="ComputeNormals", default=True,
+    ) # type: ignore
+    m_ComputeScalars: bpy.props.BoolProperty(
+        name="ComputeScalars", default=True,
+    ) # type: ignore
+    m_GenerateTriangles: bpy.props.BoolProperty(
+        name="GenerateTriangles", default=True,
+    ) # type: ignore
+    m_ArrayComponent: bpy.props.IntProperty(
+        name="ArrayComponent", default=0,
+    ) # type: ignore
+    m_NumberOfContours: bpy.props.IntProperty(
+        name="NumberOfContours", default=1,
+    ) # type: ignore
+
+    single_value: bpy.props.FloatProperty(
+        name="Single Value", default=0.5,
+    ) # type: ignore
+    additional_values: bpy.props.StringProperty(
+        name="Additional Values", default="",
+    ) # type: ignore
+
+    b_properties: bpy.props.BoolVectorProperty(
+        name="", size=8, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b
+    ) # type: ignore
+
+    def m_properties(self):
+        return [
+            "m_ComputeGradients",
+            "m_ComputeNormals",
+            "m_ComputeScalars",
+            "m_GenerateTriangles",
+            "m_ArrayComponent",
+            "m_NumberOfContours",
+            "single_value",
+            "additional_values",
+        ]
+
+    def m_connections(self):
+        return (["VTK Input"], ["VTK Output"], [], [])
+
+
+add_class(VTKCustomContourFilter)
 
 # -----------------------------------------------------------------------------
 # VTK to Numpy Converter Nodes
@@ -1011,7 +1092,7 @@ class VTKPolyDataToNumpyNode(Node, PBVTK_Node):
         return []
 
     def m_connections(self):
-        return (["input"], [], [], [])
+        return (["VTK Input"], [], [], [])
 
     def init(self, context):
         # Call parent init
@@ -1029,7 +1110,7 @@ class VTKPolyDataToNumpyNode(Node, PBVTK_Node):
         var_name = self.get_var_name()
         
         # Get input VTK object variable name
-        input_node, from_socket_name = self.get_input_node_and_socketname("input")
+        input_node, from_socket_name = self.get_input_node_and_socketname("VTK Input")
         if not input_node:
             code.append(f"# No input connected")
             return code
@@ -1037,9 +1118,9 @@ class VTKPolyDataToNumpyNode(Node, PBVTK_Node):
         vtk_var = input_node.get_var_name()
         
         code.append(f"# Convert VTK PolyData to Numpy")
-        code.append(f"import numpy as np")
-        code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
-        code.append(f"")
+        # code.append(f"import numpy as np")
+        # code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
+        # code.append(f"")
         
         # Get the output from VTK pipeline
         code.append(f"{vtk_var}.Update()")
@@ -1084,7 +1165,7 @@ class VTKStructuredGridToNumpyNode(Node, PBVTK_Node):
         return []
 
     def m_connections(self):
-        return (["input"], [], [], [])
+        return (["VTK Input"], [], [], [])
 
     def init(self, context):
         PBVTK_Node.init(self, context)
@@ -1097,7 +1178,7 @@ class VTKStructuredGridToNumpyNode(Node, PBVTK_Node):
         code.append(f"# Label: {self.label if hasattr(self, 'label') and self.label else self.name}")
         
         var_name = self.get_var_name()
-        input_node, from_socket_name = self.get_input_node_and_socketname("input")
+        input_node, from_socket_name = self.get_input_node_and_socketname("VTK Input")
         if not input_node:
             code.append(f"# No input connected")
             return code
@@ -1105,9 +1186,9 @@ class VTKStructuredGridToNumpyNode(Node, PBVTK_Node):
         vtk_var = input_node.get_var_name()
         
         code.append(f"# Convert VTK Structured Grid to Numpy")
-        code.append(f"import numpy as np")
-        code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
-        code.append(f"")
+        # code.append(f"import numpy as np")
+        # code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
+        # code.append(f"")
         
         code.append(f"{vtk_var}.Update()")
         code.append(f"{var_name}_grid = {vtk_var}.GetOutput()")
@@ -1148,7 +1229,7 @@ class VTKUnstructuredGridToNumpyNode(Node, PBVTK_Node):
         return []
 
     def m_connections(self):
-        return (["input"], [], [], [])
+        return (["VTK Input"], [], [], [])
 
     def init(self, context):
         PBVTK_Node.init(self, context)
@@ -1162,7 +1243,7 @@ class VTKUnstructuredGridToNumpyNode(Node, PBVTK_Node):
         code.append(f"# Label: {self.label if hasattr(self, 'label') and self.label else self.name}")
         
         var_name = self.get_var_name()
-        input_node, from_socket_name = self.get_input_node_and_socketname("input")
+        input_node, from_socket_name = self.get_input_node_and_socketname("VTK Input")
         if not input_node:
             code.append(f"# No input connected")
             return code
@@ -1170,9 +1251,9 @@ class VTKUnstructuredGridToNumpyNode(Node, PBVTK_Node):
         vtk_var = input_node.get_var_name()
         
         code.append(f"# Convert VTK Unstructured Grid to Numpy")
-        code.append(f"import numpy as np")
-        code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
-        code.append(f"")
+        # code.append(f"import numpy as np")
+        # code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
+        # code.append(f"")
         
         code.append(f"{vtk_var}.Update()")
         code.append(f"{var_name}_ugrid = {vtk_var}.GetOutput()")
@@ -1219,7 +1300,7 @@ class VTKImageDataToNumpyNode(Node, PBVTK_Node):
         return []
 
     def m_connections(self):
-        return (["input"], [], [], [])
+        return (["VTK Input"], [], [], [])
 
     def init(self, context):
         PBVTK_Node.init(self, context)
@@ -1233,7 +1314,7 @@ class VTKImageDataToNumpyNode(Node, PBVTK_Node):
         code.append(f"# Label: {self.label if hasattr(self, 'label') and self.label else self.name}")
         
         var_name = self.get_var_name()
-        input_node, from_socket_name = self.get_input_node_and_socketname("input")
+        input_node, from_socket_name = self.get_input_node_and_socketname("VTK Input")
         if not input_node:
             code.append(f"# No input connected")
             return code
@@ -1241,9 +1322,9 @@ class VTKImageDataToNumpyNode(Node, PBVTK_Node):
         vtk_var = input_node.get_var_name()
         
         code.append(f"# Convert VTK Image Data to Numpy")
-        code.append(f"import numpy as np")
-        code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
-        code.append(f"")
+        # code.append(f"import numpy as np")
+        # code.append(f"from vtk.util.numpy_support import vtk_to_numpy")
+        # code.append(f"")
         
         code.append(f"{vtk_var}.Update()")
         code.append(f"{var_name}_imagedata = {vtk_var}.GetOutput()")

@@ -10,12 +10,11 @@ class VTKRungeKutta2(Node, PBVTK_Node):
     bl_idname = 'VTKRungeKutta2Type'
     bl_label  = 'vtkRungeKutta2'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
     b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
-        return ['m_ObjectName',]
+        return []
     def m_connections( self ):
         return ([], [], ['FunctionSet'], ['self']) 
     
@@ -28,12 +27,11 @@ class VTKRungeKutta4(Node, PBVTK_Node):
     bl_idname = 'VTKRungeKutta4Type'
     bl_label  = 'vtkRungeKutta4'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
     b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
-        return ['m_ObjectName',]
+        return []
     def m_connections( self ):
         return ([], [], ['FunctionSet'], ['self']) 
     
@@ -46,12 +44,11 @@ class VTKRungeKutta45(Node, PBVTK_Node):
     bl_idname = 'VTKRungeKutta45Type'
     bl_label  = 'vtkRungeKutta45'
     
-    m_ObjectName: bpy.props.StringProperty(name='ObjectName', default="", update=PBVTK_Node.outdate_vtk_status) #type: ignore
     
     b_properties: bpy.props.BoolVectorProperty(name="", size=1, get=PBVTK_Node.get_b, set=PBVTK_Node.set_b) #type: ignore
 
     def m_properties( self ):
-        return ['m_ObjectName',]
+        return []
     def m_connections( self ):
         return ([], [], ['FunctionSet'], ['self']) 
     

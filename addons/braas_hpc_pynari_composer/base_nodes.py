@@ -101,6 +101,8 @@ class PYNARIComposerNodeTree(NodeTree):
         code_lines = []
         code_lines.append("import pynari")
         code_lines.append("import numpy as np")
+        code_lines.append("import vtk")
+        code_lines.append("from vtk.util.numpy_support import vtk_to_numpy")
         code_lines.append("")
         
         # Find device node
@@ -197,6 +199,12 @@ class PYNARIComposerNode(Node):
     @classmethod
     def poll(cls, ntree):
         return ntree.bl_idname == 'PYNARIComposerNodeTree'
+
+    def init(self, context):
+        """Create and initialize a new node.
+        """
+        # Node properties
+        self.width = 200
     
     def get_input_value(self, input_name, default=None):
         """Get value from input socket"""

@@ -219,7 +219,7 @@ def generate(group):
                 items_arg = ", subtype='DIR_PATH'"
 
             # Declaration row
-            decl_string = "{}{}: bpy.props.{}(name='{}', default={}{}{}, update=PBVTK_Node.outdate_vtk_status) #type: ignore"
+            decl_string = "{}{}: bpy.props.{}(name='{}', default={}{}{}) #type: ignore"
             P["decl"] = decl_string.format(
                 prefix, name, ptype, name, value, size, items_arg
             )
@@ -228,16 +228,16 @@ def generate(group):
         # Input ports
         num_in = c["num_in"]
         if num_in == 1:
-            input_ports = ["input"]
+            input_ports = ["VTK Input"]
         else:
-            input_ports = ["input " + str(i) for i in range(num_in)]
+            input_ports = ["VTK Input " + str(i) for i in range(num_in)]
 
         # Output ports
         num_out = c["num_out"]
         if num_out == 1:
-            output_ports = ["output"]
+            output_ports = ["VTK Output"]
         else:
-            output_ports = ["output " + str(i) for i in range(num_out)]
+            output_ports = ["VTK Output " + str(i) for i in range(num_out)]
 
         # Extras
         extra_inputs = c["extra_connections"]
