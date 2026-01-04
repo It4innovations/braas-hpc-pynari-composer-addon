@@ -1338,8 +1338,9 @@ class PYNARIQuadGeometryNode(PYNARIComposerNode):
         self.outputs.new('PYNARIGeometrySocket', "Geometry")
     
     def draw_buttons(self, context, layout):
-        layout.prop(self, "position")
-        layout.prop(self, "size")
+        # layout.prop(self, "position")
+        # layout.prop(self, "size")
+        pass
     
     def generate_code(self, auto_gen_enabled=False):
         code = []
@@ -1361,7 +1362,7 @@ class PYNARIQuadGeometryNode(PYNARIComposerNode):
         colors = [link.from_node.get_var_name(colors_socket_varname) for link in self.inputs["NP Colors"].links]
         
         if vertices:
-            code.append(f"{var_name}_{vertices_socket_varname} = device.newArray1D(pynari.FLOAT32_VEC3, {vertices[0]})")
+            code.append(f"{var_name}_{vertices_socket_varname} = device.newArray1D(pynari.FLOAT32_VEC4, {vertices[0]})")
             code.append(f"{var_name}.setParameter('vertex.position', pynari.ARRAY1D, {var_name}_{vertices_socket_varname})")
 
         if indices:
@@ -3921,8 +3922,9 @@ class PYNARIOutputBRAASHPCNode(PYNARIComposerNode):
         code.append("")
         code.append("    print(\"Rendering stopped.\")")
         code.append("")
-        code.append("# Start BRAAS HPC render loop")        
-        code.append(f"render_loop('{self.hostname}', {port}, {width}, {height})")
+        code.append("# Start BRAAS HPC render loop")
+        code.append("while True:")
+        code.append(f"    render_loop('{self.hostname}', {port}, {width}, {height})")
         
         return code
 
